@@ -61,6 +61,18 @@ public abstract class DungeonLoader {
             entity = wall;
             break;
         // TODO Handle other possible entities
+        case "treasure":
+        	break;
+        case "invincibility":
+        	break;
+        case "switch":
+        	break;
+        case "boulder":
+        	break;
+        case "sword":
+        	break;
+        case "enemy":
+        	break;
         }
         dungeon.addEntity(entity);
     }
