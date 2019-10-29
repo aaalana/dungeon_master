@@ -1,4 +1,5 @@
 package unsw.dungeon;
+//import Java.util.ArrayList;
 
 /**
  * The player entity
@@ -8,7 +9,8 @@ package unsw.dungeon;
 public class Player extends Entity {
 
     private Dungeon dungeon;
-
+    //private ArrayList<Item> inventory;
+    
     /**
      * Create a player positioned in square (x,y)
      * @param x
@@ -38,4 +40,10 @@ public class Player extends Entity {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
+    /*
+    public Item getItem() {
+    	for (Item i: inventory) {
+    		
+    	}
+    }*/
 }

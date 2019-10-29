@@ -19,6 +19,9 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
+    //private List<Obstacle> obstacles;
+    //private List<Item> items;
+    //private List<Enemy> enemies;
     private Player player;
 
     public Dungeon(int width, int height) {
