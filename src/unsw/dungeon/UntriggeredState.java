@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class UntriggeredState implements switchState {
+public class UntriggeredState implements SwitchState {
 	Switch _switch;
 	 
 	public UntriggeredState(Switch _switch) {

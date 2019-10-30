@@ -1,9 +1,9 @@
 package unsw.dungeon;
 
 public class Switch extends Entity {
-	private switchState triggeredState;
-	private switchState untriggeredState;
-	private switchState state;
+	private SwitchState triggeredState;
+	private SwitchState untriggeredState;
+	private SwitchState state;
 	private Dungeon dungeon;
 	
     public Switch(int x, int y, Dungeon dungeon) {
@@ -18,19 +18,19 @@ public class Switch extends Entity {
     	return this.dungeon;
     }
     
-    public void setState(switchState state) {
+    public void setState(SwitchState state) {
         this.state = state;		
     }
     
-    public switchState getState(){
+    public SwitchState getState(){
         return state;
     }
     
-    public switchState getTriggeredState() {
+    public SwitchState getTriggeredState() {
 		return triggeredState;
 	}
 
-	public switchState getUntriggeredState() {
+	public SwitchState getUntriggeredState() {
 		return untriggeredState;
 	}
 }
