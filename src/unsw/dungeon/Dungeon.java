@@ -31,7 +31,7 @@ public class Dungeon {
         this.player = null;
     }
 
-    public int getWidth() {
+	public int getWidth() {
         return width;
     }
 
@@ -49,5 +49,24 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+    
+    /**
+     * This function checks if a particular square has a wall in it
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean checkWall(int x, int y) {
+    	for (Entity entity : this.entities) {
+    		if (entity == null) continue;
+    		
+    		if (entity.getX() == x && entity.getY() == y) {
+    			//System.out.println(entity.toString());
+    			return true;
+    		}
+    		
+    	}
+    	return false;
     }
 }

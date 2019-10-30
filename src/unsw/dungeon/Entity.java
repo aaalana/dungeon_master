@@ -39,4 +39,9 @@ public class Entity {
     public int getX() {
         return x().get();
     }
+    
+    @Override
+    public String toString() {
+    	return "Entity, " + this.getClass() + ", x: " + this.x + ", y: " + this.y;
+    }
 }
