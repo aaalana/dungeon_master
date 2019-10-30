@@ -50,6 +50,7 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+
     
     /**
      * This function checks if a particular square has a wall in it

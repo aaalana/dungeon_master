@@ -40,6 +40,7 @@ public class Player extends Entity {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
+    
     /*
     public Item getItem() {
     	for (Item i: inventory) {
