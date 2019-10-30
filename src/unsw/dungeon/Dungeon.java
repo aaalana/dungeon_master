@@ -62,7 +62,7 @@ public class Dungeon {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue;
     		
-    		if (entity.getX() == x && entity.getY() == y) {
+    		if (entity.getX() == x && entity.getY() == y && entity instanceof unsw.dungeon.Wall) {
     			//System.out.println(entity.toString());
     			return true;
     		}
