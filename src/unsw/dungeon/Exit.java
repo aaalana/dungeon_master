@@ -11,5 +11,5 @@ public class Exit extends Entity {
 		return dungeon.isOnTopOf(getX(), getY(), "Exit");
 	}
 	
-
+	
 }
