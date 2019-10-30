@@ -49,6 +49,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	dungeon.moveEnemies();
         switch (event.getCode()) {
         case UP:
         	//System.out.println(player.toString());
@@ -75,6 +76,10 @@ public class DungeonController {
             break;
         }
     }
-
+    
+    @FXML
+    public void whatrk() {
+    	dungeon.moveEnemies();
+    }
 }
 

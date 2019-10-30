@@ -50,7 +50,6 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
-
     
     /**
      * This function checks if a particular square has a wall in it
@@ -69,5 +68,16 @@ public class Dungeon {
     		
     	}
     	return false;
+    }
+    
+    public void moveEnemies() {
+    	for (Entity entity : this.entities) {
+    		if (entity == null) continue;
+    		
+    		if (entity instanceof unsw.dungeon.Enemy) {
+    			Enemy enemy = (Enemy) entity;
+    			enemy.searchPlayer(getPlayer().getX(), getPlayer().getY());
+    		}
+    	}
     }
 }
