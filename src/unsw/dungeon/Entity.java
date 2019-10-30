@@ -13,7 +13,7 @@ public class Entity {
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
-
+    
     /**
      * Create an entity positioned in square (x,y)
      * @param x
@@ -39,9 +39,5 @@ public class Entity {
     public int getX() {
         return x().get();
     }
-    
-    @Override
-    public String toString() {
-    	return "Entity, " + this.getClass() + ", x: " + this.x + ", y: " + this.y;
-    }
+
 }
