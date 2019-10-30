@@ -10,5 +10,6 @@ public class Exit extends Entity {
 	public boolean triggered() {
 		return dungeon.isOnTopOf(getX(), getY(), "Exit");
 	}
+	
 
 }
