@@ -66,7 +66,6 @@ public class Dungeon {
     			//System.out.println(entity.toString());
     			return true;
     		}
-    		
     	}
     	return false;
     }

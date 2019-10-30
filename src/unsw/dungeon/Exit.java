@@ -7,7 +7,10 @@ public class Exit extends Entity {
 	}
 	
 	public boolean triggered() {
+		//if () {
+			
+		//}
 		return false;
 	}
-	
+
 }
