@@ -10,7 +10,7 @@ public class Exit extends Entity {
 	}
 	
 	public void setTriggered() {
-		if (dungeon.isOnTopOf(this)) {
+		if (dungeon.isOnTopOf(this, "exit")) {
 			System.out.println("Player is exiting the dungeon. Puzzle is complete.");
 			// might want to stop them from moving as a temporarily fix
 			// need to find a way to restart the game?

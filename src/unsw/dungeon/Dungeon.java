@@ -70,12 +70,15 @@ public class Dungeon {
     	return false;
     }
     
-    public boolean isOnTopOf(Entity below) {
+    public boolean isOnTopOf(Entity below, String situation) {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue;
     		
-    		if ((below instanceof Switch && entity instanceof Boulder) ||
-    		 	(below instanceof Exit && entity instanceof Player)) {
+    		if ((situation.equals("switch") && entity instanceof Boulder) ||
+    		 	(situation.equals("exit") && entity instanceof Player) ||
+    		 	(situation.equals("sword") && entity instanceof Player) || 
+    		 	(situation.equals("treasure") && entity instanceof Player) ||
+    		 	(situation.equals("invincibilityPotion") && entity instanceof Player)) {
     			if (entity.getX() == below.getX() && entity.getY() == below.getY()) {
     				return true;
     			}
