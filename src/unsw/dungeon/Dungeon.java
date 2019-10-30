@@ -69,4 +69,23 @@ public class Dungeon {
     	}
     	return false;
     }
+    
+    public boolean isOnTopOf(int x, int y, String situation) {
+    	for (Entity entity : this.entities) {
+    		if (entity == null) continue;
+    		
+    		if ((situation.equals("switch") && entity instanceof Boulder) ||
+    			(situation.equals("exit") && entity instanceof Player)) {
+    			return matchCoordinates(entity, x, y);
+    		}
+    	}
+    	return false;
+    }
+    
+    public boolean matchCoordinates(Entity entity, int x, int y) {
+    	if (entity.getX() == x && entity.getY() == y) {
+			return true;
+		}
+    	return false;
+    }
 }

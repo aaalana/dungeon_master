@@ -1,16 +1,14 @@
 package unsw.dungeon;
 
 public class Exit extends Entity {
-
-	public Exit(int x, int y) {
+	private Dungeon dungeon;
+	
+	public Exit(int x, int y, Dungeon dungeon) {
 		super(x, y);
 	}
 	
 	public boolean triggered() {
-		//if () {
-			
-		//}
-		return false;
+		return dungeon.isOnTopOf(getX(), getY(), "Exit");
 	}
 
 }

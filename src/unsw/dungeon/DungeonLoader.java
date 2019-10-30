@@ -94,18 +94,20 @@ public abstract class DungeonLoader {
             entity = enemy;
         	break;
         case "exit":
-        	Exit exit = new Exit(x, y);
+        	Exit exit = new Exit(x, y, dungeon);
             loadImage(exit);
             entity = exit;
          	break;
         // not in json files
         case "key":
+        	// temporary
         	int keyId = 0;
             Key key = new Key(x, y, keyId);
             loadImage(key);
             entity = key;
         	break;
         case "door":
+        	// temporary
         	int doorId = 0;
         	Door door = new Door(x, y, doorId);
         	loadImage(door);
