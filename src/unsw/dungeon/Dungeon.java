@@ -50,4 +50,12 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+    /*
+    public Wall getWall() {
+    	for(Entity e : entities) {
+    		if (e.getName().equals("Wall")) {
+    			
+    		}
+    	}
+    }*/
 }

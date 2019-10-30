@@ -91,6 +91,11 @@ public abstract class DungeonLoader {
             onLoad(enemy);
             entity = enemy;
         	break;
+        case "exit":
+        	Exit exit = new Exit(x, y);
+            onLoad(exit);
+            entity = exit;
+         	break;
         // not in json files
         case "key":
         	int keyId = 0;
@@ -113,5 +118,13 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
 
     // TODO Create additional abstract methods for the other entities
-
+    public abstract void onLoad(Exit exit);
+    public abstract void onLoad(Boulder boulder);
+    public abstract void onLoad(Switch _switch);
+    public abstract void onLoad(Enemy enemy);
+    public abstract void onLoad(Sword sword);
+    public abstract void onLoad(Treasure treasure);
+    public abstract void onLoad(Invincibility invincibility);
+    public abstract void onLoad(Key key);
+    public abstract void onLoad(Portal portal);
 }

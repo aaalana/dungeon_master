@@ -30,7 +30,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image enemyImage;
     private Image swordImage;
     private Image treasureImage;
-    private Image potionImage;
+    private Image invincibilityImage;
     private Image doorImage;
     private Image keyImage;
     private Image portalImage;
@@ -48,7 +48,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         enemyImage = new Image("/deep_elf_master_archer.png");
         swordImage = new Image("/greatsword_1_new.png");
         treasureImage = new Image("/gold_pile.png");
-        potionImage = new Image("/brilliant_blue_new.png");
+        invincibilityImage = new Image("/brilliant_blue_new.png");
         doorImage = new Image("/closed_door.png");
         keyImage = new Image("/key.png");
         portalImage = new Image("/portal.png");   
@@ -66,12 +66,35 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(wall, view);
     }
     
-    /*
     @Override
     public void onLoad(Exit exit) {
-    	ImageView view = new ImageView(exitImage);
-        addEntity(Exit, view);
-    }*/
+        ImageView view = new ImageView(exitImage);
+        addEntity(exit, view);
+    }
+    
+    @Override
+    public abstract void onLoad(Boulder boulder);
+    
+    @Override
+    public abstract void onLoad(Switch _switch);
+    
+    @Override
+    public abstract void onLoad(Enemy enemy);
+    
+    @Override
+    public abstract void onLoad(Sword sword);
+    
+    @Override
+    public abstract void onLoad(Treasure treasure);
+    
+    @Override
+    public abstract void onLoad(Invincibility invincibility);
+    
+    @Override
+    public abstract void onLoad(Key key);
+    
+    @Override
+    public abstract void onLoad(Portal portal);
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
