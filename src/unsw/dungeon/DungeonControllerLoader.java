@@ -55,46 +55,39 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity player) {
-        ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
-    }
-
-    @Override
-    public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
+    public void onLoad(Entity entity, Image image) {
+        ImageView view = new ImageView(image);
+        addEntity(entity, view);
     }
     
     @Override
-    public void onLoad(Exit exit) {
-        ImageView view = new ImageView(exitImage);
-        addEntity(exit, view);
+    public void loadImage(Entity entity) {
+    	if (entity instanceof Player) {
+    		onLoad(entity, playerImage);    		
+    	} else if (entity instanceof Wall) {
+    		onLoad(entity, wallImage);
+    	} else if (entity instanceof Exit) {
+    		onLoad(entity, exitImage);
+    	} else if (entity instanceof Boulder) {
+    		onLoad(entity, boulderImage);
+    	} else if (entity instanceof Switch) {
+    		onLoad(entity, switchImage);
+    	} else if (entity instanceof Enemy) {
+    		onLoad(entity, enemyImage);
+    	} else if (entity instanceof Sword) {
+    		onLoad(entity, swordImage);
+    	} else if (entity instanceof Treasure) {
+    		onLoad(entity, treasureImage);
+    	} else if (entity instanceof Invincibility) {
+    		onLoad(entity, invincibilityImage);
+    	} else if (entity instanceof Door) {
+    		onLoad(entity, doorImage);
+    	} else if (entity instanceof Key) {
+    		onLoad(entity, keyImage);
+    	} else if (entity instanceof Portal) {
+    		onLoad(entity, portalImage);
+    	}
     }
-    
-    @Override
-    public abstract void onLoad(Boulder boulder);
-    
-    @Override
-    public abstract void onLoad(Switch _switch);
-    
-    @Override
-    public abstract void onLoad(Enemy enemy);
-    
-    @Override
-    public abstract void onLoad(Sword sword);
-    
-    @Override
-    public abstract void onLoad(Treasure treasure);
-    
-    @Override
-    public abstract void onLoad(Invincibility invincibility);
-    
-    @Override
-    public abstract void onLoad(Key key);
-    
-    @Override
-    public abstract void onLoad(Portal portal);
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

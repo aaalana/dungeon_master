@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javafx.scene.image.Image;
+
 /**
  * Loads a dungeon from a .json file.
  *
@@ -52,79 +54,69 @@ public abstract class DungeonLoader {
         case "player":
             Player player = new Player(dungeon, x, y);
             dungeon.setPlayer(player);
-            onLoad(player);
+            loadImage(player);
             entity = player;
             break;
         case "wall":
             Wall wall = new Wall(x, y);
-            onLoad(wall);
+            loadImage(wall);
             entity = wall;
             break;
         // TODO Handle other possible entities
         case "treasure":
             Treasure treasure = new Treasure(x, y);
-            onLoad(treasure);
+            loadImage(treasure);
             entity = treasure;
         	break;
         case "invincibility":
             Invincibility invincibility = new Invincibility(x, y);
-            onLoad(invincibility);
+            loadImage(invincibility);
             entity = invincibility;
         	break;
         case "switch":
             Switch _switch = new Switch(x, y);
-            onLoad(_switch);
+            loadImage(_switch);
             entity = _switch;
         	break;
         case "boulder":
             Boulder boulder = new Boulder(x, y);
-            onLoad(boulder);
+            loadImage(boulder);
             entity = boulder;
         	break;
         case "sword":
             Sword sword = new Sword(x, y);
-            onLoad(sword);
+            loadImage(sword);
             entity = sword;
         	break;
         case "enemy":
             Enemy enemy = new Enemy(x, y);
-            onLoad(enemy);
+            loadImage(enemy);
             entity = enemy;
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
-            onLoad(exit);
+            loadImage(exit);
             entity = exit;
          	break;
         // not in json files
         case "key":
         	int keyId = 0;
             Key key = new Key(x, y, keyId);
-            onLoad(key);
+            loadImage(key);
             entity = key;
         	break;
         case "door":
         	int doorId = 0;
         	Door door = new Door(x, y, doorId);
-        	onLoad(door);
+        	loadImage(door);
         	entity = door;
         	break;
         }
         dungeon.addEntity(entity);
     }
 
-    public abstract void onLoad(Entity player);
-
-    public abstract void onLoad(Wall wall);
+	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities
-    public abstract void onLoad(Exit exit);
-    public abstract void onLoad(Boulder boulder);
-    public abstract void onLoad(Switch _switch);
-    public abstract void onLoad(Enemy enemy);
-    public abstract void onLoad(Sword sword);
-    public abstract void onLoad(Treasure treasure);
-    public abstract void onLoad(Invincibility invincibility);
-    public abstract void onLoad(Key key);
-    public abstract void onLoad(Portal portal);
+    protected abstract void loadImage(Entity entity);
 }
