@@ -16,8 +16,8 @@ public class Enemy extends Entity {
      * @param y
      */
     public void searchPlayer(int playerX, int playerY) {
-    	//System.out.println("Player is at (" + playerX  + ", " + playerY + ")");
-    	//System.out.println("Enemy is at (" + getX() + ", " + getY() + ")");
+//    	System.out.println("Player is at (" + playerX  + ", " + playerY + ")");
+//    	System.out.println("Enemy is at (" + getX() + ", " + getY() + ")");
     	//Try and move horizontally to find the player
     	if (getX() != playerX) {
     		if (getX() > playerX && !dungeon.checkWall(getX() - 1, getY())) {

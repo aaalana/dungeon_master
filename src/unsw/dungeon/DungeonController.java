@@ -49,7 +49,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	dungeon.moveEnemies();
+    	
         switch (event.getCode()) {
         case UP:
         	//System.out.println(player.toString());
@@ -75,6 +75,7 @@ public class DungeonController {
         default:
             break;
         }
+        dungeon.moveEnemies();
     }
     
     @FXML
