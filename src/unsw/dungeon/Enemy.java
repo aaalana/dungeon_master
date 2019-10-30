@@ -3,11 +3,12 @@ package unsw.dungeon;
 public class Enemy extends Entity {
 	
 	private Dungeon dungeon;
-
+	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
     }
+
 
     /**
      * The enemy will take in a set of co-ordinates and find the best way to reach

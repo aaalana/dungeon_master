@@ -19,6 +19,7 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
+    private EnemySystem enemies;
     //private List<Obstacle> obstacles;
     //private List<Item> items;
     //private List<Enemy> enemies;
@@ -28,6 +29,7 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.enemies = new EnemySystem();
         this.player = null;
     }
 
@@ -48,6 +50,10 @@ public class Dungeon {
     }
 
     public void addEntity(Entity entity) {
+    	if (entity instanceof Enemy) {
+    		this.enemies.addEnemy((Enemy) entity);
+    	} 
+    	
         entities.add(entity);
     }
     
@@ -71,13 +77,6 @@ public class Dungeon {
     }
     
     public void moveEnemies() {
-    	for (Entity entity : this.entities) {
-    		if (entity == null) continue;
-    		
-    		if (entity instanceof unsw.dungeon.Enemy) {
-    			Enemy enemy = (Enemy) entity;
-    			enemy.searchPlayer(getPlayer().getX(), getPlayer().getY());
-    		}
-    	}
+    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY());
     }
 }
