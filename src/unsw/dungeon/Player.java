@@ -9,6 +9,10 @@ package unsw.dungeon;
 public class Player extends Entity {
 
     private Dungeon dungeon;
+    private PlayerState invincibilityState;
+    private PlayerState normalState;
+    private PlayerState state;
+    
     //private ArrayList<Item> inventory;
     
     /**
@@ -19,9 +23,24 @@ public class Player extends Entity {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        invincibilityState = new InvincibilityState(this);
+        normalState = new NormalState(this);
+        this.state = normalState;
     }
 
-    public void moveUp() {
+    public PlayerState getInvincibilityState() {
+		return invincibilityState;
+	}
+
+	public PlayerState getNormalState() {
+		return normalState;
+	}
+
+	public void setState(PlayerState s) {
+		this.state = s;
+	}
+
+	public void moveUp() {
         if (getY() > 0)
             y().set(getY() - 1);
     }

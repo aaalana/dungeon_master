@@ -74,7 +74,7 @@ public abstract class DungeonLoader {
             entity = invincibility;
         	break;
         case "switch":
-            Switch _switch = new Switch(x, y);
+            Switch _switch = new Switch(x, y, dungeon);
             loadImage(_switch);
             entity = _switch;
         	break;

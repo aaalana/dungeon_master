@@ -70,22 +70,17 @@ public class Dungeon {
     	return false;
     }
     
-    public boolean isOnTopOf(int x, int y, String situation) {
+    public boolean isOnTopOf(Entity below) {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue;
     		
-    		if ((situation.equals("switch") && entity instanceof Boulder) ||
-    			(situation.equals("exit") && entity instanceof Player)) {
-    			return matchCoordinates(entity, x, y);
+    		if ((below instanceof Switch && entity instanceof Boulder) ||
+    		 	(below instanceof Exit && entity instanceof Player)) {
+    			if (entity.getX() == below.getX() && entity.getY() == below.getY()) {
+    				return true;
+    			}
     		}
     	}
-    	return false;
-    }
-    
-    public boolean matchCoordinates(Entity entity, int x, int y) {
-    	if (entity.getX() == x && entity.getY() == y) {
-			return true;
-		}
     	return false;
     }
 }
