@@ -9,9 +9,9 @@ public class UntriggeredState implements SwitchState {
 	
 	@Override
 	public void triggerSwitch() {
-		System.out.println("The user triggered the switch.");
 		if (_switch.getDungeon().isOnTopOf(_switch, "switch")) {
-			_switch.setState(_switch.getTriggeredState()); 
+			_switch.setState(_switch.getTriggeredState());
+			System.out.println("The user triggered the switch.");
 		}
 	}
 

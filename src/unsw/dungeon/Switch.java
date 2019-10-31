@@ -26,6 +26,14 @@ public class Switch extends Entity {
         return state;
     }
     
+    public void triggerSwitch() {
+    	state.triggerSwitch();
+    }
+    
+    public void untriggerSwitch() {
+    	state.untriggerSwitch();
+    }
+    
     public SwitchState getTriggeredState() {
 		return triggeredState;
 	}
