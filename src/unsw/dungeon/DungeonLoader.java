@@ -79,7 +79,7 @@ public abstract class DungeonLoader {
             entity = _switch;
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(x, y);
+            Boulder boulder = new Boulder(dungeon, x, y);
             loadImage(boulder);
             entity = boulder;
         	break;
