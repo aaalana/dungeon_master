@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class InvincibilityPotion extends Entity {
+public class InvincibilityPotion extends Item {
 	public Timer timer;
 	public int timeLeft;
 	
@@ -13,11 +13,8 @@ public class InvincibilityPotion extends Entity {
 		this.timer = new Timer();
     }
     
-	/**
-	 * Count down timer which reduces number of milliseconds the current potion instance will be activated for
-	 * @param player
-	 */
-	public void reduceActivationTime(Player player) {
+    @Override
+	public void useItem(Player player) {
 		System.out.println("5 second countdown for invincibility potion initiated.");
 		InvincibilityPotion potion = this;
 		TimerTask task = new TimerTask() {

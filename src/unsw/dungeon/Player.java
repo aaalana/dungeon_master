@@ -14,7 +14,7 @@ public class Player extends Entity {
     private PlayerState deadState;
     private PlayerState state;
     // WE MIGHT NEED AN ITEMS INTERFACE
-    private ArrayList<Entity> inventory;
+    private ArrayList<Item> inventory;
    
     /**
      * Create a player positioned in square (x,y)
@@ -24,9 +24,10 @@ public class Player extends Entity {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
-        invincibilityState = new InvincibilityState(this, dungeon);
-        normalState = new NormalState(this, dungeon);
-        deadState = new DeadState(this, dungeon);
+        inventory = new ArrayList<Item>();
+        invincibilityState = new InvincibilityState(this);
+        normalState = new NormalState(this);
+        deadState = new DeadState(this);
         this.state = normalState;
     }
 
@@ -54,7 +55,7 @@ public class Player extends Entity {
      * 
      * @param potion
      */
-    public void drinkInvincibilityPotion(InvincibilityPotion potion) {
+    public void drinkInvincibilityPotion(Item potion) {
     	state.drinkInvincibilityPotion(potion);
     }
 	
@@ -62,7 +63,7 @@ public class Player extends Entity {
      * 
      * @param potion
      */
-    public void expelInvincibilityPotion(InvincibilityPotion potion) {
+    public void expelInvincibilityPotion(Item potion) {
     	state.expelInvincibilityPotion(potion);
     }
     
@@ -106,58 +107,43 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Add an item to the inventory
+	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item
 	 * @return
 	 */
-    public void addItem(Entity item) {
-    	if (item instanceof Sword && !hasSword()) {
+    public void collectItem(Item item) {
+    	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    	} else if (item instanceof Key && !hasKey()) {
+    		dungeon.removeItem(item);
+    	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
+    		dungeon.removeItem(item);
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
-    		drinkInvincibilityPotion((InvincibilityPotion) item);
+    		drinkInvincibilityPotion(item);
+    		dungeon.removeItem(item);
+    	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
+    		inventory.add(item);
+    		dungeon.removeItem(item);
     	}
+    	
+    	// temp testing: print out the inventory
+    	System.out.println("Inventory: [");
+    	for (Item i : inventory) {
+    		System.out.println(i + ",");
+    	}
+    	System.out.println("]");
     }
-	
-    // these methods kind of repeat a lot - need to fix
-    
+  
     /**
      * Check if the player has a sword in the inventory
      * @return
      */
-	public boolean hasSword() {
-	   	for (Entity holding : inventory) {
-    		if (holding instanceof Sword) {
+	public boolean hasCertainItem(Item obj) {
+		for (Item i : inventory) {
+    		if (i.getClass().equals(obj.getClass())) {
     			return true;
-    		}
-    	}
-		return false;
-	}
-	
-	/**
-	 * Check if the player has a key in the inventory
-	 * @return
-	 */
-	public boolean hasKey() {
-		for (Entity holding : inventory) {
-    		if (holding instanceof Key) {
-    			return true;
-    		}
-    	}
-		return false;
-	}
-	
-	/** 
-	 * Check if the player has invincibility potion/s in the inventory
-	 * @return
-	 */
-	public boolean hasInvincibilityPotion() {
-		for (Entity holding : inventory) {
-    		if (holding instanceof InvincibilityPotion) {
-    			return true;
-    		}
+    		} 
     	}
 		return false;
 	}
@@ -166,7 +152,7 @@ public class Player extends Entity {
 	 * Removes an item from the inventory
 	 * @param item
 	 */
-	public void removeItem(Entity item) {
+	public void removeItem(Item item) {
 		inventory.remove(item);
 	}
 }
