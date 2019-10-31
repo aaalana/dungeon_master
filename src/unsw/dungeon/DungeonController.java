@@ -75,6 +75,7 @@ public class DungeonController {
             break; 
         }
         dungeon.addToInventory();  
+        dungeon.updateObstacle();
     }
     
     public boolean checkMove(int x, int y, String direction) {

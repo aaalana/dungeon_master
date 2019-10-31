@@ -158,7 +158,6 @@ public class Dungeon {
     	for (Obstacle o : this.obstacles) {
     		if (o == null) 
     			continue;
-    		
     		o.trigger(shareSquare(o));
     	}
     }
