@@ -49,7 +49,8 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-        System.out.println(player.getState());
+        // testing: check if the player's dead
+    	System.out.println(player.getState());
     	if (!(player.getState() instanceof DeadState)) {
 	    	switch (event.getCode()) {
 	        case UP:

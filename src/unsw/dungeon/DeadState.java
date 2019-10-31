@@ -20,6 +20,5 @@ public class DeadState implements PlayerState {
 	@Override
 	public void killPlayer() {
 		System.out.println("Can't kill a dead player.");
-		System.out.println("-----GAME OVER-----");
 	}	
 }
