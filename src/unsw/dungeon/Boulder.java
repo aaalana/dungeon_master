@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Boulder extends Entity {
+public class Boulder extends Blocker {
 
 	private Dungeon dungeon;
 	
@@ -28,4 +28,10 @@ public class Boulder extends Entity {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
+
+	@Override
+	public void block() {
+		// TODO Auto-generated method stub
+		
+	}
 }
