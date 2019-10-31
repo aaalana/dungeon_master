@@ -127,13 +127,19 @@ public class Dungeon {
     		if (entity == null) continue;
     		
     		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    			(sharedWith instanceof Exit && entity instanceof Player)) {
+    			(sharedWith instanceof Exit && entity instanceof Player) || 
+    			(sharedWith instanceof Player && entity instanceof Enemy)) {
     			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
     				return true;
     			}
     		}
     	}
     	return false;
+    }
+    
+    public void killCreatures() {
+    	List<Item> tempList = new ArrayList<>(livingCreatures);	
+    	
     }
     
     /**
