@@ -70,6 +70,13 @@ public class Dungeon {
     	return false;
     }
     
+    /**
+     * Gets an entity which shares the same square as an entity passed in as the Entity below
+     * @param below
+     * @param situation
+     * @return null when no entity is sharing the same square as below; Otherwise, the entity
+     * sharing the same square is returned.
+     */
     public Entity getOnTopOf(Entity below, String situation) {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue;

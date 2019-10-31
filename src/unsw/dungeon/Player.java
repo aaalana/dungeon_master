@@ -84,6 +84,8 @@ public class Player extends Entity {
     	}
     }
 	
+    // these methods kind of repeat a lot - need to fix
+    
     /**
      * Check if the player has a sword in the inventory
      * @return
