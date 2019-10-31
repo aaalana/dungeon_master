@@ -21,6 +21,8 @@ public class Dungeon {
     private List<Entity> entities;
     private List<Obstacle> obstacles;
     private List<Item> items;
+    private List<Blocker> blockers;
+    private List<LivingCreature> livingCreatures;
     private BoulderSystem boulders;
     private Player player;
 
@@ -30,6 +32,8 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
+        this.blockers = new ArrayList<>();
+        this.livingCreatures = new ArrayList<>();
         this.boulders = new BoulderSystem(this);
         this.player = null;
     }
@@ -79,6 +83,30 @@ public class Dungeon {
      */
     public void removeItem(Item item) {
         items.remove(item);
+    }
+    
+    /**
+     * add an blocker to the blockers list
+     * @param blocker
+     */
+    public void addBlocker(Blocker blocker) {
+    	blockers.add(blocker);
+    }
+    
+    /**
+     * add an LivingCreature to the LivingCreatures list
+     * @param c
+     */
+    public void addLivingCreature(LivingCreature c) {
+    	livingCreatures.add(c);
+    }
+    
+    /**
+     * remove an living creature from the livingCreatures list
+     * @param c
+     */
+    public void removeLivingCreature(LivingCreature c) {
+    	livingCreatures.remove(c);
     }
     
     /**
