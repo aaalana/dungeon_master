@@ -124,6 +124,13 @@ public abstract class DungeonLoader {
         	entity = door;
         	dungeon.addBlocker(door);
         	break;
+        case "portal":
+        	// temporary
+        	int portalId = 0;
+        	Portal portal = new Portal(x, y, portalId);
+        	loadImage(portal);
+        	entity = portal;
+        	break;
         }
         dungeon.addEntity(entity);
     }
