@@ -7,6 +7,6 @@ public abstract class Obstacle extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 	
-	abstract public void trigger(boolean state);
-	abstract public boolean getState();
+	public abstract void trigger(boolean state);
+	public abstract boolean getState();
 }
