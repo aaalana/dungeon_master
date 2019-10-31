@@ -12,6 +12,7 @@ public class Exit extends Obstacle {
 	public void trigger(boolean state) {
 		// might want to stop them from moving as a temporarily fix
 		// need to find a way to restart the game?
+		System.out.println("Player is exiting the dungeon.");
 		this.triggered = state;
 	}
 	
