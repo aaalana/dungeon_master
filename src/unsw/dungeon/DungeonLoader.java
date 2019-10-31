@@ -67,19 +67,22 @@ public abstract class DungeonLoader {
             Treasure treasure = new Treasure(x, y);
             loadImage(treasure);
             entity = treasure;
+            dungeon.addItem(treasure);
         	break;
         case "invincibility":
-            Invincibility invincibility = new Invincibility(x, y);
+            InvincibilityPotion invincibility = new InvincibilityPotion(x, y);
             loadImage(invincibility);
             entity = invincibility;
+            dungeon.addItem(invincibility);
         	break;
         case "switch":
-            Switch _switch = new Switch(x, y, dungeon);
+            Switch _switch = new Switch(x, y);
             loadImage(_switch);
             entity = _switch;
+            dungeon.addObstacle(_switch);
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(x, y);
+            Boulder boulder = new Boulder(dungeon, x, y);
             loadImage(boulder);
             entity = boulder;
         	break;
@@ -87,6 +90,7 @@ public abstract class DungeonLoader {
             Sword sword = new Sword(x, y);
             loadImage(sword);
             entity = sword;
+            dungeon.addItem(sword);
         	break;
         case "enemy":
             Enemy enemy = new Enemy(x, y);
@@ -94,9 +98,10 @@ public abstract class DungeonLoader {
             entity = enemy;
         	break;
         case "exit":
-        	Exit exit = new Exit(x, y, dungeon);
+        	Exit exit = new Exit(x, y);
             loadImage(exit);
             entity = exit;
+            dungeon.addObstacle(exit);
          	break;
         // not in json files
         case "key":
@@ -105,6 +110,7 @@ public abstract class DungeonLoader {
             Key key = new Key(x, y, keyId);
             loadImage(key);
             entity = key;
+            dungeon.addItem(key);
         	break;
         case "door":
         	// temporary
@@ -117,6 +123,12 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
+    public void extractGoal(Dungeon dungeon, JSONObject json) {
+        String goal = json.getString("goal-condition");
+    	
+        // maybe ??? dungeon.addGoal(goal);	
+    }
+    
 	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities

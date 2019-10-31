@@ -8,14 +8,20 @@ public class NormalState implements PlayerState {
 	}
 	
 	@Override
-	public void drinkInvincibilityPotion() {
-		System.out.println("The player is now invincible for 30 seconds.");
+	public void drinkInvincibilityPotion(Item potion) {
+		System.out.println("The player is now invincible for 5 seconds.");
+		potion.useItem(this.player);
 		player.setState(player.getInvincibilityState());
 	}
 
 	@Override
-	public void expelledInvincibilityPotion() {
+	public void expelInvincibilityPotion(Item potion) {
 		System.out.println("The player is already not invincible.");
+	}
+
+	@Override
+	public void killPlayer() {
+		player.setState(player.getDeadState());
 	}
 	
 }
