@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Switch extends Entity {
+public class Switch extends Obstacle {
 	private boolean triggered;
 
     public Switch(int x, int y) {
@@ -8,19 +8,19 @@ public class Switch extends Entity {
         this.triggered = false;
     }
  
-    /**
-     * triggers the switch represented by setting its state as true
-     */
-    public void trigger(Dungeon dungeon){
-    	if (dungeon.shareSquare(this, "switch") instanceof Boulder) {
-    		this.triggered = true;
-    	}
+    @Override
+    public void trigger(boolean state){
+    	// temporary testing - remove later
+    	if (state)
+    		System.out.println("switch triggered!");
+    	else
+    		System.out.println("switch untriggered!");
+    	
+    	this.triggered = state;
+    	
     }
     
-    /**
-     * Returns the state of the switch
-     * @return
-     */
+	@Override
     public boolean getState() {
     	return triggered;
     }

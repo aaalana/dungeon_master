@@ -2,22 +2,20 @@ package unsw.dungeon;
 
 public class NormalState implements PlayerState {
 	private Player player;
-	private Dungeon dungeon;
 	
-	public NormalState(Player player, Dungeon dungeon) {
+	public NormalState(Player player) {
 		this.player = player;
-		this.dungeon = dungeon;
 	}
 	
 	@Override
-	public void drinkInvincibilityPotion(InvincibilityPotion potion) {
+	public void drinkInvincibilityPotion(Item potion) {
 		System.out.println("The player is now invincible for 5 seconds.");
-		potion.reduceActivationTime(this.player);
+		potion.useItem(this.player);
 		player.setState(player.getInvincibilityState());
 	}
 
 	@Override
-	public void expelInvincibilityPotion(InvincibilityPotion potion) {
+	public void expelInvincibilityPotion(Item potion) {
 		System.out.println("The player is already not invincible.");
 	}
 
