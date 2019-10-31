@@ -32,8 +32,8 @@ public class BoulderSystem {
     			//If there's a boulder or a wall at the position next to the boulder, then return false
     			if (direction == "left" && (dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Wall")) return false;
     			if (direction == "right" && (dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Wall")) return false;
-    			if (direction == "up" && (dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Bouder" || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
-    			if (direction == "down" && (dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "up" && (dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "down" && (dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
     			
     			//If not, then move the boulder and return true
     			if (direction == "left") {

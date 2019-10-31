@@ -66,7 +66,7 @@ public class Dungeon {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
-    			System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
+    			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
     			return entity.getClass().getName();
     		}
     	}
