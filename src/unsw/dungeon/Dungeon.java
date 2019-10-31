@@ -171,19 +171,17 @@ public class Dungeon {
     public void killCreature() {
     	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
     	for (LivingCreature e: tempList) {
-    		if (e == null && !(e instanceof Enemy)) 
+    		if (e == null || !(e instanceof Enemy)) 
     			continue;
     		
-    		if (player.getState() instanceof InvincibilityState) {
-	    		if (player.getX() == e.getX() && player.getY() == e.getY()) {
-	    			e.killOff();
-	    			removeLivingCreature(e);
-	    			System.out.println("enemy killed");
-	    		}
-    		} else if (player.getState() instanceof NormalState) {
-    			if (player.getX() == e.getX() && player.getY() == e.getY()) {
-	    			player.killOff();
-	    			removeLivingCreature(player);
+    		if (player.getX() == e.getX() && player.getY() == e.getY()) {
+	    		if (player.getState() instanceof InvincibilityState) {
+		    			e.killOff();
+		    			removeLivingCreature(e);
+		    			System.out.println("enemy killed");
+	    		} else if (player.getState() instanceof NormalState) {
+		    			player.killOff();
+		    			removeLivingCreature(player);
 	    		}
     		}
     	}
