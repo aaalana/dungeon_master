@@ -106,6 +106,14 @@ public class Player extends LivingCreature {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public PlayerState getState() {
+		return state;
+	}
+	
+	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item
 	 * @return

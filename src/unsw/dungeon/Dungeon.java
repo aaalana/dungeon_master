@@ -155,13 +155,36 @@ public class Dungeon {
     		if (entity == null) continue;
     		
     		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    			(sharedWith instanceof Exit && entity instanceof Player)) {
+    			(sharedWith instanceof Exit && entity instanceof Player) || 
+    			(sharedWith instanceof Player && entity instanceof Enemy)) {
     			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
     				return true;
     			}
     		}
     	}
     	return false;
+    }
+    
+    /**
+     * Kills off living creatures when they come in contact with one another
+     */
+    public void killCreature() {
+    	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
+    	for (LivingCreature e: tempList) {
+    		if (e == null || !(e instanceof Enemy)) 
+    			continue;
+    		
+    		if (player.getX() == e.getX() && player.getY() == e.getY()) {
+	    		if (player.getState() instanceof InvincibilityState) {
+		    			e.killOff();
+		    			removeLivingCreature(e);
+		    			System.out.println("enemy killed");
+	    		} else if (player.getState() instanceof NormalState) {
+		    			player.killOff();
+		    			removeLivingCreature(player);
+	    		}
+    		}
+    	}
     }
     
     /**
