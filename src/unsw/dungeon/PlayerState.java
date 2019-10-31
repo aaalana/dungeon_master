@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
 public interface PlayerState {
-	public void drinkInvincibilityPotion();
-	public void expelledInvincibilityPotion();
+	public void drinkInvincibilityPotion(InvincibilityPotion potion);
+	public void expelInvincibilityPotion(InvincibilityPotion potion);
 }

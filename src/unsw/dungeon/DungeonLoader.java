@@ -69,7 +69,7 @@ public abstract class DungeonLoader {
             entity = treasure;
         	break;
         case "invincibility":
-            Invincibility invincibility = new Invincibility(x, y);
+            InvincibilityPotion invincibility = new InvincibilityPotion(x, y);
             loadImage(invincibility);
             entity = invincibility;
         	break;
