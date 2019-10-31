@@ -26,4 +26,9 @@ public class InvincibilityState implements PlayerState {
 		}
 	}
 	
+	@Override
+	public void killPlayer() {
+		player.setState(player.getDeadState());
+	}
+
 }

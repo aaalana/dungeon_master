@@ -74,7 +74,7 @@ public abstract class DungeonLoader {
             entity = invincibility;
         	break;
         case "switch":
-            Switch _switch = new Switch(x, y, dungeon);
+            Switch _switch = new Switch(x, y);
             loadImage(_switch);
             entity = _switch;
         	break;
@@ -94,7 +94,7 @@ public abstract class DungeonLoader {
             entity = enemy;
         	break;
         case "exit":
-        	Exit exit = new Exit(x, y, dungeon);
+        	Exit exit = new Exit(x, y);
             loadImage(exit);
             entity = exit;
          	break;
@@ -117,6 +117,12 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
+    public void extractGoal(Dungeon dungeon, JSONObject json) {
+        String goal = json.getString("goal-condition");
+    	
+        // maybe ??? dungeon.addGoal(goal);	
+    }
+    
 	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities

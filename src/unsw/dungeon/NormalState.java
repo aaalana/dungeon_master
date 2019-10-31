@@ -20,5 +20,10 @@ public class NormalState implements PlayerState {
 	public void expelInvincibilityPotion(InvincibilityPotion potion) {
 		System.out.println("The player is already not invincible.");
 	}
+
+	@Override
+	public void killPlayer() {
+		player.setState(player.getDeadState());
+	}
 	
 }

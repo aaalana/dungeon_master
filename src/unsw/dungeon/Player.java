@@ -11,6 +11,7 @@ public class Player extends Entity {
     private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
+    private PlayerState deadState;
     private PlayerState state;
     // WE MIGHT NEED AN ITEMS INTERFACE
     private ArrayList<Entity> inventory;
@@ -25,6 +26,7 @@ public class Player extends Entity {
         this.dungeon = dungeon;
         invincibilityState = new InvincibilityState(this, dungeon);
         normalState = new NormalState(this, dungeon);
+        deadState = new DeadState(this, dungeon);
         this.state = normalState;
     }
 
@@ -48,22 +50,57 @@ public class Player extends Entity {
             x().set(getX() + 1);
     }
     
+    /**
+     * 
+     * @param potion
+     */
     public void drinkInvincibilityPotion(InvincibilityPotion potion) {
     	state.drinkInvincibilityPotion(potion);
     }
 	
+    /**
+     * 
+     * @param potion
+     */
     public void expelInvincibilityPotion(InvincibilityPotion potion) {
     	state.expelInvincibilityPotion(potion);
     }
     
+    /**
+     * 
+     */
+    public void killPlayer() {
+    	state.killPlayer();
+    }
+    
+    /**
+     * 
+     * @return
+     */
     public PlayerState getInvincibilityState() {
 		return invincibilityState;
 	}
-
+    
+    /**
+     * 
+     * @return
+     */
 	public PlayerState getNormalState() {
 		return normalState;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public PlayerState getDeadState() {
+		return deadState;
+	}
+	
+	/**
+	 * 
+	 * @param s
+	 */
 	public void setState(PlayerState s) {
 		this.state = s;
 	}

@@ -1,44 +1,27 @@
 package unsw.dungeon;
 
 public class Switch extends Entity {
-	private SwitchState triggeredState;
-	private SwitchState untriggeredState;
-	private SwitchState state;
-	private Dungeon dungeon;
-	
-    public Switch(int x, int y, Dungeon dungeon) {
-        super(x, y);
-        triggeredState = new TriggeredState(this);
-        untriggeredState = new UntriggeredState(this);
-        this.dungeon = dungeon;
-        this.state = untriggeredState;
-    }
-  
-	public Dungeon getDungeon() {
-    	return this.dungeon;
-    }
-    
-    public void setState(SwitchState state) {
-        this.state = state;		
-    }
-    
-    public SwitchState getState(){
-        return state;
-    }
-    
-    public void triggerSwitch() {
-    	state.triggerSwitch();
-    }
-    
-    public void untriggerSwitch() {
-    	state.untriggerSwitch();
-    }
-    
-    public SwitchState getTriggeredState() {
-		return triggeredState;
-	}
+	private boolean triggered;
 
-	public SwitchState getUntriggeredState() {
-		return untriggeredState;
-	}
+    public Switch(int x, int y) {
+        super(x, y);
+        this.triggered = false;
+    }
+ 
+    /**
+     * triggers the switch represented by setting its state as true
+     */
+    public void trigger(Dungeon dungeon){
+    	if (dungeon.shareSquare(this, "switch") instanceof Boulder) {
+    		this.triggered = true;
+    	}
+    }
+    
+    /**
+     * Returns the state of the switch
+     * @return
+     */
+    public boolean getState() {
+    	return triggered;
+    }
 }
