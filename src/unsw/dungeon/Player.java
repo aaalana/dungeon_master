@@ -22,7 +22,7 @@ public class Player extends LivingCreature {
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-        //this.dungeon = dungeon;
+        this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);

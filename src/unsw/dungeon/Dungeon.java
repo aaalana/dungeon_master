@@ -178,7 +178,8 @@ public class Dungeon {
 		    			//removeLivingCreature(e);
 		    			System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
-		    			player.killOff();
+	    				System.out.println("player killed");
+	    				player.killOff();
 		    			//removeLivingCreature(player);
 		    			System.exit(0);
 	    		}
