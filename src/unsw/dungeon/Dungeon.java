@@ -56,17 +56,17 @@ public class Dungeon {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    
+    public void addEnemy(Entity enemy) {
+    	this.enemies.addEnemy(enemy);
+    }
 
     public void addEntity(Entity entity) {
     	if (entity instanceof Enemy) {
-    		this.enemies.addEnemy((Enemy) entity);
-    	} 
-    	
-        entities.add(entity);
-    
-    	if (entity instanceof unsw.dungeon.Boulder) {
+    		this.addEnemy(entity);
+    	} else if (entity instanceof unsw.dungeon.Boulder) {
     		boulders.addBoulder(entity);
-    	} 
+    	} 	
         entities.add(entity);
     }
     

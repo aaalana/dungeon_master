@@ -18,8 +18,8 @@ public class EnemySystem {
 		this.enemies = enemies;
 	}
 	
-	public void addEnemy(Enemy enemy) {
-		this.enemies.add(enemy);
+	public void addEnemy(Entity enemy) {
+		this.enemies.add((Enemy) enemy);
 	}
 	
 	public void removeEnemy(Entity enemy) {

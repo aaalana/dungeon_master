@@ -2,10 +2,10 @@ package unsw.dungeon;
 
 public abstract class LivingCreature extends Entity {
 	
-
+	private Dungeon dungeon;
 	public LivingCreature(Dungeon dungeon, int x, int y) {
-		super(dungeon, x, y);
-		// TODO Auto-generated constructor stub
+		super(x, y);
+		this.dungeon = dungeon;
 	}
 
     

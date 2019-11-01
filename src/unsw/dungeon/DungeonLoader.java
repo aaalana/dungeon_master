@@ -56,7 +56,7 @@ public abstract class DungeonLoader {
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
-            dungeon.addLivingCreature(player);
+//            dungeon.addLivingCreature(player);
             break;
         case "wall":
             Wall wall = new Wall(x, y);
@@ -99,7 +99,7 @@ public abstract class DungeonLoader {
             Enemy enemy = new Enemy(dungeon, x, y);
             loadImage(enemy);
             entity = enemy;
-            dungeon.addLivingCreature(enemy);
+            dungeon.addEnemy(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
