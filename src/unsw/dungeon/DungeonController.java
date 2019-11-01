@@ -77,6 +77,7 @@ public class DungeonController {
 	        default:
 	            break; 
 	        }
+	    	dungeon.updateObstacle();
 	        dungeon.addToInventory();  
 	        dungeon.killCreature();
         }

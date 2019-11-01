@@ -44,7 +44,7 @@ public class BoulderSystem {
     				boulder.moveUp();
     			} else if (direction == "down") {
     				boulder.moveDown();
-    			}			
+    			}	
     			
     			return true;
     		}

@@ -10,15 +10,12 @@ public class Exit extends Obstacle {
 	
 	@Override
 	public void trigger(boolean state) {
-		// might want to stop them from moving as a temporarily fix
-		// need to find a way to restart the game?
+		// End the application when leaving the maze
 		if (state) {
-			System.out.println("Player is exiting the dungeon.");
+			System.out.println("Player exited the dungeon.");
+			System.exit(0);
 		}
 		this.isBeingUsed = state;
-		
-		// End the application when leaving the maze
-		//System.exit(0);
 	}
 	
 	@Override
