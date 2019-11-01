@@ -23,7 +23,6 @@ public class Dungeon {
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
-    private List<LivingCreature> livingCreatures;
     private BoulderSystem boulders;
     private Player player;
 
@@ -37,7 +36,6 @@ public class Dungeon {
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
-        this.livingCreatures = new ArrayList<>();
         this.boulders = new BoulderSystem(this);
 
         this.player = null;
@@ -105,22 +103,6 @@ public class Dungeon {
     }
     
     /**
-     * add an LivingCreature to the LivingCreatures list
-     * @param c
-     */
-    public void addLivingCreature(LivingCreature c) {
-    	livingCreatures.add(c);
-    }
-    
-    /**
-     * remove an living creature from the livingCreatures list
-     * @param c
-     */
-    public void removeLivingCreature(LivingCreature c) {
-    	livingCreatures.remove(c);
-    }
-    
-    /**
      * This function takes in co-ordinates and returns what entity is on that square
      * @param x
      * @param y
@@ -185,7 +167,7 @@ public class Dungeon {
      * Kills off living creatures when they come in contact with one another
      */
     public void killCreature() {
-    	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
+    	List<LivingCreature> tempList = new ArrayList<LivingCreature>();	
     	for (LivingCreature e: tempList) {
     		if (e == null || !(e instanceof Enemy)) 
     			continue;
@@ -193,11 +175,11 @@ public class Dungeon {
     		if (player.getX() == e.getX() && player.getY() == e.getY()) {
 	    		if (player.getState() instanceof InvincibilityState) {
 		    			e.killOff();
-		    			removeLivingCreature(e);
+		    			//removeLivingCreature(e);
 		    			System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
 		    			player.killOff();
-		    			removeLivingCreature(player);
+		    			//removeLivingCreature(player);
 	    		}
     		}
     	}
