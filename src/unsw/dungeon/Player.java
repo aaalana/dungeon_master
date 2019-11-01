@@ -6,14 +6,13 @@ import java.util.ArrayList;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
+public class Player extends LivingCreature {
 
     private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
     private PlayerState state;
-    // WE MIGHT NEED AN ITEMS INTERFACE
     private ArrayList<Item> inventory;
    
     /**
@@ -70,7 +69,7 @@ public class Player extends Entity {
     /**
      * 
      */
-    public void killPlayer() {
+    public void killOff() {
     	state.killPlayer();
     }
     
@@ -106,6 +105,14 @@ public class Player extends Entity {
 		this.state = s;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public PlayerState getState() {
+		return state;
+	}
+	
 	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item

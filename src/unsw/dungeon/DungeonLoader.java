@@ -56,11 +56,13 @@ public abstract class DungeonLoader {
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
+            dungeon.addLivingCreature(player);
             break;
         case "wall":
             Wall wall = new Wall(x, y);
             loadImage(wall);
             entity = wall;
+            dungeon.addBlocker(wall);
             break;
         // TODO Handle other possible entities
         case "treasure":
@@ -85,6 +87,7 @@ public abstract class DungeonLoader {
             Boulder boulder = new Boulder(dungeon, x, y);
             loadImage(boulder);
             entity = boulder;
+            dungeon.addBlocker(boulder);
         	break;
         case "sword":
             Sword sword = new Sword(x, y);
@@ -96,6 +99,7 @@ public abstract class DungeonLoader {
             Enemy enemy = new Enemy(x, y);
             loadImage(enemy);
             entity = enemy;
+            dungeon.addLivingCreature(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
@@ -118,6 +122,14 @@ public abstract class DungeonLoader {
         	Door door = new Door(x, y, doorId);
         	loadImage(door);
         	entity = door;
+        	dungeon.addBlocker(door);
+        	break;
+        case "portal":
+        	// temporary
+        	int portalId = 0;
+        	Portal portal = new Portal(x, y, portalId);
+        	loadImage(portal);
+        	entity = portal;
         	break;
         }
         dungeon.addEntity(entity);
