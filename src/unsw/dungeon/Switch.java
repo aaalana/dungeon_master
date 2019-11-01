@@ -19,8 +19,8 @@ public class Switch extends Obstacle {
     	this.triggered = state;
     	
     }
-    
-	@Override
+   
+    @Override
     public boolean getState() {
     	return triggered;
     }

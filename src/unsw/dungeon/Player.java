@@ -21,7 +21,7 @@ public class Player extends LivingCreature {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
+        super(dungeon, x, y);
         this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
@@ -29,27 +29,18 @@ public class Player extends LivingCreature {
         deadState = new DeadState(this);
         this.state = normalState;
     }
-
-	public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
-    }
-
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
-    }
     
+    /**
+     * Teleports the player to another location. 
+     * This is used when the player enters a portal
+     * @param x
+     * @param y
+     */
+    public void teleport(int x, int y) {
+    	x().set(x);
+    	y().set(y);
+    }
+    	
     /**
      * 
      * @param potion
@@ -105,6 +96,14 @@ public class Player extends LivingCreature {
 		this.state = s;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public PlayerState getState() {
+		return state;
+	}
+	
 	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item
