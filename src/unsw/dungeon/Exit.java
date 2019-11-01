@@ -15,8 +15,10 @@ public class Exit extends Obstacle {
 		if (state) {
 			System.out.println("Player is exiting the dungeon.");
 		}
-		
 		this.isBeingUsed = state;
+		
+		// End the application when leaving the maze
+		System.exit(0);
 	}
 	
 	@Override
