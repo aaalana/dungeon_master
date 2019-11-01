@@ -15,6 +15,7 @@ public class Exit extends Obstacle {
 		this.triggered = state;
 	}
 	
+	@Override
 	public boolean getState() {
 		return this.triggered;
 	}

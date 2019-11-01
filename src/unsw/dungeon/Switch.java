@@ -20,6 +20,7 @@ public class Switch extends Obstacle {
     	
     }
    
+    @Override
     public boolean getState() {
     	return triggered;
     }

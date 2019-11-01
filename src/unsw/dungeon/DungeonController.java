@@ -79,6 +79,7 @@ public class DungeonController {
 	        }
 	        dungeon.addToInventory();  
 	        dungeon.killCreature();
+	        dungeon.updateObstacle();
         }
     }
     
