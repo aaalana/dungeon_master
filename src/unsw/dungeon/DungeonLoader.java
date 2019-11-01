@@ -143,22 +143,23 @@ public abstract class DungeonLoader {
     
     private Goal loadGoals(JSONObject goals, Dungeon dungeon){
         String type = goals.getString("goal");
-        JSONArray subgoals = goals.getJSONArray("subgoals");
-        
+       
         Goal goal = null;
         switch(type) {
         	// if the goals is AND, add all goals
             case "AND":
-				ANDGoal ANDgoals = new ANDGoal();
+                JSONArray subgoals = goals.getJSONArray("subgoals");
+            	ANDGoal ANDgoals = new ANDGoal();
 				for (int i = 0; i < subgoals.length(); i++) {
 				    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
 				    ANDgoals.addGoal(subgoal);
 				}
 				break;
             case "OR":
+            	JSONArray subgoals2 = goals.getJSONArray("subgoals");
                 ORGoal ORgoals = new ORGoal();
-                for (int i = 0; i < subgoals.length(); i++) {
-                    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
+                for (int i = 0; i < subgoals2.length(); i++) {
+                    Goal subgoal = loadGoals(subgoals2.getJSONObject(i), dungeon);
                     ORgoals.addGoal(subgoal);
                 }
                 break;
