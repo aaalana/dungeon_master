@@ -1,9 +1,11 @@
 package unsw.dungeon;
 
 public class Portal extends Entity {
-	private Dungeon dungeon;
-	public Portal(Dungeon dungeon, int x, int y) {
+	// to pair match portals
+	private int id; 
+	
+	public Portal(int x, int y, int id) {
         super(x, y);
-        this.dungeon = dungeon;
+        this.id = id;
     }
 }

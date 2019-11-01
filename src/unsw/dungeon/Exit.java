@@ -1,13 +1,22 @@
 package unsw.dungeon;
 
-public class Exit extends Entity {
-
+public class Exit extends Obstacle {
+	private boolean triggered;
+	
 	public Exit(int x, int y) {
 		super(x, y);
+		this.triggered = false;
 	}
 	
-	public boolean triggered() {
-		return false;
+	@Override
+	public void trigger(boolean state) {
+		// might want to stop them from moving as a temporarily fix
+		// need to find a way to restart the game?
+		this.triggered = state;
 	}
 	
+	@Override
+	public boolean getState() {
+		return this.triggered;
+	}
 }

@@ -56,65 +56,91 @@ public abstract class DungeonLoader {
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
+            dungeon.addLivingCreature(player);
             break;
         case "wall":
             Wall wall = new Wall(x, y);
             loadImage(wall);
             entity = wall;
+            dungeon.addBlocker(wall);
             break;
         // TODO Handle other possible entities
         case "treasure":
             Treasure treasure = new Treasure(x, y);
             loadImage(treasure);
             entity = treasure;
+            dungeon.addItem(treasure);
         	break;
         case "invincibility":
-            Invincibility invincibility = new Invincibility(x, y);
+            InvincibilityPotion invincibility = new InvincibilityPotion(x, y);
             loadImage(invincibility);
             entity = invincibility;
+            dungeon.addItem(invincibility);
         	break;
         case "switch":
             Switch _switch = new Switch(x, y);
             loadImage(_switch);
             entity = _switch;
+            dungeon.addObstacle(_switch);
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(x, y);
+            Boulder boulder = new Boulder(dungeon, x, y);
             loadImage(boulder);
             entity = boulder;
+            dungeon.addBlocker(boulder);
         	break;
         case "sword":
             Sword sword = new Sword(x, y);
             loadImage(sword);
             entity = sword;
+            dungeon.addItem(sword);
         	break;
         case "enemy":
             Enemy enemy = new Enemy(dungeon, x, y);
             loadImage(enemy);
             entity = enemy;
+            dungeon.addLivingCreature(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
             loadImage(exit);
             entity = exit;
+            dungeon.addObstacle(exit);
          	break;
         // not in json files
         case "key":
+        	// temporary
         	int keyId = 0;
             Key key = new Key(x, y, keyId);
             loadImage(key);
             entity = key;
+            dungeon.addItem(key);
         	break;
         case "door":
+        	// temporary
         	int doorId = 0;
         	Door door = new Door(x, y, doorId);
         	loadImage(door);
         	entity = door;
+        	dungeon.addBlocker(door);
+        	break;
+        case "portal":
+        	// temporary
+        	int portalId = 0;
+        	Portal portal = new Portal(x, y, portalId);
+        	loadImage(portal);
+        	entity = portal;
         	break;
         }
         dungeon.addEntity(entity);
     }
 
+    public void extractGoal(Dungeon dungeon, JSONObject json) {
+        String goal = json.getString("goal-condition");
+    	
+        // maybe ??? dungeon.addGoal(goal);	
+    }
+    
 	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities

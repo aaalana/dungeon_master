@@ -78,7 +78,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     		onLoad(entity, swordImage);
     	} else if (entity instanceof Treasure) {
     		onLoad(entity, treasureImage);
-    	} else if (entity instanceof Invincibility) {
+    	} else if (entity instanceof InvincibilityPotion) {
     		onLoad(entity, invincibilityImage);
     	} else if (entity instanceof Door) {
     		onLoad(entity, doorImage);

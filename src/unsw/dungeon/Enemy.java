@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
-public class Enemy extends Entity {
-	
+
+public class Enemy extends LivingCreature {
 	private Dungeon dungeon;
 	
-	public Enemy(Dungeon dungeon, int x, int y) {
+    public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
     }
@@ -61,4 +61,11 @@ public class Enemy extends Entity {
         if (getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
     }
+    
+	@Override
+	public void killOff() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

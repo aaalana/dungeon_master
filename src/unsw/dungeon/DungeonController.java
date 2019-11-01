@@ -75,12 +75,44 @@ public class DungeonController {
         default:
             break;
         }
+        // testing: check if the player's dead
+    	System.out.println(player.getState());
+    	if (!(player.getState() instanceof DeadState)) {
+	    	switch (event.getCode()) {
+	        case UP:
+	        	//System.out.println(player.toString());
+	        	if (checkMove(player.getX(), player.getY() - 1, "up")) {
+	        		player.moveUp();
+	        	}
+	            break;
+	        case DOWN:
+	        	if (checkMove(player.getX(), player.getY() + 1, "down")) {
+	        		player.moveDown();	
+	        	}
+	            break;
+	        case LEFT:
+	        	if (checkMove(player.getX() - 1, player.getY(), "left")) {
+	        		player.moveLeft();	 
+	        	}
+	            break;
+	        case RIGHT:
+	        	if (checkMove(player.getX() + 1, player.getY(), "right")) {
+	        		player.moveRight();	  
+	        	}
+	            break;
+	        default:
+	            break; 
+	        }
+	        dungeon.addToInventory();  
+	        dungeon.killCreature();
+        }
         dungeon.moveEnemies();
     }
     
-    @FXML
-    public void whatrk() {
-    	dungeon.moveEnemies();
+    
+    public boolean checkMove(int x, int y, String direction) {
+    	return (!dungeon.checkWall(x, y)) && dungeon.pushBoulder(x, y, direction);
     }
+   
 }
 
