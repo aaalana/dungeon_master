@@ -32,7 +32,6 @@ public class PortalSystem {
 		return null;
 	}
 	
-	
 	/**
 	 * Moves the player from one portal to its corresponding portal
 	 * @param portal
