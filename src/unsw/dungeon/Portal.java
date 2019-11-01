@@ -3,21 +3,35 @@ package unsw.dungeon;
 public class Portal extends Obstacle {
 	// to pair match portals
 	private int id; 
+	private Dungeon dungeon;
 	
-	public Portal(int x, int y, int id) {
+	public Portal(int x, int y, int id, Dungeon dungeon) {
         super(x, y);
         this.id = id;
+        this.dungeon = dungeon;
     }
 
 	@Override
 	public void trigger(boolean state) {
-		// TODO Auto-generated method stub
-		
+		if (state) {
+			getPortalAssist().transportPlayer(this, dungeon.getPlayer());
+			System.out.println("transported player via portal");
+		}
 	}
 
-	@Override
-	public boolean getState() {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * gets the ID of the portal
+	 * @return portal id
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * Calls on the portal system to help transport the player
+	 * @return portalSystem
+	 */
+	public PortalSystem getPortalAssist() {
+		return dungeon.getPortals();
 	}
 }
