@@ -163,22 +163,22 @@ public abstract class DungeonLoader {
                 }
                 break;
             case "exit":
-                ExitGoal exitGoal = new ExitGoal("exit");
+                ExitGoal exitGoal = new ExitGoal();
                 goal = exitGoal;
                 addObserver(exitGoal);
                 break;
             case "enemies":
-                EnemyGoal enemyGoal = new EnemyGoal("enemies");
+                EnemyGoal enemyGoal = new EnemyGoal();
                 goal = enemyGoal;
                 addObserver(enemyGoal);
                 break;
             case "treasure":
-                TreasureGoal treasureGoal = new TreasureGoal("treasure");
+                TreasureGoal treasureGoal = new TreasureGoal();
                 goal = treasureGoal;
                 addObserver(treasureGoal);
                 break;
             case "boulders":
-                BoulderGoal boulderGoal = new boulderGoal("boulders");
+                BoulderGoal boulderGoal = new BoulderGoal();
                 goal = boulderGoal;
                 addObserver(boulderGoal);
                 break;
