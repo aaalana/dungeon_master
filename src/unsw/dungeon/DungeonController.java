@@ -49,9 +49,11 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
+        // testing: check if the player's state
+    	System.out.println(player.getState());
+    	
+    	switch (event.getCode()) {
         case UP:
-        	//System.out.println(player.toString());
         	if (checkMove(player.getX(), player.getY() - 1, "up")) {
         		player.moveUp();
         	}
@@ -71,10 +73,18 @@ public class DungeonController {
         		player.moveRight();	  
         	}
             break;
+        case SPACE:
+        	// use sword??
+        	
+        	break;
         default:
             break; 
         }
-        dungeon.addToInventory();  
+    	
+    	dungeon.updateObstacle();
+        dungeon.removeFromGround();  
+        dungeon.killCreature();
+        dungeon.moveEnemies();
     }
     
     public boolean checkMove(int x, int y, String direction) {

@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Player extends LivingCreature {
 
-    private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
@@ -21,37 +20,27 @@ public class Player extends LivingCreature {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
         this.state = normalState;
     }
-
-	public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
-    }
-
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
-    }
     
     /**
-     * 
+     * Teleports the player to another location. 
+     * This is used when the player enters a portal
+     * @param x
+     * @param y
+     */
+    public void teleport(int x, int y) {
+    	x().set(x);
+    	y().set(y);
+    }
+    	
+    /**
+     * Changes the player's state to invincibilityState
      * @param potion
      */
     public void drinkInvincibilityPotion(Item potion) {
@@ -59,7 +48,7 @@ public class Player extends LivingCreature {
     }
 	
     /**
-     * 
+     * Changes the player's state to normalState
      * @param potion
      */
     public void expelInvincibilityPotion(Item potion) {
@@ -67,73 +56,90 @@ public class Player extends LivingCreature {
     }
     
     /**
-     * 
+     * Changes the player's state to deadState
      */
     public void killOff() {
     	state.killPlayer();
     }
     
     /**
-     * 
-     * @return
+     * Gets the invincibilityState
+     * @return invincibilityState
      */
     public PlayerState getInvincibilityState() {
 		return invincibilityState;
 	}
     
     /**
-     * 
-     * @return
+     * Gets the normalState
+     * @return normalState
      */
 	public PlayerState getNormalState() {
 		return normalState;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the deadState
+	 * @return deadState
 	 */
 	public PlayerState getDeadState() {
 		return deadState;
 	}
 	
 	/**
-	 * 
-	 * @param s
+	 * Sets the player's state
+	 * @param state
 	 */
-	public void setState(PlayerState s) {
-		this.state = s;
+	public void setState(PlayerState state) {
+		this.state = state;
 	}
 
 	/**
+	 * Gets the player's state
+	 * @return player's state
+	 */
+	public PlayerState getState() {
+		return state;
+	}
+	
+	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item
-	 * @return
+	 * @return true when the item has been
 	 */
-    public void collectItem(Item item) {
+    public boolean collectItem(Item item) {
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
     		drinkInvincibilityPotion(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	}
-    	
-    	// temp testing: print out the inventory
-    	System.out.println("Inventory: [");
-    	for (Item i : inventory) {
-    		System.out.println(i + ",");
-    	}
-    	System.out.println("]");
+    	return false;
+    
     }
-  
+    
+ // temp testing: print out the inventory
+ // REMOVE THIS FUNCTION LATER
+    public void printInventory() {
+		System.out.println("Inventory: [");
+		for (Item i : inventory) {
+			System.out.println(i + ",");
+		}
+		System.out.println("]");
+    }
+    
     /**
      * Check if the player has a sword in the inventory
      * @return
