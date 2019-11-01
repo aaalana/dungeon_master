@@ -49,32 +49,6 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	
-        switch (event.getCode()) {
-        case UP:
-        	//System.out.println(player.toString());
-        	if (!dungeon.checkWall(player.getX(), player.getY() - 1)) {
-        		player.moveUp();
-        	}
-            break;
-        case DOWN:
-        	if (!dungeon.checkWall(player.getX(), player.getY() + 1)) {
-        		player.moveDown();	
-        	}
-            break;
-        case LEFT:
-        	if (!dungeon.checkWall(player.getX() - 1, player.getY())) {
-        		player.moveLeft();	
-        	}
-            break;
-        case RIGHT:
-        	if (!dungeon.checkWall(player.getX() + 1, player.getY())) {
-        		player.moveRight();	
-        	}
-            break;
-        default:
-            break;
-        }
         // testing: check if the player's dead
     	System.out.println(player.getState());
     	if (!(player.getState() instanceof DeadState)) {
