@@ -46,8 +46,6 @@ public class BoulderSystem {
     				boulder.moveDown();
     			}			
     			
-    			// update switch status as triggered/untriggered
-    			dungeon.updateObstacle();
     			return true;
     		}
     	}

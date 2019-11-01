@@ -51,6 +51,17 @@ public class Player extends LivingCreature {
     }
     
     /**
+     * Teleports the player to another location. 
+     * This is used when the player enters a portal
+     * @param x
+     * @param y
+     */
+    public void teleport(int x, int y) {
+    	x().set(x);
+    	y().set(y);
+    }
+    	
+    /**
      * 
      * @param potion
      */
@@ -116,32 +127,39 @@ public class Player extends LivingCreature {
 	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item
-	 * @return
+	 * @return true when the item has been
 	 */
-    public void collectItem(Item item) {
+    public boolean collectItem(Item item) {
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
     		drinkInvincibilityPotion(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
-    		dungeon.removeItem(item);
+    		printInventory();
+    		return true;
     	}
-    	
-    	// temp testing: print out the inventory
-    	System.out.println("Inventory: [");
-    	for (Item i : inventory) {
-    		System.out.println(i + ",");
-    	}
-    	System.out.println("]");
+    	return false;
+    
     }
-  
+ // temp testing: print out the inventory
+ // REMOVE LATER
+    public void printInventory() {
+		System.out.println("Inventory: [");
+		for (Item i : inventory) {
+			System.out.println(i + ",");
+		}
+		System.out.println("]");
+    }
     /**
      * Check if the player has a sword in the inventory
      * @return

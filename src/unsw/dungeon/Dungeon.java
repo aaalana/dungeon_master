@@ -12,6 +12,9 @@ import java.util.List;
  * A dungeon can contain many entities, each occupy a square. More than one
  * entity can occupy the same square.
  *
+ * The dungeon manages itself by signaling its entities perform certain tasks. 
+ * However the entity tasks themselves are performed within the entities. 
+ * 
  * @author Robert Clifton-Everest
  *
  */
@@ -23,18 +26,25 @@ public class Dungeon {
     private List<Item> items;
     private List<Blocker> blockers;
     private List<LivingCreature> livingCreatures;
+    
     private BoulderSystem boulders;
+    private PortalSystem portals;
     private Player player;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
+        
         this.entities = new ArrayList<>();
+        
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
         this.livingCreatures = new ArrayList<>();
+        
         this.boulders = new BoulderSystem(this);
+        this.portals = new PortalSystem();
+        
         this.player = null;
     }
 
@@ -59,6 +69,14 @@ public class Dungeon {
     		boulders.addBoulder(entity);
     	} 
         entities.add(entity);
+    }
+    
+    /**
+     * Adds to a list of portals 
+     * @param portal
+     */
+    public void addPortals(Portal portal) {
+    	portals.addPortal(portal);
     }
     
     /**
@@ -110,6 +128,14 @@ public class Dungeon {
     }
     
     /**
+     * gets the portal system
+     * @return portals
+     */
+    public PortalSystem getPortals() {
+    	return portals;
+    }
+    
+    /**
      * This function takes in co-ordinates and returns what entity is on that square
      * @param x
      * @param y
@@ -146,8 +172,7 @@ public class Dungeon {
         
     /**
      * Checks if two particular entities are sharing the same square 
-     * @param sharedWith
-     * @param situation
+     * @param sharedWith an entity sharing a square
      * @return true when two entity are sharing the same square, false otherwise
      */
     public boolean shareSquare(Entity sharedWith) {
@@ -155,7 +180,7 @@ public class Dungeon {
     		if (entity == null) continue;
     		
     		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    			(sharedWith instanceof Exit && entity instanceof Player) || 
+    		   ((sharedWith instanceof Exit || sharedWith instanceof Portal) && entity instanceof Player) || 
     			(sharedWith instanceof Player && entity instanceof Enemy)) {
     			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
     				return true;
@@ -167,6 +192,8 @@ public class Dungeon {
     
     /**
      * Kills off living creatures when they come in contact with one another
+     * -When the player is invincible and touches an enemy, the enemy is signalled to die
+     * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
     	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
@@ -178,7 +205,6 @@ public class Dungeon {
 	    		if (player.getState() instanceof InvincibilityState) {
 		    			e.killOff();
 		    			removeLivingCreature(e);
-		    			System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
 		    			player.killOff();
 		    			removeLivingCreature(player);
@@ -188,21 +214,26 @@ public class Dungeon {
     }
     
     /**
-     * attempts to collect the item into the player's inventory when the player walks on top of the item
+     * -Signals the player to attempt to collect an item into the player's inventory 
+     * when the player walks on top of the item.
+     * -When collection is successful, the dungeon removes the item from itself
      */
-    public void addToInventory() {
+    public void removeFromGround() {
     	List<Item> tempList = new ArrayList<>(items);
-    	for (Item i: tempList) {
-    		if (i == null) continue;
+    	for (Item item: tempList) {
+    		if (item == null) continue;
     		
-    		if (player.getX() == i.getX() && player.getY() == i.getY()) {
-    			player.collectItem(i);
+    		if (player.getX() == item.getX() && player.getY() == item.getY()) {
+    			if (player.collectItem(item))
+    				items.remove(item);
     		}
     	}
     }
     
     /**
-     * signals an obstacle to update its state
+     * signals an obstacle to update its state under certain conditions:
+     * -when a player interacts with a portal/exit 
+     * -when a boulder interacts with a switch
      * @param e
      */
     public void updateObstacle() {

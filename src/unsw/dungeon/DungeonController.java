@@ -74,11 +74,16 @@ public class DungeonController {
 	        		player.moveRight();	  
 	        	}
 	            break;
+	        case SPACE:
+	        	// use sword??
+	        	
+	        	break;
 	        default:
 	            break; 
 	        }
-	        dungeon.addToInventory();  
+	        dungeon.removeFromGround();  
 	        dungeon.killCreature();
+	        dungeon.updateObstacle();
         }
     }
     
