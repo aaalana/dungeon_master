@@ -214,15 +214,18 @@ public class Dungeon {
     }
     
     /**
-     * signals the player to attempt to collect an item into the player's inventory when the player walks on top of the item
+     * -Signals the player to attempt to collect an item into the player's inventory 
+     * when the player walks on top of the item.
+     * -When collection is successful, the dungeon removes the item from itself
      */
-    public void addToInventory() {
+    public void removeFromGround() {
     	List<Item> tempList = new ArrayList<>(items);
-    	for (Item i: tempList) {
-    		if (i == null) continue;
+    	for (Item item: tempList) {
+    		if (item == null) continue;
     		
-    		if (player.getX() == i.getX() && player.getY() == i.getY()) {
-    			player.collectItem(i);
+    		if (player.getX() == item.getX() && player.getY() == item.getY()) {
+    			if (player.collectItem(item))
+    				items.remove(item);
     		}
     	}
     }
