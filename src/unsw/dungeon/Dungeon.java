@@ -209,7 +209,7 @@ public class Dungeon {
      * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
-    	List<LivingCreature> tempList = livingCreatures;	
+    	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
     	
     	for (LivingCreature e: tempList) {
     		if (e == null || !(e instanceof Enemy)) 
