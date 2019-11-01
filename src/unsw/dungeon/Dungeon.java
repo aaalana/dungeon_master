@@ -19,10 +19,10 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
+    private EnemySystem enemies;
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
-    private List<LivingCreature> livingCreatures;
     private BoulderSystem boulders;
     private Player player;
 
@@ -30,11 +30,14 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+
+        this.enemies = new EnemySystem();
+
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
-        this.livingCreatures = new ArrayList<>();
         this.boulders = new BoulderSystem(this);
+
         this.player = null;
     }
 
@@ -53,11 +56,17 @@ public class Dungeon {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    
+    public void addEnemy(Entity enemy) {
+    	this.enemies.addEnemy(enemy);
+    }
 
     public void addEntity(Entity entity) {
-    	if (entity instanceof unsw.dungeon.Boulder) {
+    	if (entity instanceof Enemy) {
+    		this.addEnemy(entity);
+    	} else if (entity instanceof unsw.dungeon.Boulder) {
     		boulders.addBoulder(entity);
-    	} 
+    	} 	
         entities.add(entity);
     }
     
@@ -82,7 +91,7 @@ public class Dungeon {
      * @param item
      */
     public void removeItem(Item item) {
-        items.remove(item);
+    	items.remove(item);
     }
     
     /**
@@ -91,22 +100,6 @@ public class Dungeon {
      */
     public void addBlocker(Blocker blocker) {
     	blockers.add(blocker);
-    }
-    
-    /**
-     * add an LivingCreature to the LivingCreatures list
-     * @param c
-     */
-    public void addLivingCreature(LivingCreature c) {
-    	livingCreatures.add(c);
-    }
-    
-    /**
-     * remove an living creature from the livingCreatures list
-     * @param c
-     */
-    public void removeLivingCreature(LivingCreature c) {
-    	livingCreatures.remove(c);
     }
     
     /**
@@ -119,7 +112,7 @@ public class Dungeon {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
-    			System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
+    			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
     			return entity.getClass().getName();
     		}
     	}
@@ -165,11 +158,16 @@ public class Dungeon {
     	return false;
     }
     
+
+    public void moveEnemies() {
+    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY());
+    }
+
     /**
      * Kills off living creatures when they come in contact with one another
      */
     public void killCreature() {
-    	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
+    	List<LivingCreature> tempList = new ArrayList<LivingCreature>();	
     	for (LivingCreature e: tempList) {
     		if (e == null || !(e instanceof Enemy)) 
     			continue;
@@ -177,11 +175,11 @@ public class Dungeon {
     		if (player.getX() == e.getX() && player.getY() == e.getY()) {
 	    		if (player.getState() instanceof InvincibilityState) {
 		    			e.killOff();
-		    			removeLivingCreature(e);
+		    			//removeLivingCreature(e);
 		    			System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
 		    			player.killOff();
-		    			removeLivingCreature(player);
+		    			//removeLivingCreature(player);
 	    		}
     		}
     	}
@@ -227,3 +225,4 @@ public class Dungeon {
     
     
 }
+

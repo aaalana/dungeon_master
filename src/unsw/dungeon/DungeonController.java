@@ -80,7 +80,9 @@ public class DungeonController {
 	        dungeon.addToInventory();  
 	        dungeon.killCreature();
         }
+        //dungeon.moveEnemies();
     }
+    
     
     public boolean checkMove(int x, int y, String direction) {
     	return (!dungeon.checkWall(x, y)) && dungeon.pushBoulder(x, y, direction);

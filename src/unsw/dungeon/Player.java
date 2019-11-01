@@ -21,33 +21,13 @@ public class Player extends LivingCreature {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
+        //this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
         this.state = normalState;
-    }
-
-	public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
-    }
-
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
     }
     
     /**
