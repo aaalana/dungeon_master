@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Portal extends Entity {
+public class Portal extends Obstacle {
 	// to pair match portals
 	private int id; 
 	
@@ -8,4 +8,16 @@ public class Portal extends Entity {
         super(x, y);
         this.id = id;
     }
+
+	@Override
+	public void trigger(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getState() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
