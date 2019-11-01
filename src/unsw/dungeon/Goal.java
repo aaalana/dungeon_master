@@ -3,7 +3,7 @@ package unsw.dungeon;
 public class Goal {
 	private boolean completed;
 	
-	public Goal(String name, String condition) {
+	public Goal() {
 		this.completed = false;
 	}
 	
