@@ -41,6 +41,11 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        JSONObject goals = json.getJSONObject("goal-condition");
+        System.out.println(goals.toString(2));
+        loadGoals(goals, dungeon);
+        //dungeon.setGoal(goals);
         return dungeon;
     }
 
@@ -56,7 +61,7 @@ public abstract class DungeonLoader {
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
-//            dungeon.addLivingCreature(player);
+            dungeon.addLivingCreature(player);
             break;
         case "wall":
             Wall wall = new Wall(x, y);
@@ -100,6 +105,7 @@ public abstract class DungeonLoader {
             loadImage(enemy);
             entity = enemy;
             dungeon.addEnemy(enemy);
+            dungeon.addLivingCreature(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
@@ -107,40 +113,98 @@ public abstract class DungeonLoader {
             entity = exit;
             dungeon.addObstacle(exit);
          	break;
-        // not in json files
         case "key":
-        	// temporary
-        	int keyId = 0;
+        	int keyId = json.getInt("id");
             Key key = new Key(x, y, keyId);
             loadImage(key);
             entity = key;
             dungeon.addItem(key);
         	break;
         case "door":
-        	// temporary
-        	int doorId = 0;
+        	int doorId = json.getInt("id");
         	Door door = new Door(x, y, doorId);
         	loadImage(door);
         	entity = door;
         	dungeon.addBlocker(door);
         	break;
         case "portal":
-        	// temporary
-        	int portalId = 0;
-        	Portal portal = new Portal(x, y, portalId);
+        	int portalId = json.getInt("id");
+        	Portal portal = new Portal(x, y, portalId, dungeon);
         	loadImage(portal);
         	entity = portal;
+        	dungeon.addObstacle(portal);
+        	dungeon.addPortals(portal);
         	break;
         }
         dungeon.addEntity(entity);
     }
-
-    public void extractGoal(Dungeon dungeon, JSONObject json) {
-        String goal = json.getString("goal-condition");
-    	
-        // maybe ??? dungeon.addGoal(goal);	
+    
+    private Goal loadGoals(JSONObject goals, Dungeon dungeon){
+        String type = goals.getString("goal");
+        
+        Goal goal = null;
+        switch(type) {
+        	// if the goals is AND, add all goals
+            case "AND":
+            	JSONArray subgoals = goals.getJSONArray("subgoals");
+                
+            	ANDGoal ANDgoals = new ANDGoal();
+				for (int i = 0; i < subgoals.length(); i++) {
+				    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
+				    ANDgoals.addGoal(subgoal);
+				}
+				break;
+            case "OR":
+            	JSONArray subgoals2 = goals.getJSONArray("subgoals");
+                
+            	ORGoal ORgoals = new ORGoal();
+                for (int i = 0; i < subgoals2.length(); i++) {
+                    Goal subgoal = loadGoals(subgoals2.getJSONObject(i), dungeon);
+                    ORgoals.addGoal(subgoal);
+                }
+                break;
+            case "exit":
+                ExitGoal exitGoal = new ExitGoal();
+                goal = exitGoal;
+                addObserver(exitGoal);
+                break;
+            case "enemies":
+                EnemyGoal enemyGoal = new EnemyGoal();
+                goal = enemyGoal;
+                addObserver(enemyGoal);
+                break;
+            case "treasure":
+                TreasureGoal treasureGoal = new TreasureGoal();
+                goal = treasureGoal;
+                addObserver(treasureGoal);
+                break;
+            case "boulders":
+                BoulderGoal boulderGoal = new BoulderGoal();
+                goal = boulderGoal;
+                addObserver(boulderGoal);
+                break;
+            default:
+                break;
+        }
+        return goal;
     }
     
+    public void addObserver(ExitGoal goal) {
+    	
+    }
+  
+    public void addObserver(EnemyGoal goal) {
+    	
+    }
+    
+    public void addObserver(BoulderGoal goal) {
+    	
+    }
+    
+    public void addObserver(TreasureGoal goal) {
+    	
+    }
+  
 	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities

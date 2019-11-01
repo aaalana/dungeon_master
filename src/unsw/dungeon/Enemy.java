@@ -41,8 +41,9 @@ public class Enemy extends LivingCreature {
     	
     }
     
-    @Override
-    public void killOff() {
-    	
-    }
+	@Override
+	public void killOff() {
+		// TODO Auto-generated method stub
+		System.out.println("enemy killed");
+	}
 }

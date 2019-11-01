@@ -12,6 +12,9 @@ import java.util.List;
  * A dungeon can contain many entities, each occupy a square. More than one
  * entity can occupy the same square.
  *
+ * The dungeon manages itself by signaling its entities perform certain tasks. 
+ * However the entity tasks themselves are performed within the entities. 
+ * 
  * @author Robert Clifton-Everest
  *
  */
@@ -23,21 +26,27 @@ public class Dungeon {
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
+    private List<LivingCreature> livingCreatures;
+
     private BoulderSystem boulders;
+    private PortalSystem portals;
     private Player player;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
+        
         this.entities = new ArrayList<>();
-
-        this.enemies = new EnemySystem();
 
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
+        this.livingCreatures = new ArrayList<>();
+        
+        this.enemies = new EnemySystem();
         this.boulders = new BoulderSystem(this);
-
+        this.portals = new PortalSystem();
+      
         this.player = null;
     }
 
@@ -71,6 +80,14 @@ public class Dungeon {
     }
     
     /**
+     * Adds to a list of portals 
+     * @param portal
+     */
+    public void addPortals(Portal portal) {
+    	portals.addPortal(portal);
+    }
+    
+    /**
      * add an obstacle to the obstacle list
      * @param o
      */
@@ -100,6 +117,30 @@ public class Dungeon {
      */
     public void addBlocker(Blocker blocker) {
     	blockers.add(blocker);
+    }
+    
+    /**
+     * add an LivingCreature to the LivingCreatures list
+     * @param c
+     */
+    public void addLivingCreature(LivingCreature c) {
+    	livingCreatures.add(c);
+    }
+    
+    /**
+     * remove an living creature from the livingCreatures list
+     * @param c
+     */
+    public void removeLivingCreature(LivingCreature c) {
+    	livingCreatures.remove(c);
+    }
+    
+    /**
+     * gets the portal system
+     * @return portals
+     */
+    public PortalSystem getPortals() {
+    	return portals;
     }
     
     /**
@@ -139,8 +180,7 @@ public class Dungeon {
         
     /**
      * Checks if two particular entities are sharing the same square 
-     * @param sharedWith
-     * @param situation
+     * @param sharedWith an entity sharing a square
      * @return true when two entity are sharing the same square, false otherwise
      */
     public boolean shareSquare(Entity sharedWith) {
@@ -148,7 +188,7 @@ public class Dungeon {
     		if (entity == null) continue;
     		
     		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    			(sharedWith instanceof Exit && entity instanceof Player) || 
+    		   ((sharedWith instanceof Exit || sharedWith instanceof Portal) && entity instanceof Player) || 
     			(sharedWith instanceof Player && entity instanceof Enemy)) {
     			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
     				return true;
@@ -165,30 +205,34 @@ public class Dungeon {
 
     /**
      * Kills off living creatures when they come in contact with one another
+     * -When the player is invincible and touches an enemy, the enemy is signalled to die
+     * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
-    	List<LivingCreature> tempList = new ArrayList<LivingCreature>();	
+    	List<LivingCreature> tempList = livingCreatures;	
+    	
     	for (LivingCreature e: tempList) {
     		if (e == null || !(e instanceof Enemy)) 
     			continue;
-    		
+    	
     		if (player.getX() == e.getX() && player.getY() == e.getY()) {
-	    		if (player.getState() instanceof InvincibilityState) {
+    			if (player.getState() instanceof InvincibilityState) {
 		    			e.killOff();
-		    			//removeLivingCreature(e);
-		    			System.out.println("enemy killed");
+		    			removeLivingCreature(e);
 	    		} else if (player.getState() instanceof NormalState) {
 	    				System.out.println("player killed");
 	    				player.killOff();
-		    			//removeLivingCreature(player);
-		    			System.exit(0);
+		    			removeLivingCreature(player);
+		    			
+	    				// close application to end game
+	    				System.exit(0);
 	    		}
     		}
     	}
     }
     
     /**
-     * attempts to collect the item into the player's inventory when the player walks on top of the item
+     * signals the player to attempt to collect an item into the player's inventory when the player walks on top of the item
      */
     public void addToInventory() {
     	List<Item> tempList = new ArrayList<>(items);
@@ -202,7 +246,9 @@ public class Dungeon {
     }
     
     /**
-     * signals an obstacle to update its state
+     * signals an obstacle to update its state under certain conditions:
+     * -when a player interacts with a portal/exit 
+     * -when a boulder interacts with a switch
      * @param e
      */
     public void updateObstacle() {
