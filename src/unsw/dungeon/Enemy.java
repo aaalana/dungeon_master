@@ -9,7 +9,6 @@ public class Enemy extends LivingCreature {
         this.dungeon = dungeon;
     }
 
-
     /**
      * The enemy will take in a set of co-ordinates and find the best way to reach
      * those co-ordinates.
@@ -46,6 +45,4 @@ public class Enemy extends LivingCreature {
     public void killOff() {
     	
     }
-
-
 }

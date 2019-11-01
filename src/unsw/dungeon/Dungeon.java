@@ -180,6 +180,7 @@ public class Dungeon {
 	    		} else if (player.getState() instanceof NormalState) {
 		    			player.killOff();
 		    			//removeLivingCreature(player);
+		    			System.exit(0);
 	    		}
     		}
     	}
@@ -207,7 +208,6 @@ public class Dungeon {
     	for (Obstacle o : this.obstacles) {
     		if (o == null) 
     			continue;
-    		
     		o.trigger(shareSquare(o));
     	}
     }
