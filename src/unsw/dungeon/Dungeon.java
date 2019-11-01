@@ -182,6 +182,7 @@ public class Dungeon {
 	    		} else if (player.getState() instanceof NormalState) {
 		    			player.killOff();
 		    			removeLivingCreature(player);
+		    			System.exit(0);
 	    		}
     		}
     	}
