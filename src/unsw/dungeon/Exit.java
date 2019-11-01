@@ -18,7 +18,7 @@ public class Exit extends Obstacle {
 		this.isBeingUsed = state;
 		
 		// End the application when leaving the maze
-		System.exit(0);
+		//System.exit(0);
 	}
 	
 	@Override
