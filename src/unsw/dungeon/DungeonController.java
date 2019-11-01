@@ -49,38 +49,36 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-        // testing: check if the player's dead
+        // testing: check if the player's state
     	System.out.println(player.getState());
-    	if (!(player.getState() instanceof DeadState)) {
-	    	switch (event.getCode()) {
-	        case UP:
-	        	//System.out.println(player.toString());
-	        	if (checkMove(player.getX(), player.getY() - 1, "up")) {
-	        		player.moveUp();
-	        	}
-	            break;
-	        case DOWN:
-	        	if (checkMove(player.getX(), player.getY() + 1, "down")) {
-	        		player.moveDown();	
-	        	}
-	            break;
-	        case LEFT:
-	        	if (checkMove(player.getX() - 1, player.getY(), "left")) {
-	        		player.moveLeft();	 
-	        	}
-	            break;
-	        case RIGHT:
-	        	if (checkMove(player.getX() + 1, player.getY(), "right")) {
-	        		player.moveRight();	  
-	        	}
-	            break;
-	        default:
-	            break; 
-	        }
-	    	dungeon.updateObstacle();
-	        dungeon.addToInventory();  
-	        dungeon.killCreature();
+    	
+    	switch (event.getCode()) {
+        case UP:
+        	if (checkMove(player.getX(), player.getY() - 1, "up")) {
+        		player.moveUp();
+        	}
+            break;
+        case DOWN:
+        	if (checkMove(player.getX(), player.getY() + 1, "down")) {
+        		player.moveDown();	
+        	}
+            break;
+        case LEFT:
+        	if (checkMove(player.getX() - 1, player.getY(), "left")) {
+        		player.moveLeft();	 
+        	}
+            break;
+        case RIGHT:
+        	if (checkMove(player.getX() + 1, player.getY(), "right")) {
+        		player.moveRight();	  
+        	}
+            break;
+        default:
+            break; 
         }
+    	dungeon.updateObstacle();
+        dungeon.addToInventory();  
+        dungeon.killCreature();
     }
     
     public boolean checkMove(int x, int y, String direction) {
