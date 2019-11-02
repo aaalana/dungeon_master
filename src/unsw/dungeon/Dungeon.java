@@ -150,17 +150,21 @@ public class Dungeon {
     }
     
     /**
-     * This function checks if a particular square has a wall in it
+     * checks when the player's movement should be blocked
      * @param x
      * @param y
-     * @return
+     * @return true when the player should be blocked and false otherwise
      */
     public boolean checkBlocker(int x, int y) {
-    	for (Blocker entity : blockers) {
+    	for (Blocker entity : this.blockers) {
     		if (entity == null) continue;
     		
-    		if (entity.getX() == x && entity.getY() == y && entity instanceof Wall) {
-    			return true;
+    		if (entity.getX() == x && entity.getY() == y) {
+    			if (entity instanceof Wall) {
+    				return true;
+    			} else if (entity instanceof Door) {
+    				return entity.block(player);
+    			}
     		}
     	}
     	return false;

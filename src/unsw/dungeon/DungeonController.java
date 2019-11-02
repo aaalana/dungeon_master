@@ -83,7 +83,7 @@ public class DungeonController {
     	
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
-        dungeon.moveEnemies();
+        //dungeon.moveEnemies();
         
         // detects when to kill creatures after all creatures have moved
         dungeon.killCreature();
