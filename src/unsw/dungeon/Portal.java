@@ -54,9 +54,4 @@ public class Portal extends Obstacle {
 	public PortalSystem getPortalAssist() {
 		return dungeon.getPortals();
 	}
-
-	@Override
-	public boolean getState() {
-		return this.state;
-	}
 }
