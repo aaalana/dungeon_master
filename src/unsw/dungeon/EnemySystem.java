@@ -14,10 +14,6 @@ public class EnemySystem {
 		return enemies;
 	}
 
-	public void setEnemies(List<Enemy> enemies) {
-		this.enemies = enemies;
-	}
-	
 	public void addEnemy(Enemy enemy) {
 		this.enemies.add((Enemy) enemy);
 	}
