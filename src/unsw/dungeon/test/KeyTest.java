@@ -16,5 +16,4 @@ class KeyTest {
 		Key key3 = new Key(9, 2, 3);
 		assertEquals(3, key3.getId());
 	}
-
 }

@@ -25,5 +25,4 @@ class SwitchTest {
 		_switch.trigger(false);
 		assertFalse(_switch.getState());
 	}
-
 }

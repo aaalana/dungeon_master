@@ -15,6 +15,7 @@ class DoorTest {
 	@Test
 	void testBlock() {
 		Door door = new Door(0, 0, 0, new CantMove());
+		Door door2 = new Door(0, 0, 1, new CantMove());
 		Player player = new Player(1, 0);
 		Player player2 = new Player(0, 1);
 		Key matchingKey = new Key(1, 0, 0);
@@ -23,13 +24,16 @@ class DoorTest {
 		// no key at door
 		assertTrue(door.block(player));
 		
-		// wrong key at door
 		player.collectItem(wrongKey);
+		player2.collectItem(matchingKey);
+		
+		// wrong key at door
 		assertTrue(door.block(player));
+		assertTrue(door2.block(player2));
 		
 		// right key at door
-		player2.collectItem(matchingKey);
 		assertFalse(door.block(player2));
+		assertFalse(door2.block(player));
 		
 	}
 	
