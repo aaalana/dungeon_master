@@ -42,11 +42,22 @@ public class Entity {
         return x().get();
     }
     
+    /**
+     * Allows the entity to move if it has an ItMoves strategy
+     * Otherwise, the entity can't move
+     * @param direction
+     * @param dungeon
+     * @param entity
+     */
     public void tryToMove(String direction, Dungeon dungeon, Entity entity) {
     	moveable.move(direction, dungeon, entity);
     }
     
     public void setMovingAbility(MoveStrategy newMovingType) {
     	this.moveable = newMovingType;
+    }
+    
+    public String getClassName() {
+    	return getClass().getName();
     }
 }

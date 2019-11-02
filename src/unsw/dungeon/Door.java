@@ -12,7 +12,6 @@ public class Door extends Blocker {
 	@Override
 	public boolean block(Player player) {
 		Key key = (Key)player.getItemByName("key");
-		
 		if (key != null && (matchingKey(key))) {
 			key.useItem(player);
 			unlock();

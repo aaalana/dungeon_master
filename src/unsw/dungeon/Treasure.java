@@ -8,7 +8,6 @@ public class Treasure extends Item {
 
 	@Override
 	public void useItem(Player player) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Treasure cannot be used.");
 	}
 }
