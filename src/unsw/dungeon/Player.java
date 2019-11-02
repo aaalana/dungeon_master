@@ -55,10 +55,7 @@ public class Player extends LivingCreature {
     	state.expelInvincibilityPotion(potion);
     }
     
-    /**
-     * Changes the player's state to deadState
-     * (the player dies)
-     */
+    @Override
     public void killOff() {
     	state.killPlayer();
     }

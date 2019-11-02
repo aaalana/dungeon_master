@@ -3,38 +3,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnemySystem {
-	private List<Entity> enemies;
+	private List<Enemy> enemies;
 
 	public EnemySystem() {
 		super();
-		this.enemies = new ArrayList<Entity>(); 
+		this.enemies = new ArrayList<Enemy>(); 
 	}
 
-	public List<Entity> getEnemies() {
+	public List<Enemy> getEnemies() {
 		return enemies;
 	}
 
-	public void setEnemies(List<Entity> enemies) {
+	public void setEnemies(List<Enemy> enemies) {
 		this.enemies = enemies;
 	}
 	
-	public void addEnemy(Entity enemy) {
+	public void addEnemy(Enemy enemy) {
 		this.enemies.add((Enemy) enemy);
 	}
 	
-	public void removeEnemy(Entity enemy) {
+	public void removeEnemy(Enemy enemy) {
 		this.enemies.remove(enemy);
 	}
 	
 	 public void moveEnemies(int playerX, int playerY) {
-	    	for (Entity entity : this.enemies) {
-	    		if (entity == null) continue;
-	    		
-	    		if (entity instanceof unsw.dungeon.Enemy) {
-	    			Enemy enemy = (Enemy) entity;
-	    			enemy.searchPlayer(playerX, playerY);
-	    		}
-	    	}
-	    }
+    	for (Enemy entity : this.enemies) {
+    		if (entity == null) continue;
+    		entity.searchPlayer(playerX, playerY);
+    	}
+	 }
 
 }

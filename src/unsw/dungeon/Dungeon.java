@@ -84,7 +84,7 @@ public class Dungeon {
      * Adds an enemy to an enemy system
      * @param enemy
      */
-    public void addEnemy(Entity enemy) {
+    public void addEnemy(Enemy enemy) {
     	enemies.addEnemy(enemy);
     }
     
@@ -226,15 +226,15 @@ public class Dungeon {
      * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
-    	List<Entity> tempList = new ArrayList<>(enemies.getEnemies());	
-    	for (Entity enemy: tempList) {
+    	List<Enemy> tempList = new ArrayList<>(enemies.getEnemies());	
+    	for (Enemy enemy: tempList) {
     		if (enemy == null) 
     			continue;
     		
     		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
     			if (player.getState() instanceof InvincibilityState) {
     				enemies.removeEnemy(enemy);
-    				System.out.println("enemy killed");
+    				enemy.killOff();
 	    		} else if (player.getState() instanceof NormalState) {
 	    			player.killOff();
 	    			
