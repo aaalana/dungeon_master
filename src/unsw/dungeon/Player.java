@@ -57,6 +57,7 @@ public class Player extends LivingCreature {
     
     /**
      * Changes the player's state to deadState
+     * (the player dies)
      */
     public void killOff() {
     	state.killPlayer();

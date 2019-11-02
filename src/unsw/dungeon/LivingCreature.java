@@ -29,6 +29,4 @@ public abstract class LivingCreature extends Entity {
             x().set(getX() + 1);
     }
     
-
-	public abstract void killOff();
 }

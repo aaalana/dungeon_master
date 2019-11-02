@@ -26,8 +26,7 @@ public class Dungeon {
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
-    private List<LivingCreature> livingCreatures;
-
+  
     private BoulderSystem boulders;
     private PortalSystem portals;
     private Player player;
@@ -41,8 +40,7 @@ public class Dungeon {
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
-        this.livingCreatures = new ArrayList<>();
-        
+     
         this.enemies = new EnemySystem();
         this.boulders = new BoulderSystem(this);
         this.portals = new PortalSystem();
@@ -75,15 +73,14 @@ public class Dungeon {
     }
     
     public void addEnemy(Entity enemy) {
-    	this.enemies.addEnemy(enemy);
+    	enemies.addEnemy(enemy);
     }
-
+    
+    public void addBoulder(Entity boulder) {
+    	boulders.addBoulder(boulder);
+    }
+    
     public void addEntity(Entity entity) {
-    	if (entity instanceof Enemy) {
-    		this.addEnemy(entity);
-    	} else if (entity instanceof unsw.dungeon.Boulder) {
-    		boulders.addBoulder(entity);
-    	} 	
         entities.add(entity);
     }
     
@@ -128,22 +125,6 @@ public class Dungeon {
     }
     
     /**
-     * add an LivingCreature to the LivingCreatures list
-     * @param c
-     */
-    public void addLivingCreature(LivingCreature c) {
-    	livingCreatures.add(c);
-    }
-    
-    /**
-     * remove an living creature from the livingCreatures list
-     * @param c
-     */
-    public void removeLivingCreature(LivingCreature c) {
-    	livingCreatures.remove(c);
-    }
-    
-    /**
      * gets the portal system
      * @return portals
      */
@@ -175,7 +156,7 @@ public class Dungeon {
      * @return
      */
     public boolean checkWall(int x, int y) {
-    	for (Entity entity : this.entities) {
+    	for (Entity entity : entities) {
     		if (entity == null) continue;
     		
     		if (entity.getX() == x && entity.getY() == y && entity instanceof unsw.dungeon.Wall) {
@@ -217,23 +198,22 @@ public class Dungeon {
      * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
-    	List<LivingCreature> tempList = new ArrayList<>(livingCreatures);	
-    	
-    	for (LivingCreature e: tempList) {
-    		if (e == null || !(e instanceof Enemy)) 
+    	List<Entity> tempList = new ArrayList<>(enemies.getEnemies());	
+    	for (Entity enemy: tempList) {
+    		if (enemy == null) 
     			continue;
-    	
-    		if (player.getX() == e.getX() && player.getY() == e.getY()) {
+    		
+    		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
     			if (player.getState() instanceof InvincibilityState) {
-		    			e.killOff();
-		    			removeLivingCreature(e);
+    				enemies.removeEnemy(enemy);
+    				System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
-	    				System.out.println("player killed");
-	    				player.killOff();
-		    			removeLivingCreature(player);
+	    			player.killOff();
+		    		player = null;
+		    		System.out.println("player killed");
 		    			
-	    				// close application to end game
-	    				System.exit(0);
+	    			// close application to end game
+	    			System.exit(0);
 	    		}
     		}
     	}

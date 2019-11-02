@@ -84,7 +84,7 @@ public class DungeonController {
     	dungeon.updateObstacle();
         dungeon.removeFromGround();  
         dungeon.killCreature();
-        dungeon.moveEnemies();
+        //dungeon.moveEnemies();
     }
     
     public boolean checkMove(int x, int y, String direction) {
