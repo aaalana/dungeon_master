@@ -3,12 +3,74 @@ package unsw.dungeon.test;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
 
 class PlayerTest {
 
+	@Test
+	void testTeleport() {
+		Player player = new Player(0,0);
+		
+		// try the same location as the player
+		player.teleport(0, 0);
+		assertEquals(0, player.getX());
+		assertEquals(0, player.getY());
+		
+		// try a different location from the player 
+		player.teleport(3, 4);
+		assertEquals(3, player.getX());
+		assertEquals(4, player.getY());
+		
+		// trying out with another player for reliability
+		Player player2 = new Player(6,6);
+		assertNotSame(new InvincibilityState(player2), player2.getInvincibilityState());
+		player2.teleport(0, 0);
+		assertEquals(0, player2.getX());
+		assertEquals(0, player2.getY());
+	}
+	
+	@Test
+	void testInvincibility() {
+		Player player = new Player(0,0);
+		InvincibilityPotion potion = new InvincibilityPotion(2, 3);
+		InvincibilityPotion potion2 = new InvincibilityPotion(7, 3);
+		
+		// test the player's invincibility time period
+		player.drinkInvincibilityPotion(potion);
+		assertSame(player.getInvincibilityState(), player.getState());
+		
+		try {
+			TimeUnit.SECONDS.sleep(6);
+			assertSame(player.getNormalState(), player.getState());
+		} catch (Exception e) {
+			System.out.println("Delay failed.");
+		}
+		
+		// when the player drinks another potion while invincibility is on
+		player.drinkInvincibilityPotion(potion);
+		assertSame(player.getInvincibilityState(), player.getState());
+		player.drinkInvincibilityPotion(potion2);
+		
+		try {
+			// 4 seconds tested instead of 5 because of CPU lag
+			TimeUnit.SECONDS.sleep(4);
+			assertSame(player.getInvincibilityState(), player.getState());
+			TimeUnit.SECONDS.sleep(5);
+			assertSame(player.getNormalState(), player.getState());
+		} catch (Exception e) {
+			System.out.println("Delay failed.");
+		}
+		
+		// when the player is killed off
+		assertSame(player.getNormalState(), player.getState());
+		player.killOff();
+		assertSame(player.getDeadState(), player.getState());
+	}
+	
 	@Test
 	void testGetInvincibilityState() {
 		// trying with out 2 different players for reliability

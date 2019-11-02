@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import com.sun.tools.javac.util.List;
-
 import unsw.dungeon.*;
 
 class EnemySystemTest {
