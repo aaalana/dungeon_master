@@ -27,26 +27,18 @@ public class BoulderSystem {
     	for (Boulder boulder : this.boulders) {
     		if (boulder == null) continue;
     		
-    		//If there's a boulder at the specified position
+    		// If there's a boulder at the specified position
     		if (boulder.getX() == x && boulder.getY() == y) {
-    			//If there's a boulder or a wall at the position next to the boulder, then return false
+    			// If there's a boulder or a wall at the position next to the boulder, then return false
     			if (direction == "left" && (dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Wall")) return false;
     			if (direction == "right" && (dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Wall")) return false;
     			if (direction == "up" && (dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
     			if (direction == "down" && (dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
     			
 
-    			//If not, then move the boulder and return true
-    			if (direction == "left") {
-    				boulder.moveLeft();
-    			} else if (direction == "right") {
-    				boulder.moveRight();
-    			} else if (direction == "up") {
-    				boulder.moveUp();
-    			} else if (direction == "down") {
-    				boulder.moveDown();
-    			}	
-    			
+    			// If not, then move the boulder and return true
+    			boulder.tryToMove(direction, dungeon, boulder);
+    				
     			return true;
     		}
     	}

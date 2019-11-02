@@ -55,22 +55,22 @@ public class DungeonController {
     	switch (event.getCode()) {
         case UP:
         	if (checkMove(player.getX(), player.getY() - 1, "up")) {
-        		player.moveUp();
+        		player.tryToMove("up", dungeon, player);
         	}
             break;
         case DOWN:
         	if (checkMove(player.getX(), player.getY() + 1, "down")) {
-        		player.moveDown();	
+        		player.tryToMove("down", dungeon, player);
         	}
             break;
         case LEFT:
         	if (checkMove(player.getX() - 1, player.getY(), "left")) {
-        		player.moveLeft();	 
+        		player.tryToMove("left", dungeon, player); 
         	}
             break;
         case RIGHT:
         	if (checkMove(player.getX() + 1, player.getY(), "right")) {
-        		player.moveRight();	  
+        		player.tryToMove("right", dungeon, player);  
         	}
             break;
         case SPACE:
@@ -83,7 +83,7 @@ public class DungeonController {
     	
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
-        //dungeon.moveEnemies();
+        dungeon.moveEnemies();
         
         // detects when to kill creatures after all creatures have moved
         dungeon.killCreature();

@@ -1,10 +1,11 @@
 package unsw.dungeon;
 
 public class Enemy extends LivingCreature {
+	
 	private Dungeon dungeon;
 	
     public Enemy(Dungeon dungeon, int x, int y) {
-        super(dungeon, x, y);
+        super(x, y);
         this.dungeon = dungeon;
     }
 
@@ -20,20 +21,20 @@ public class Enemy extends LivingCreature {
     	//Try and move horizontally to find the player
     	if (getX() != playerX) {
     		if (getX() > playerX && !dungeon.checkBlocker(getX() - 1, getY())) {
-    			moveLeft();
+    			this.tryToMove("left", dungeon, this);
     			return;
     		} else if (getX() < playerX && !dungeon.checkBlocker(getX() + 1, getY())) {
-    			moveRight();
+    			this.tryToMove("right", dungeon, this);
     			return;
     		}
     	}
     	
     	if (getY() != playerY) {
     		if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() - 1)) {
-    			moveUp();
+    			this.tryToMove("up", dungeon, this);
     			return;
     		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() + 1)) {
-    			moveDown();
+    			this.tryToMove("down", dungeon, this);
     			return;
     		}
     	}

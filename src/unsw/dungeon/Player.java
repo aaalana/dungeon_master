@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  */
 public class Player extends LivingCreature {
-
+	
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
@@ -19,8 +19,8 @@ public class Player extends LivingCreature {
      * @param x
      * @param y
      */
-    public Player(Dungeon dungeon, int x, int y) {
-        super(dungeon, x, y);
+    public Player(int x, int y) {
+        super(x, y);
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);

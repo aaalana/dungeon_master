@@ -5,7 +5,7 @@ public abstract class Item extends Entity {
 	String name;
 	
 	public Item(int x, int y, String name) {
-		super(x, y);
+		super(x, y, new CantMove());
 		this.name = name;
 	}
 	

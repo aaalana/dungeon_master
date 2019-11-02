@@ -45,7 +45,7 @@ public abstract class DungeonLoader {
         JSONObject goals = json.getJSONObject("goal-condition");
         System.out.println(goals.toString(2));
         loadGoals(goals, dungeon);
-        //dungeon.setGoal(goals);
+        // maybe? dungeon.setGoal(goals);
         return dungeon;
     }
 
@@ -57,13 +57,13 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(dungeon, x, y);
+            Player player = new Player(x, y);
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
             break;
         case "wall":
-            Wall wall = new Wall(x, y);
+            Wall wall = new Wall(x, y, new CantMove());
             loadImage(wall);
             entity = wall;
             dungeon.addBlocker(wall);
@@ -88,7 +88,7 @@ public abstract class DungeonLoader {
             dungeon.addObstacle(_switch);
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(dungeon, x, y);
+            Boulder boulder = new Boulder(dungeon, x, y, new ItMoves());
             loadImage(boulder);
             entity = boulder;
             dungeon.addBlocker(boulder);
@@ -121,7 +121,7 @@ public abstract class DungeonLoader {
         	break;
         case "door":
         	int doorId = json.getInt("id");
-        	Door door = new Door(x, y, doorId);
+        	Door door = new Door(x, y, doorId, new CantMove());
         	loadImage(door);
         	entity = door;
         	dungeon.addBlocker(door);
