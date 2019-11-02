@@ -54,7 +54,7 @@ public class PortalSystem {
 	 * @return true when the two instances are the same
 	 */
 	public boolean isSamePortal(Portal portal, Portal match) {
-		if (portal == null) 
+		if (portal == null || match == null) 
 			return false;
 		
 		// it is assumed by design that all entities for the current application run belong to the same dungeon

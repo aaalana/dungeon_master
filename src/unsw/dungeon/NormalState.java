@@ -22,6 +22,7 @@ public class NormalState implements PlayerState {
 	@Override
 	public void killPlayer() {
 		player.setState(player.getDeadState());
+		player = null;
 		System.out.println("Player died. :(");
 		System.out.println("-----GAME OVER-----");
 	}

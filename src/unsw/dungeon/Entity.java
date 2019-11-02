@@ -43,7 +43,8 @@ public class Entity {
     }
     
     /**
-     * Attempts movement of the entity depending on the its moving type
+     * Allows the entity to move if it has an ItMoves strategy
+     * Otherwise, the entity can't move
      * @param direction
      * @param dungeon
      * @param entity
@@ -52,4 +53,7 @@ public class Entity {
     	moveable.move(direction, dungeon, entity);
     }
 
+    public String getClassName() {
+    	return getClass().getName();
+    }
 }

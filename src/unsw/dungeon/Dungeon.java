@@ -124,8 +124,8 @@ public class Dungeon {
      * add an item to the items list
      * @param i
      */
-    public void addItem(Item i) {
-    	items.add(i);
+    public void addItem(Item item) {
+    	items.add(item);
     }
     
     /**
@@ -163,7 +163,7 @@ public class Dungeon {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
     			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
-    			return entity.getClass().getName();
+    			return entity.getClassName();
     		}
     	}
     	return "None";
@@ -191,7 +191,8 @@ public class Dungeon {
     }
         
     /**
-     * Checks if two particular entities are sharing the same square 
+     * Checks if two particular entities are sharing the same square in relation to 
+     * particular obstacles
      * @param sharedWith an entity sharing a square
      * @return true when two entity are sharing the same square, false otherwise
      */
@@ -199,12 +200,14 @@ public class Dungeon {
      	for (Entity entity : this.entities) {
     		if (entity == null) continue;
     		
-    		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    		   ((sharedWith instanceof Exit || sharedWith instanceof Portal) && entity instanceof Player) || 
-    			(sharedWith instanceof Player && entity instanceof Enemy)) {
-    			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
-    				return true;
-    			}
+    		if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
+	    		if (sharedWith instanceof Switch && entity instanceof Boulder) {
+	    			return true;
+	    		} else if (sharedWith instanceof Exit && entity instanceof Player) {
+	    			return true;
+	    		} else if (sharedWith instanceof Portal && entity instanceof Player) {
+	    			return true;
+	    		}
     		}
     	}
     	return false;
@@ -234,9 +237,7 @@ public class Dungeon {
     				System.out.println("enemy killed");
 	    		} else if (player.getState() instanceof NormalState) {
 	    			player.killOff();
-		    		player = null;
-		    		System.out.println("player killed");
-		    			
+	    			
 	    			// close application to end game
 	    			System.exit(0);
 	    		}
@@ -262,7 +263,7 @@ public class Dungeon {
     }
     
     /**
-     * signals an obstacle to update its state under certain conditions:
+     * Signals an obstacle to update its state under certain conditions:
      * -when a player interacts with a portal/exit 
      * -when a boulder interacts with a switch
      * @param e
@@ -285,7 +286,4 @@ public class Dungeon {
     public boolean pushBoulder(int x, int y, String direction) {
     	return boulders.pushBoulder(x, y, direction);
     }
-    
-    
 }
-

@@ -11,7 +11,6 @@ public class Boulder extends Blocker {
   
 	@Override
 	public boolean block(Player player) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }
