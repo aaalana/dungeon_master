@@ -13,16 +13,16 @@ public class Door extends Blocker {
 	public boolean block(Player player) {
 		Key key = (Key)player.getItemByName("key");
 		
-		if (this.locked) {
-			System.out.println("Player shall not pass. Door is locked.");
-			return false;
-		} else if (key != null && (matchingKey(key))) {
+		if (key != null && (matchingKey(key))) {
 			key.useItem(player);
 			unlock();
 			System.out.println("Player unlocked door.");
 			return false;
+		} else if (this.locked) {
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 	
 	/**
