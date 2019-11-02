@@ -10,7 +10,7 @@ import unsw.dungeon.Switch;
 class SwitchTest {
 
 	@Test
-	void getState() {
+	void testGetState() {
 		Switch _switch = new Switch(0,0);
 		
 		// Switch should be false on default unless triggered
