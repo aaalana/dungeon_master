@@ -240,7 +240,7 @@ public class Dungeon {
     }
     
     /**
-     * signals an obstacle to update its state under certain conditions:
+     * Signals an obstacle to update its state under certain conditions:
      * -when a player interacts with a portal/exit 
      * -when a boulder interacts with a switch
      * @param e
@@ -254,7 +254,7 @@ public class Dungeon {
     }
     
     /**
-     * 
+     * Signals the boulder to move when a player tries to push a boulder
      * @param x
      * @param y
      * @param direction
