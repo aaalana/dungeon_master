@@ -19,8 +19,10 @@ public class Door extends Blocker {
 			System.out.println("Player unlocked door.");
 			return false;
 		} else if (this.locked) {
+			System.out.println("Player does not have a key or has the wrong key to unlock the door.");
 			return true;
 		} else {
+			System.out.println("Player can pass. Door was previously unlocked.");
 			return false;
 		}
 	}
