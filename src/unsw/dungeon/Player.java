@@ -111,26 +111,27 @@ public class Player extends LivingCreature {
     	
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
     		drinkInvincibilityPotion(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	}
     	return false;
     
     }
     
+ /*
  // temp testing: print out the inventory
  // REMOVE THIS FUNCTION LATER
     public void printInventory() {
@@ -139,7 +140,7 @@ public class Player extends LivingCreature {
 			System.out.println(i + ",");
 		}
 		System.out.println("]");
-    }
+    }*/
     
     /**
      * Check if the player has a sword in the inventory
