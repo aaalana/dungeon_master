@@ -158,12 +158,12 @@ public class Dungeon {
      * @param y
      * @return
      */
-    public boolean checkWall(int x, int y) {
-    	for (Entity entity : this.entities) {
+    public boolean checkBlocker(int x, int y) {
+    	for (Blocker entity : blockers) {
     		if (entity == null) continue;
     		
-    		if (entity.getX() == x && entity.getY() == y && entity instanceof unsw.dungeon.Wall) {
-    			//System.out.println(entity.toString());
+    		if (entity.getX() == x && entity.getY() == y) {
+    			
     			return true;
     		}
     	}

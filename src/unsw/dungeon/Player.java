@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Player extends LivingCreature {
 
-    private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
@@ -21,33 +20,12 @@ public class Player extends LivingCreature {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
         this.state = normalState;
-    }
-
-	public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
-    }
-
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
     }
     
     /**
@@ -62,7 +40,7 @@ public class Player extends LivingCreature {
     }
     	
     /**
-     * 
+     * Changes the player's state to invincibilityState
      * @param potion
      */
     public void drinkInvincibilityPotion(Item potion) {
@@ -70,7 +48,7 @@ public class Player extends LivingCreature {
     }
 	
     /**
-     * 
+     * Changes the player's state to normalState
      * @param potion
      */
     public void expelInvincibilityPotion(Item potion) {
@@ -78,47 +56,48 @@ public class Player extends LivingCreature {
     }
     
     /**
-     * 
+     * Changes the player's state to deadState
+     * (the player dies)
      */
     public void killOff() {
     	state.killPlayer();
     }
     
     /**
-     * 
-     * @return
+     * Gets the invincibilityState
+     * @return invincibilityState
      */
     public PlayerState getInvincibilityState() {
 		return invincibilityState;
 	}
     
     /**
-     * 
-     * @return
+     * Gets the normalState
+     * @return normalState
      */
 	public PlayerState getNormalState() {
 		return normalState;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the deadState
+	 * @return deadState
 	 */
 	public PlayerState getDeadState() {
 		return deadState;
 	}
 	
 	/**
-	 * 
-	 * @param s
+	 * Sets the player's state
+	 * @param state
 	 */
-	public void setState(PlayerState s) {
-		this.state = s;
+	public void setState(PlayerState state) {
+		this.state = state;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the player's state
+	 * @return player's state
 	 */
 	public PlayerState getState() {
 		return state;
@@ -151,8 +130,9 @@ public class Player extends LivingCreature {
     	return false;
     
     }
+    
  // temp testing: print out the inventory
- // REMOVE LATER
+ // REMOVE THIS FUNCTION LATER
     public void printInventory() {
 		System.out.println("Inventory: [");
 		for (Item i : inventory) {
@@ -160,17 +140,32 @@ public class Player extends LivingCreature {
 		}
 		System.out.println("]");
     }
+    
     /**
      * Check if the player has a sword in the inventory
      * @return
      */
 	public boolean hasCertainItem(Item obj) {
-		for (Item i : inventory) {
-    		if (i.getClass().equals(obj.getClass())) {
+		for (Item item : inventory) {
+    		if (item.isSameItem(obj)) {
     			return true;
     		} 
     	}
 		return false;
+	}
+	
+	/**
+	 * gets the class of an item given the item a player has
+	 * @param item
+	 * @return type of item
+	 */
+	public Item getItemByName(String name) {
+		for (Item item : inventory) {
+			if (item.sameName(name)) {
+				return item;
+			}
+		}
+		return null;
 	}
 	
 	/**

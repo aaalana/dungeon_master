@@ -13,4 +13,19 @@ public class Door extends Blocker {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * sets the door's state to unlocked
+	 */
+	public void unlock() {
+		this.locked = false;
+	}
+	
+	/**
+	 * gets the door's id
+	 * @return door's id
+	 */
+	public int getId() {
+		return this.id;
+	}
 }
