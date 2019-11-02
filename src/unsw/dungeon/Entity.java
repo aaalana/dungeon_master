@@ -42,11 +42,14 @@ public class Entity {
         return x().get();
     }
     
+    /**
+     * Attempts movement of the entity depending on the its moving type
+     * @param direction
+     * @param dungeon
+     * @param entity
+     */
     public void tryToMove(String direction, Dungeon dungeon, Entity entity) {
     	moveable.move(direction, dungeon, entity);
     }
-    
-    public void setMovingAbility(MoveStrategy newMovingType) {
-    	this.moveable = newMovingType;
-    }
+
 }

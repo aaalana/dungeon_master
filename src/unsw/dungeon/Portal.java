@@ -32,6 +32,11 @@ public class Portal extends Obstacle {
 		}
 	}
 	
+	@Override
+	public boolean getState() {
+		return this.state;
+	}
+	
 	/**
 	 * Set the portal's state
 	 */
@@ -53,10 +58,5 @@ public class Portal extends Obstacle {
 	 */
 	public PortalSystem getPortalAssist() {
 		return dungeon.getPortals();
-	}
-
-	@Override
-	public boolean getState() {
-		return this.state;
 	}
 }

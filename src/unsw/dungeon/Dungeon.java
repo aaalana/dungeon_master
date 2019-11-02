@@ -64,28 +64,48 @@ public class Dungeon {
         return height;
     }
 
+    /**
+     * Gets the player entity
+     * @return
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Sets the player entity of the dungeon
+     * @param player
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
     
+    /**
+     * Adds an enemy to an enemy system
+     * @param enemy
+     */
     public void addEnemy(Entity enemy) {
     	enemies.addEnemy(enemy);
     }
     
+    /**
+     * Adds a boulder to a boulder system
+     * @param boulder
+     */
     public void addBoulder(Entity boulder) {
     	boulders.addBoulder(boulder);
     }
     
+    /**
+     * Adds an entity to the dungeon's list of entities
+     * @param entity
+     */
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
     
     /**
-     * Adds to a list of portals 
+     * Adds a portal to a portal assistant system 
      * @param portal
      */
     public void addPortals(Portal portal) {
@@ -150,7 +170,7 @@ public class Dungeon {
     }
     
     /**
-     * checks when the player's movement should be blocked
+     * checks when the player's movement should be blocked when facing an blocker entity
      * @param x
      * @param y
      * @return true when the player should be blocked and false otherwise
@@ -190,7 +210,9 @@ public class Dungeon {
     	return false;
     }
     
-
+    /**
+     * Signals enemies to move
+     */
     public void moveEnemies() {
     	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY());
     }
@@ -254,11 +276,11 @@ public class Dungeon {
     }
     
     /**
-     * 
+     * Signals the movement of boulders caused by the player
      * @param x
      * @param y
      * @param direction
-     * @return
+     * @return true when the boulder should be moved and false otherwise
      */
     public boolean pushBoulder(int x, int y, String direction) {
     	return boulders.pushBoulder(x, y, direction);
