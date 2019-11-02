@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-
 public class Enemy extends LivingCreature {
 	private Dungeon dungeon;
 	
@@ -20,24 +19,25 @@ public class Enemy extends LivingCreature {
 //    	System.out.println("Enemy is at (" + getX() + ", " + getY() + ")");
     	//Try and move horizontally to find the player
     	if (getX() != playerX) {
-    		if (getX() > playerX && !dungeon.checkWall(getX() - 1, getY())) {
+    		if (getX() > playerX && !dungeon.checkBlocker(getX() - 1, getY())) {
     			moveLeft();
     			return;
-    		} else if (getX() < playerX && !dungeon.checkWall(getX() + 1, getY())) {
+    		} else if (getX() < playerX && !dungeon.checkBlocker(getX() + 1, getY())) {
     			moveRight();
     			return;
     		}
     	}
     	
     	if (getY() != playerY) {
-    		if (getY() > playerY && !dungeon.checkWall(getX(), getY() - 1)) {
+    		if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() - 1)) {
     			moveUp();
     			return;
-    		} else if (getY() < playerY && !dungeon.checkWall(getX(), getY() + 1)) {
+    		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() + 1)) {
     			moveDown();
     			return;
     		}
     	}
     	
     }
+
 }

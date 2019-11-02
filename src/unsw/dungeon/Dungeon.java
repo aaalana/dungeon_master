@@ -26,7 +26,7 @@ public class Dungeon {
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
-  
+
     private BoulderSystem boulders;
     private PortalSystem portals;
     private Player player;
@@ -36,7 +36,7 @@ public class Dungeon {
         this.height = height;
         
         this.entities = new ArrayList<>();
-
+       
         this.obstacles = new ArrayList<>();
         this.items = new ArrayList<>();
         this.blockers = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Dungeon {
         this.enemies = new EnemySystem();
         this.boulders = new BoulderSystem(this);
         this.portals = new PortalSystem();
-      
+     
         this.player = null;
     }
 
@@ -131,7 +131,7 @@ public class Dungeon {
     public PortalSystem getPortals() {
     	return portals;
     }
-    
+   
     /**
      * This function takes in co-ordinates and returns what entity is on that square
      * @param x
@@ -155,12 +155,11 @@ public class Dungeon {
      * @param y
      * @return
      */
-    public boolean checkWall(int x, int y) {
-    	for (Entity entity : entities) {
+    public boolean checkBlocker(int x, int y) {
+    	for (Blocker entity : blockers) {
     		if (entity == null) continue;
     		
-    		if (entity.getX() == x && entity.getY() == y && entity instanceof unsw.dungeon.Wall) {
-    			//System.out.println(entity.toString());
+    		if (entity.getX() == x && entity.getY() == y && entity instanceof Wall) {
     			return true;
     		}
     	}

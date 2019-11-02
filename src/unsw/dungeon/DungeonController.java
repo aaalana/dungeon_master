@@ -84,11 +84,13 @@ public class DungeonController {
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
         dungeon.moveEnemies();
+        
+        // detects when to kill creatures after all creatures have moved
         dungeon.killCreature();
     }
     
     public boolean checkMove(int x, int y, String direction) {
-    	return (!dungeon.checkWall(x, y)) && dungeon.pushBoulder(x, y, direction);
+    	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
     }
    
 }

@@ -146,12 +146,27 @@ public class Player extends LivingCreature {
      * @return
      */
 	public boolean hasCertainItem(Item obj) {
-		for (Item i : inventory) {
-    		if (i.getClass().equals(obj.getClass())) {
+		for (Item item : inventory) {
+    		if (item.isSameItem(obj)) {
     			return true;
     		} 
     	}
 		return false;
+	}
+	
+	/**
+	 * -gets the class of an item given the item a player has
+	 * -treasure cannot be received since it is not a usable item
+	 * @param item
+	 * @return type of item
+	 */
+	public Item getItemByName(String name) {
+		for (Item item : inventory) {
+			if (item.sameName(name) && !name.equals("treasure")) {
+				return item;
+			}
+		}
+		return null;
 	}
 	
 	/**
