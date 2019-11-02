@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Player extends LivingCreature {
 
+	private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
@@ -20,7 +21,8 @@ public class Player extends LivingCreature {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(dungeon, x, y);
+        super(x, y);
+        this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
@@ -155,13 +157,14 @@ public class Player extends LivingCreature {
 	}
 	
 	/**
-	 * gets the class of an item given the item a player has
+	 * -gets the class of an item given the item a player has
+	 * -treasure cannot be received since it is not a usable item
 	 * @param item
 	 * @return type of item
 	 */
 	public Item getItemByName(String name) {
 		for (Item item : inventory) {
-			if (item.sameName(name)) {
+			if (item.sameName(name) && !name.equals("treasure")) {
 				return item;
 			}
 		}

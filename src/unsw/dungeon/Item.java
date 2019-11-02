@@ -43,6 +43,6 @@ public abstract class Item extends Entity {
 		return item.getClass();
 	}
 	
-	public abstract void usedUp();
+	public abstract void useItem(Player player);
 
 }

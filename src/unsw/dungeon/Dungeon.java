@@ -162,8 +162,7 @@ public class Dungeon {
     	for (Blocker entity : blockers) {
     		if (entity == null) continue;
     		
-    		if (entity.getX() == x && entity.getY() == y) {
-    			
+    		if (entity.getX() == x && entity.getY() == y && entity instanceof Wall) {
     			return true;
     		}
     	}

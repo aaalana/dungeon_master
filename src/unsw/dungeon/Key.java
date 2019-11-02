@@ -10,14 +10,19 @@ public class Key extends Item {
         this.usable = true;
 	}
 
-	public void useItem(Player player, Door door) {
-	    if (door.getId() == this.id) {
-	    	door.unlock();
-	    	usedUp();
-	    }
-	}
-
 	@Override
+	public void useItem(Player player) {
+	    Item door = player.getItemByName("door");
+		//if (door.getId() == this.id) {
+	    //	door.unlock();
+	    	usedUp();
+	    //}
+	}
+	
+	public Item getDoorToUnlock(Player player) {
+		return player.getItemByName("key");
+	}
+	
 	public void usedUp() {
 		this.usable = false;
 	}
