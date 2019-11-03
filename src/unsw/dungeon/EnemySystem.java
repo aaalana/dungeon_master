@@ -2,9 +2,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 public class EnemySystem implements Subject {
-	private List<Entity> enemies;
+	private List<Enemy> enemies;
 	private EnemyGoal enemyGoal;
 
 	public EnemySystem() {
@@ -16,7 +15,7 @@ public class EnemySystem implements Subject {
 		return enemies;
 	}
 
-	public void setEnemies(List<Entity> enemies) {
+	public void setEnemies(List<Enemy> enemies) {
 		this.enemies = enemies;
 	}
 	

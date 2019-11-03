@@ -29,6 +29,7 @@ public class Dungeon implements Observer {
 
     private BoulderSystem boulders;
     private PortalSystem portals;
+    private TreasureSystem treasures;
     private Player player;
 
     private Goal goal;
@@ -45,6 +46,7 @@ public class Dungeon implements Observer {
      
         this.enemies = new EnemySystem();
         this.boulders = new BoulderSystem(this);
+        this.treasures = new TreasureSystem();
         this.portals = new PortalSystem();
      
         this.player = null;
@@ -121,6 +123,10 @@ public class Dungeon implements Observer {
     	portals.addPortal(portal);
     }
     
+    public void addTreasure(Treasure treasure) {
+        treasures.addTreasure(treasure);
+    }
+
     /**
      * add an obstacle to the obstacle list
      * @param o
@@ -265,8 +271,16 @@ public class Dungeon implements Observer {
     		if (item == null) continue;
     		
     		if (player.getX() == item.getX() && player.getY() == item.getY()) {
-    			if (player.collectItem(item))
+    			if (player.collectItem(item)) {
     				items.remove(item);
+    				System.out.println(item.getClass().getName());
+    				if (item instanceof Treasure) {
+                        this.treasures.removeTreasure((Treasure) item);
+    					// System.out.println("Reached here");
+         //                this.treasures.update();        	
+                    }
+    			}
+                
     		}
     	}
     }
@@ -302,6 +316,16 @@ public class Dungeon implements Observer {
         }
     }
     
+    public void setExitGoal(ExitGoal exitGoal) {
+    	for (Obstacle o : obstacles) {
+    		o.setExitGoal(exitGoal);
+    	}
+    }
+
+    public void setTreasureGoal (TreasureGoal treasureGoal) {
+        this.treasures.setTreasureGoal(treasureGoal);
+    }
+
     public void update() {
         System.out.println("A goal was just completed");
     	if (this.goal.getStatus() == true) {

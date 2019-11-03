@@ -73,6 +73,7 @@ public abstract class DungeonLoader {
             Treasure treasure = new Treasure(x, y);
             loadImage(treasure);
             entity = treasure;
+            dungeon.addTreasure(treasure);
             dungeon.addItem(treasure);
         	break;
         case "invincibility":
@@ -152,6 +153,7 @@ public abstract class DungeonLoader {
 				    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
 				    ANDgoals.addGoal(subgoal);
 				}
+                goal = ANDgoals;
 				break;
             case "OR":
             	JSONArray subgoals2 = goals.getJSONArray("subgoals");
@@ -161,10 +163,12 @@ public abstract class DungeonLoader {
                     Goal subgoal = loadGoals(subgoals2.getJSONObject(i), dungeon);
                     ORgoals.addGoal(subgoal);
                 }
+                goal = ORgoals;
                 break;
             case "exit":
                 ExitGoal exitGoal = new ExitGoal(dungeon);
                 goal = exitGoal;
+                dungeon.setExitGoal(exitGoal);
                 addObserver(exitGoal);
                 break;
             case "enemies":
@@ -176,6 +180,7 @@ public abstract class DungeonLoader {
             case "treasure":
                 TreasureGoal treasureGoal = new TreasureGoal(dungeon);
                 goal = treasureGoal;
+                dungeon.setTreasureGoal(treasureGoal);
                 addObserver(treasureGoal);
                 break;
             case "boulders":
