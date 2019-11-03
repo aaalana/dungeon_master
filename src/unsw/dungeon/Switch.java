@@ -18,6 +18,10 @@ public class Switch extends Obstacle {
     	
     	this.triggered = state;
     }
+    
+    public void setExitGoal(ExitGoal e) {
+    	return;
+    }
    
     public boolean getState() {
     	return triggered;
