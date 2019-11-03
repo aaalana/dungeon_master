@@ -44,8 +44,8 @@ public abstract class DungeonLoader {
         
         JSONObject goals = json.getJSONObject("goal-condition");
         System.out.println(goals.toString(2));
-        loadGoals(goals, dungeon);
-        // maybe? dungeon.setGoal(goals);
+        Goal finalGoal = loadGoals(goals, dungeon);
+        dungeon.setGoal(finalGoal);
         return dungeon;
     }
 
@@ -140,14 +140,14 @@ public abstract class DungeonLoader {
     
     private Goal loadGoals(JSONObject goals, Dungeon dungeon){
         String type = goals.getString("goal");
-        
+        System.out.println(goals);
         Goal goal = null;
         switch(type) {
         	// if the goals is AND, add all goals
             case "AND":
             	JSONArray subgoals = goals.getJSONArray("subgoals");
                 
-            	ANDGoal ANDgoals = new ANDGoal();
+            	ANDGoal ANDgoals = new ANDGoal(dungeon);
 				for (int i = 0; i < subgoals.length(); i++) {
 				    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
 				    ANDgoals.addGoal(subgoal);
@@ -156,29 +156,30 @@ public abstract class DungeonLoader {
             case "OR":
             	JSONArray subgoals2 = goals.getJSONArray("subgoals");
                 
-            	ORGoal ORgoals = new ORGoal();
+            	ORGoal ORgoals = new ORGoal(dungeon);
                 for (int i = 0; i < subgoals2.length(); i++) {
                     Goal subgoal = loadGoals(subgoals2.getJSONObject(i), dungeon);
                     ORgoals.addGoal(subgoal);
                 }
                 break;
             case "exit":
-                ExitGoal exitGoal = new ExitGoal();
+                ExitGoal exitGoal = new ExitGoal(dungeon);
                 goal = exitGoal;
                 addObserver(exitGoal);
                 break;
             case "enemies":
-                EnemyGoal enemyGoal = new EnemyGoal();
+                EnemyGoal enemyGoal = new EnemyGoal(dungeon);
                 goal = enemyGoal;
+                dungeon.setEnemyGoal(enemyGoal);
                 addObserver(enemyGoal);
                 break;
             case "treasure":
-                TreasureGoal treasureGoal = new TreasureGoal();
+                TreasureGoal treasureGoal = new TreasureGoal(dungeon);
                 goal = treasureGoal;
                 addObserver(treasureGoal);
                 break;
             case "boulders":
-                BoulderGoal boulderGoal = new BoulderGoal();
+                BoulderGoal boulderGoal = new BoulderGoal(dungeon);
                 goal = boulderGoal;
                 addObserver(boulderGoal);
                 break;

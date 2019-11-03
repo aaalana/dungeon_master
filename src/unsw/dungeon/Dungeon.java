@@ -18,7 +18,7 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon {
+public class Dungeon implements Observer {
 
     private int width, height;
     private List<Entity> entities;
@@ -30,6 +30,8 @@ public class Dungeon {
     private BoulderSystem boulders;
     private PortalSystem portals;
     private Player player;
+
+    private Goal goal;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -46,6 +48,13 @@ public class Dungeon {
         this.portals = new PortalSystem();
      
         this.player = null;
+
+        this.goal = null;
+    }
+
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
     }
 
     /**
@@ -286,6 +295,18 @@ public class Dungeon {
     	return boulders.pushBoulder(x, y, direction);
     }
     
+    public void setEnemyGoal(EnemyGoal enemyGoal) {
+        if (this.enemies != null) {
+            this.enemies.setEnemyGoal(enemyGoal);
+        }
+    }
+    
+    public void update() {
+        System.out.println("A goal was just completed");
+    	if (this.goal.getStatus() == true) {
+    		System.exit(0);
+    	}
+    }
     
 }
 

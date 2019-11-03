@@ -6,8 +6,9 @@ public class ORGoal extends GoalCombinations implements GoalComponent {
 	
 	private ArrayList<Goal> goals;
 	
-	public ORGoal() {
+	public ORGoal(Dungeon dungeon) {
 		// TODO Auto-generated constructor stub
+		super(dungeon);
 		this.goals = new ArrayList<>();
 	}
 

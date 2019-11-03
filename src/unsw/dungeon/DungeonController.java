@@ -50,7 +50,7 @@ public class DungeonController {
     @FXML
     public void handleKeyPress(KeyEvent event) {
         // testing: check if the player's state
-    	System.out.println(player.getState());
+    	// System.out.println(player.getState());
     	
     	switch (event.getCode()) {
         case UP:

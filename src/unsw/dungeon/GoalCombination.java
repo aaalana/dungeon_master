@@ -2,20 +2,17 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class GoalCombination {
-	private ArrayList<GoalCombinations> goals;
+public class GoalCombination extends Goal {
+	private ArrayList<GoalCombinations> subGoals;
 
-	public GoalCombination() {
-		this.goals = new ArrayList<>();
+	public GoalCombination(Dungeon dungeon) {
+		super(dungeon);
+		this.subGoals = new ArrayList<>();
 	}
 
 	private void addGoal(GoalCombinations goal) {
-		goals.add(goal);
+		subGoals.add(goal);
 	}
 
-	private boolean completed() {
-		return false;
-	}
-	
 	
 }

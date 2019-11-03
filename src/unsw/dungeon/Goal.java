@@ -1,10 +1,12 @@
 package unsw.dungeon;
 
-public class Goal {
+public class Goal implements Subject {
 	private boolean completed;
+	private Dungeon dungeon;
 	
-	public Goal() {
+	public Goal(Dungeon dungeon) {
 		this.completed = false;
+		this.dungeon = dungeon;
 	}
 	
 	/**
@@ -20,5 +22,9 @@ public class Goal {
 	 */
 	public void setComplete() {
 		this.completed = true;
+	}
+	
+	public void update() {
+		dungeon.update();
 	}
 }
