@@ -30,6 +30,7 @@ public class Dungeon implements Observer {
     private BoulderSystem boulders;
     private PortalSystem portals;
     private TreasureSystem treasures;
+    private SwitchSystem switches;
     private Player player;
 
     private Goal goal;
@@ -47,6 +48,7 @@ public class Dungeon implements Observer {
         this.enemies = new EnemySystem();
         this.boulders = new BoulderSystem(this);
         this.treasures = new TreasureSystem();
+        this.switches = new SwitchSystem(this);
         this.portals = new PortalSystem();
      
         this.player = null;
@@ -107,6 +109,10 @@ public class Dungeon implements Observer {
     	boulders.addBoulder(boulder);
     }
     
+    public void addSwitch(Switch switchItem) {
+        this.switches.addSwitch(switchItem);
+    }
+
     /**
      * Adds an entity to the dungeon's list of entities
      * @param entity
@@ -297,6 +303,7 @@ public class Dungeon implements Observer {
     			continue;
     		o.trigger(shareSquare(o));
     	}
+        switches.checkSwitches();
     }
     
     /**
@@ -324,6 +331,10 @@ public class Dungeon implements Observer {
 
     public void setTreasureGoal (TreasureGoal treasureGoal) {
         this.treasures.setTreasureGoal(treasureGoal);
+    }
+
+    public void setSwitchGoal(BoulderGoal boulderGoal) {
+        this.switches.setBoulderGoal(boulderGoal);
     }
 
     public void update() {

@@ -87,6 +87,7 @@ public abstract class DungeonLoader {
             loadImage(_switch);
             entity = _switch;
             dungeon.addObstacle(_switch);
+            dungeon.addSwitch(_switch);
         	break;
         case "boulder":
             Boulder boulder = new Boulder(dungeon, x, y, new ItMoves());
@@ -186,6 +187,7 @@ public abstract class DungeonLoader {
             case "boulders":
                 BoulderGoal boulderGoal = new BoulderGoal(dungeon);
                 goal = boulderGoal;
+                dungeon.setSwitchGoal(boulderGoal);
                 addObserver(boulderGoal);
                 break;
             default:
