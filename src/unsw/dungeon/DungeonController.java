@@ -80,7 +80,6 @@ public class DungeonController {
         default:
             break; 
         }
-    	
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
         dungeon.moveEnemies();

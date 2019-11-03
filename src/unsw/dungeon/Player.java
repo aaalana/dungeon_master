@@ -55,10 +55,7 @@ public class Player extends LivingCreature {
     	state.expelInvincibilityPotion(potion);
     }
     
-    /**
-     * Changes the player's state to deadState
-     * (the player dies)
-     */
+    @Override
     public void killOff() {
     	state.killPlayer();
     }
@@ -109,28 +106,32 @@ public class Player extends LivingCreature {
 	 * @return true when the item has been
 	 */
     public boolean collectItem(Item item) {
+    	if (item == null)
+    		return false;
+    	
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
     		drinkInvincibilityPotion(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
-    		printInventory();
+    		//printInventory();
     		return true;
     	}
     	return false;
     
     }
     
+ /*
  // temp testing: print out the inventory
  // REMOVE THIS FUNCTION LATER
     public void printInventory() {
@@ -139,7 +140,7 @@ public class Player extends LivingCreature {
 			System.out.println(i + ",");
 		}
 		System.out.println("]");
-    }
+    }*/
     
     /**
      * Check if the player has a sword in the inventory
@@ -155,14 +156,15 @@ public class Player extends LivingCreature {
 	}
 	
 	/**
-	 * -gets the class of an item given the item a player has
-	 * -treasure cannot be received since it is not a usable item
+	 * -gets an item from the inventory given its name
+	 * -this function is most useful for items that can 
+	 *  only be collected once 
 	 * @param item
 	 * @return type of item
 	 */
 	public Item getItemByName(String name) {
 		for (Item item : inventory) {
-			if (item.sameName(name) && !name.equals("treasure")) {
+			if (item.sameName(name)) {
 				return item;
 			}
 		}

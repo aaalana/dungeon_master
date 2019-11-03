@@ -93,7 +93,7 @@ public class Dungeon implements Observer {
      * Adds an enemy to an enemy system
      * @param enemy
      */
-    public void addEnemy(Entity enemy) {
+    public void addEnemy(Enemy enemy) {
     	enemies.addEnemy(enemy);
     }
     
@@ -133,8 +133,8 @@ public class Dungeon implements Observer {
      * add an item to the items list
      * @param i
      */
-    public void addItem(Item i) {
-    	items.add(i);
+    public void addItem(Item item) {
+    	items.add(item);
     }
     
     /**
@@ -172,7 +172,7 @@ public class Dungeon implements Observer {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
     			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
-    			return entity.getClass().getName();
+    			return entity.getClassName();
     		}
     	}
     	return "None";
@@ -200,7 +200,8 @@ public class Dungeon implements Observer {
     }
         
     /**
-     * Checks if two particular entities are sharing the same square 
+     * Checks if two particular entities are sharing the same square in relation to 
+     * particular obstacles
      * @param sharedWith an entity sharing a square
      * @return true when two entity are sharing the same square, false otherwise
      */
@@ -208,12 +209,14 @@ public class Dungeon implements Observer {
      	for (Entity entity : this.entities) {
     		if (entity == null) continue;
     		
-    		if ((sharedWith instanceof Switch && entity instanceof Boulder) ||
-    		   ((sharedWith instanceof Exit || sharedWith instanceof Portal) && entity instanceof Player) || 
-    			(sharedWith instanceof Player && entity instanceof Enemy)) {
-    			if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
-    				return true;
-    			}
+    		if (entity.getX() == sharedWith.getX() && entity.getY() == sharedWith.getY()) {
+	    		if (sharedWith instanceof Switch && entity instanceof Boulder) {
+	    			return true;
+	    		} else if (sharedWith instanceof Exit && entity instanceof Player) {
+	    			return true;
+	    		} else if (sharedWith instanceof Portal && entity instanceof Player) {
+	    			return true;
+	    		}
     		}
     	}
     	return false;
@@ -232,20 +235,18 @@ public class Dungeon implements Observer {
      * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
     public void killCreature() {
-    	List<Entity> tempList = new ArrayList<>(enemies.getEnemies());	
-    	for (Entity enemy: tempList) {
+    	List<Enemy> tempList = new ArrayList<>(enemies.getEnemies());	
+    	for (Enemy enemy: tempList) {
     		if (enemy == null) 
     			continue;
     		
     		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
     			if (player.getState() instanceof InvincibilityState) {
     				enemies.removeEnemy(enemy);
-    				System.out.println("enemy killed");
+    				enemy.killOff();
 	    		} else if (player.getState() instanceof NormalState) {
 	    			player.killOff();
-		    		player = null;
-		    		System.out.println("player killed");
-		    			
+	    			
 	    			// close application to end game
 	    			System.exit(0);
 	    		}
@@ -271,7 +272,7 @@ public class Dungeon implements Observer {
     }
     
     /**
-     * signals an obstacle to update its state under certain conditions:
+     * Signals an obstacle to update its state under certain conditions:
      * -when a player interacts with a portal/exit 
      * -when a boulder interacts with a switch
      * @param e

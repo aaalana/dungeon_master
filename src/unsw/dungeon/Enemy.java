@@ -10,7 +10,7 @@ public class Enemy extends LivingCreature {
     }
 
     /**
-     * The enemy will take in a set of co-ordinates and find the best way to reach
+     * The enemy will take in the player's co-ordinates and finds the best way to reach
      * those co-ordinates.
      * @param x
      * @param y
@@ -39,6 +39,11 @@ public class Enemy extends LivingCreature {
     		}
     	}
     	
+    }
+    
+    @Override
+    public void killOff() {
+    	System.out.println("Enemy killed");
     }
 
 }

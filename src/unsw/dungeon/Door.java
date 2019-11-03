@@ -3,6 +3,7 @@ package unsw.dungeon;
 public class Door extends Blocker {
 	private int id;
 	private boolean locked;
+	
 	public Door(int x, int y, int id, MoveStrategy movementType) {
 		super(x, y, movementType);
 		this.id = id;
@@ -12,7 +13,6 @@ public class Door extends Blocker {
 	@Override
 	public boolean block(Player player) {
 		Key key = (Key)player.getItemByName("key");
-		
 		if (key != null && (matchingKey(key))) {
 			key.useItem(player);
 			unlock();

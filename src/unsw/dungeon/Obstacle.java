@@ -7,5 +7,4 @@ public abstract class Obstacle extends Entity {
 	}
 	
 	public abstract void trigger(boolean state);
-	public abstract boolean getState();
 }

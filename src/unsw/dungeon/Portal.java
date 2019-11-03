@@ -32,11 +32,6 @@ public class Portal extends Obstacle {
 		}
 	}
 	
-	@Override
-	public boolean getState() {
-		return this.state;
-	}
-	
 	/**
 	 * Set the portal's state
 	 */

@@ -2,16 +2,17 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 public class EnemySystem implements Subject {
 	private List<Entity> enemies;
 	private EnemyGoal enemyGoal;
 
 	public EnemySystem() {
 		super();
-		this.enemies = new ArrayList<Entity>(); 
+		this.enemies = new ArrayList<Enemy>(); 
 	}
 
-	public List<Entity> getEnemies() {
+	public List<Enemy> getEnemies() {
 		return enemies;
 	}
 
@@ -31,7 +32,7 @@ public class EnemySystem implements Subject {
 		this.enemies.add((Enemy) enemy);
 	}
 	
-	public void removeEnemy(Entity enemy) {
+	public void removeEnemy(Enemy enemy) {
 		this.enemies.remove(enemy);
 		if (this.enemies.size() == 0) {
 			this.update();

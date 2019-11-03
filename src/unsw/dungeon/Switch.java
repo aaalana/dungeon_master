@@ -17,10 +17,8 @@ public class Switch extends Obstacle {
     		System.out.println("switch untriggered!");
     	
     	this.triggered = state;
-    	
     }
    
-    @Override
     public boolean getState() {
     	return triggered;
     }
