@@ -57,5 +57,4 @@ class BoulderSystemTest {
 		assertFalse(sys.pushBoulder(10, 9, "left"));
 		assertFalse(sys.pushBoulder(10, 9, "down")); 
 	}
-
 }
