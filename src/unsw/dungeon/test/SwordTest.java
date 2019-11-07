@@ -29,8 +29,6 @@ class SwordTest {
 	@Test
 	void testReduceUses() {
 		Sword sword = new Sword(5, 1);
-		Dungeon dungeon = new Dungeon(18, 16);
-		Player player = new Player(2, 2, dungeon);
 		
 		// default should have 5 uses
 		assertEquals(5, sword.getUses());
