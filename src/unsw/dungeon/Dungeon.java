@@ -290,9 +290,7 @@ public class Dungeon implements Observer {
     			if (player.collectItem(item)) {
     				items.remove(item);
     				if (item instanceof Treasure) {
-    					treasures.removeTreasure((Treasure) item);
-    					// System.out.println("Reached here");
-         //                this.treasures.update();        	
+    					treasures.removeTreasure((Treasure) item);   	
                     }
     			}
                 
