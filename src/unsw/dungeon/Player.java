@@ -186,13 +186,12 @@ public class Player extends LivingCreature {
     public void useSword() {
     	if (getItemByName("sword") != null) {
     		Sword sword = (Sword) getItemByName("sword");
-    		System.out.println("here");
+    		
     		// sets the sword status to being used
     		if (sword.getStatus() == false)
     			sword.useItem(this);
     		
     		// kills the enemy is in range of 2 squares from the player
-    		
     		dungeon.killCreature(sword);
     		
     		// remove the item from the inventory when the sword is all used up

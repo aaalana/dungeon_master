@@ -5,7 +5,4 @@ public class TreasureGoal extends Goal {
 	public TreasureGoal(Dungeon dungeon) {
 		super(dungeon);
 	}
-
-	
-
 }

@@ -4,6 +4,7 @@ public class Sword extends Item {
 	
 	private boolean inUse;
 	private int usesLeft = 5;
+	
     public Sword(int x, int y) {
         super(x, y, "sword");
         this.inUse = false;
@@ -23,7 +24,9 @@ public class Sword extends Item {
 	 * Reduces the number of uses the sword has 
 	 */
 	public void reduceUses() {
-		usesLeft--;
+		if (usesLeft != 0) {
+			usesLeft--;
+		}
 		System.out.println("The sword has " + usesLeft + " use/s left.");
 	}
 	
