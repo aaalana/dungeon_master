@@ -189,7 +189,7 @@ public class Dungeon implements Observer {
     	}
     	return "None";
     }
-    
+        
     /**
      * checks when the player's movement should be blocked when facing an blocker entity
      * @param x
