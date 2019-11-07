@@ -3,3 +3,4 @@
 hs_err_pid*
 /bin/
 bin/unsw/dungeon/*.class
+src/unsw/dungeon/DungeonApplication.java
