@@ -43,7 +43,7 @@ class DungeonTest {
 	@Test
 	void testCheckBlocker() {
 		Dungeon dungeon = new Dungeon(18,16);
-		Player player = new Player(0,0);
+		Player player = new Player(0, 0, dungeon);
 		Wall wall = new Wall(0,0, new CantMove());
 		Wall wall2 = new Wall(1,0, new CantMove());
 		Door door = new Door(2,1,0, new CantMove());
@@ -73,7 +73,7 @@ class DungeonTest {
 	@Test
 	void testShareSquare() {
 		Dungeon dungeon = new Dungeon(18,16);
-		Player player = new Player(0,0);
+		Player player = new Player(0, 0, dungeon);
 		Portal portal = new Portal(1,0,0,dungeon);
 		Portal portal2 = new Portal(8,0,0,dungeon);
 		Switch _switch = new Switch(3,2);

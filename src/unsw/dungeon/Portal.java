@@ -54,4 +54,10 @@ public class Portal extends Obstacle {
 	public PortalSystem getPortalAssist() {
 		return dungeon.getPortals();
 	}
+
+	@Override
+	public void setExitGoal(ExitGoal exitGoal) {
+		// TODO Auto-generated method stub
+		
+	}
 }

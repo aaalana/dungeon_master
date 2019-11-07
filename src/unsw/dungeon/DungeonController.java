@@ -73,10 +73,6 @@ public class DungeonController {
         		player.tryToMove("right", dungeon, player);  
         	}
             break;
-        case SPACE:
-        	// use sword??
-        	
-        	break;
         default:
             break; 
         }
@@ -84,8 +80,12 @@ public class DungeonController {
         dungeon.removeFromGround(); 
         dungeon.moveEnemies();
         
+        if (player.getItemByName("sword") != null) {
+    		player.useSword();
+    	}
+        
         // detects when to kill creatures after all creatures have moved
-        dungeon.killCreature();
+        dungeon.killCreature(null);
     }
     
     public boolean checkMove(int x, int y, String direction) {

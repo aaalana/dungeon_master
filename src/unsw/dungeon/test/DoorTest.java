@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.CantMove;
 import unsw.dungeon.Door;
+import unsw.dungeon.Dungeon;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 
@@ -16,8 +17,9 @@ class DoorTest {
 	void testBlock() {
 		Door door = new Door(0, 0, 0, new CantMove());
 		Door door2 = new Door(0, 0, 1, new CantMove());
-		Player player = new Player(1, 0);
-		Player player2 = new Player(0, 1);
+		Dungeon dungeon = new Dungeon(18, 16);
+		Player player = new Player(1, 0, dungeon);
+		Player player2 = new Player(0, 1, dungeon);
 		Key matchingKey = new Key(1, 0, 0);
 		Key wrongKey = new Key(1, 0, 1);
 		

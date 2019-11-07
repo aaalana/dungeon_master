@@ -51,7 +51,7 @@ class PortalSystemTest {
 		Portal portal = new Portal(0, 0, 0, dungeon);
 		Portal portal2 = new Portal(9, 9, 0, dungeon);
 		PortalSystem sys = new PortalSystem();
-		Player player = new Player(0,0);
+		Player player = new Player(0, 0, dungeon);
 		sys.addPortal(portal);
 		sys.addPortal(portal2);
 		

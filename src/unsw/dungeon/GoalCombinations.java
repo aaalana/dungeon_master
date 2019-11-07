@@ -7,7 +7,8 @@ public class GoalCombinations extends GoalCombination {
 	private ArrayList<ANDGoal> ANDGoals;
 	private ArrayList<ORGoal> ORGoals;
 	
-	public GoalCombinations() {
+	public GoalCombinations(Dungeon dungeon) {
+		super(dungeon);
 		this.ANDGoals = new ArrayList<>();
 		this.ORGoals = new ArrayList<>();
 	}
