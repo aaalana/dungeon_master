@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Player extends LivingCreature {
 	
+	private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
@@ -19,8 +20,9 @@ public class Player extends LivingCreature {
      * @param x
      * @param y
      */
-    public Player(int x, int y) {
+    public Player(int x, int y, Dungeon dungeon) {
         super(x, y);
+        this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
@@ -111,23 +113,23 @@ public class Player extends LivingCreature {
     	
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
-    		//printInventory();
+    		printInventory();
     		return true;
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		inventory.add(item);
-    		//printInventory();
+    		printInventory();
     		return true;
     	} else if (item instanceof InvincibilityPotion) {
     		inventory.add(item);
     		drinkInvincibilityPotion(item);
-    		//printInventory();
+    		printInventory();
     		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
+    		printInventory();
     		return true;
     	} 
     	return false;
-    
     }
     
  
@@ -177,4 +179,27 @@ public class Player extends LivingCreature {
 	public void removeItem(Item item) {
 		inventory.remove(item);
 	}
+	
+    /**
+     * If a player has a sword, the player can attempt to use the sword to kill surrounding enemies
+     */
+    public void useSword() {
+    	if (getItemByName("sword") != null) {
+    		Sword sword = (Sword) getItemByName("sword");
+    		System.out.println("here");
+    		// sets the sword status to being used
+    		if (sword.getStatus() == false)
+    			sword.useItem(this);
+    		
+    		// kills the enemy is in range of 2 squares from the player
+    		
+    		dungeon.killCreature(sword);
+    		
+    		// remove the item from the inventory when the sword is all used up
+    		if (sword.getUses() == 0) {
+    			System.out.println("Sword was used up.");
+    			removeItem(sword);
+    		}
+    	}
+    }
 }

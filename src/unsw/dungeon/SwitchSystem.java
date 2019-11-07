@@ -36,13 +36,14 @@ public class SwitchSystem implements Subject {
 				return;
 			}
 		}
-
 		update();
 	}
 
 	public void update() {
-		System.out.println("All switches are active");
-		this.boulderGoal.updateGoal();
+		if (boulderGoal != null) {
+			System.out.println("All switches are active");
+			this.boulderGoal.updateGoal();
+		}
 	}
 
 }

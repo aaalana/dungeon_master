@@ -6,7 +6,7 @@ public class ORGoal extends GoalCombination implements GoalComponent {
 	
 	private ArrayList<Goal> goals;
 	
-	public ANDGoal(Dungeon dungeon) {
+	public ORGoal(Dungeon dungeon) {
 		super(dungeon);
 		this.goals = new ArrayList<>();
 	}

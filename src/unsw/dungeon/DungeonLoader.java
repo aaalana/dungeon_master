@@ -57,7 +57,7 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(x, y);
+            Player player = new Player(x, y, dungeon);
             dungeon.setPlayer(player);
             loadImage(player);
             entity = player;
@@ -170,48 +170,28 @@ public abstract class DungeonLoader {
                 ExitGoal exitGoal = new ExitGoal(dungeon);
                 goal = exitGoal;
                 dungeon.setExitGoal(exitGoal);
-                addObserver(exitGoal);
                 break;
             case "enemies":
                 EnemyGoal enemyGoal = new EnemyGoal(dungeon);
                 goal = enemyGoal;
                 dungeon.setEnemyGoal(enemyGoal);
-                addObserver(enemyGoal);
                 break;
             case "treasure":
                 TreasureGoal treasureGoal = new TreasureGoal(dungeon);
                 goal = treasureGoal;
                 dungeon.setTreasureGoal(treasureGoal);
-                addObserver(treasureGoal);
                 break;
             case "boulders":
                 BoulderGoal boulderGoal = new BoulderGoal(dungeon);
                 goal = boulderGoal;
                 dungeon.setSwitchGoal(boulderGoal);
-                addObserver(boulderGoal);
                 break;
             default:
                 break;
         }
         return goal;
     }
-    
-    public void addObserver(ExitGoal goal) {
-    	
-    }
-  
-    public void addObserver(EnemyGoal goal) {
-    	
-    }
-    
-    public void addObserver(BoulderGoal goal) {
-    	
-    }
-    
-    public void addObserver(TreasureGoal goal) {
-    	
-    }
-  
+      
 	public abstract void onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities

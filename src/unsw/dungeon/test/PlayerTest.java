@@ -13,7 +13,8 @@ class PlayerTest {
 
 	@Test
 	void testTeleport() {
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0,0, dungeon);
 		
 		// try the same location as the player
 		player.teleport(0, 0);
@@ -26,7 +27,7 @@ class PlayerTest {
 		assertEquals(4, player.getY());
 		
 		// trying out with another player for reliability
-		Player player2 = new Player(6,6);
+		Player player2 = new Player(6,6, dungeon);
 		assertNotSame(new InvincibilityState(player2), player2.getInvincibilityState());
 		player2.teleport(0, 0);
 		assertEquals(0, player2.getX());
@@ -35,7 +36,8 @@ class PlayerTest {
 	
 	@Test
 	void testInvincibility() {
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0,0, dungeon);
 		InvincibilityPotion potion = new InvincibilityPotion(2, 3);
 		InvincibilityPotion potion2 = new InvincibilityPotion(7, 3);
 		
@@ -74,36 +76,42 @@ class PlayerTest {
 	@Test
 	void testGetInvincibilityState() {
 		// trying with out 2 different players for reliability
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		
+		Player player = new Player(0, 0, dungeon);
 		assertNotSame(new InvincibilityState(player), player.getInvincibilityState());
 		
-		Player player2 = new Player(6,6);
+		Player player2 = new Player(6, 6, dungeon);
 		assertNotSame(new InvincibilityState(player2), player2.getInvincibilityState());
 	}
 	
 	@Test
 	void testGetNormalState() {
 		// trying with out 2 different players for reliability
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		
+		Player player = new Player(0,0, dungeon);
 		assertNotSame(new NormalState(player), player.getNormalState());
 		
-		Player player2 = new Player(9,0);
+		Player player2 = new Player(9,0, dungeon);
 		assertNotSame(new NormalState(player2), player2.getNormalState());
 	}
 
 	@Test
 	void testGetDeadState() {
 		// trying with out 2 different players for reliability
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0, 0, dungeon);
 		assertNotSame(new DeadState(player), player.getDeadState());
 		
-		Player player2 = new Player(9,0);
+		Player player2 = new Player(9, 0, dungeon);
 		assertNotSame(new DeadState(player2), player2.getDeadState());
 	}
 	
 	@Test
 	void testgetState() {
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0, 0, dungeon);
 		
 		// default
 		assertNotSame(new NormalState(player), player.getState());
@@ -132,7 +140,8 @@ class PlayerTest {
 		Treasure treasure2 = new Treasure(7,9);
 		InvincibilityPotion potion = new InvincibilityPotion(2,4);
 		InvincibilityPotion potion2 = new InvincibilityPotion(0,4);
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0, 0, dungeon);
 		
 		// no item
 		assertFalse(player.collectItem(null));
@@ -156,7 +165,8 @@ class PlayerTest {
 	
 	@Test
 	void testHasCertainItem() {
-		Player player = new Player(0,0);
+		Dungeon dungeon = new Dungeon(18,16);
+		Player player = new Player(0, 0, dungeon);
 		Treasure treasure = new Treasure(1,2);
 		Sword sword = new Sword(5,6);
 		Key key = new Key(7,7,0);
@@ -193,8 +203,9 @@ class PlayerTest {
 	
 	@Test
 	void testGetItemByName() {
-		Player player = new Player(0,9);
-		Sword sword = new Sword(5,6);
+		Dungeon dungeon = new Dungeon(18, 16);
+		Player player = new Player(0, 9, dungeon);
+		Sword sword = new Sword(5, 6);
 		Treasure treasure = new Treasure(1,2);
 		Key key = new Key(7,7,0);
 		InvincibilityPotion potion = new InvincibilityPotion(2,4);

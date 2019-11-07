@@ -246,7 +246,7 @@ public class Dungeon implements Observer {
      * -When the player is invincible and touches an enemy, the enemy is signalled to die
      * -When the player is not invincible and touches an enemy, the player is signalled to die
      */
-    public void killCreature() {
+    public void killCreature(Sword sword) {
     	List<Enemy> tempList = new ArrayList<>(enemies.getEnemies());	
     	for (Enemy enemy: tempList) {
     		if (enemy == null) 
@@ -257,10 +257,20 @@ public class Dungeon implements Observer {
     				enemies.removeEnemy(enemy);
     				enemy.killOff();
 	    		} else if (player.getState() instanceof NormalState) {
+	    			if (sword == null) {
 	    			player.killOff();
 	    			
 	    			// close application to end game
 	    			System.exit(0);
+	    			} else if (sword.getStatus()) {
+	        			// kill the enemy
+	        			enemies.removeEnemy(enemy);
+	    				enemy.killOff();
+	    				sword.reduceUses();
+	    				
+	    				// get the sword back to not in use
+	    				sword.useItem(player);
+	        		}
 	    		}
     		}
     	}
@@ -279,9 +289,8 @@ public class Dungeon implements Observer {
     		if (player.getX() == item.getX() && player.getY() == item.getY()) {
     			if (player.collectItem(item)) {
     				items.remove(item);
-    				System.out.println(item.getClass().getName());
     				if (item instanceof Treasure) {
-                        this.treasures.removeTreasure((Treasure) item);
+    					treasures.removeTreasure((Treasure) item);
     					// System.out.println("Reached here");
          //                this.treasures.update();        	
                     }
@@ -303,7 +312,8 @@ public class Dungeon implements Observer {
     			continue;
     		o.trigger(shareSquare(o));
     	}
-        switches.checkSwitches();
+    	
+    	switches.checkSwitches();
     }
     
     /**
@@ -319,27 +329,43 @@ public class Dungeon implements Observer {
     
     public void setEnemyGoal(EnemyGoal enemyGoal) {
         if (this.enemies != null) {
-            this.enemies.setEnemyGoal(enemyGoal);
+            enemies.setEnemyGoal(enemyGoal);
         }
     }
     
+    /**
+     * Sets the goal for exiting the dungeon
+     * @param exitGoal
+     */
     public void setExitGoal(ExitGoal exitGoal) {
     	for (Obstacle o : obstacles) {
     		o.setExitGoal(exitGoal);
     	}
     }
 
+    /**
+     * Sets the goal for collecting treasure
+     * @param treasureGoal
+     */
     public void setTreasureGoal (TreasureGoal treasureGoal) {
-        this.treasures.setTreasureGoal(treasureGoal);
+        treasures.setTreasureGoal(treasureGoal);
     }
 
+    /**
+     * Sets the goal for switches/boulders
+     * @param boulderGoal
+     */
     public void setSwitchGoal(BoulderGoal boulderGoal) {
-        this.switches.setBoulderGoal(boulderGoal);
+    	switches.setBoulderGoal(boulderGoal);
     }
 
-    public void update() {
+    /**
+     * Keeps track of when a goal has been completed
+     * - If the overall goal is complete, then the game will exit.
+     */
+    public void updateGoal() {
         System.out.println("A goal was just completed");
-    	if (this.goal.getStatus() == true) {
+    	if (goal.getStatus() == true) {
     		System.exit(0);
     	}
     }

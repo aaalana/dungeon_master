@@ -42,13 +42,13 @@ public class Goal implements Subject {
 	}
 	
 	public void update() {
-		dungeon.update();
+		dungeon.updateGoal();
 	}
 
 
 	public void updateGoal() {
 		this.setComplete();
-		dungeon.update();
+		dungeon.updateGoal();
 	}
 
 }
