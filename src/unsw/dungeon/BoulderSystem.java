@@ -16,6 +16,15 @@ public class BoulderSystem {
 		this.boulders.add((Boulder) boulder);
 	}
 	
+	public boolean checkBoulder(int x, int y) {
+		for (Boulder boulder : this.boulders) {
+			if (boulder.getX() == x && boulder.getY() == y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	 /**
      * This function returns true if there are not more than two boulders aligned in the specified direction
      * @param x
@@ -30,10 +39,10 @@ public class BoulderSystem {
     		// If there's a boulder at the specified position
     		if (boulder.getX() == x && boulder.getY() == y) {
     			// If there's a boulder or a wall at the position next to the boulder, then return false
-    			if (direction == "left" && (dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Wall")) return false;
-    			if (direction == "right" && (dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Wall")) return false;
-    			if (direction == "up" && (dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
-    			if (direction == "down" && (dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Boulder" || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "left" && (this.checkBoulder(x - 1, y) == true || dungeon.checkSquare(x - 1, y) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "right" && (this.checkBoulder(x + 1, y) == true || dungeon.checkSquare(x + 1, y) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "up" && (this.checkBoulder(x, y - 1) == true || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
+    			if (direction == "down" && (this.checkBoulder(x, y + 1) == true || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
     			
 
     			// If not, then move the boulder and return true
