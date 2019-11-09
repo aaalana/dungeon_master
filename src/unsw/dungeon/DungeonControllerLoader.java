@@ -23,6 +23,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private static DungeonController dungeonController;
     
     //Images
+    /*
     private Image playerImage;
     private Image wallImage;
     private Image exitImage;
@@ -34,13 +35,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image invincibilityImage;
     private Image doorImage;
     private Image keyImage;
-    private Image portalImage;
+    private Image portalImage;*/
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
       
         entities = new ArrayList<>();
+       /*
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
         
@@ -53,7 +55,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         invincibilityImage = new Image("/brilliant_blue_new.png");
         doorImage = new Image("/closed_door.png");
         keyImage = new Image("/key.png");
-        portalImage = new Image("/portal.png");   
+        portalImage = new Image("/portal.png");   */
     }
 
     @Override
@@ -126,9 +128,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     public static class ImageManager {
-    	void removeImage(Entity entity) {
-    		dungeonController.getSquaresChildren().remove(entity.getImage());
+    	public void removeImage(ImageView view) {
+    		dungeonController.getSquaresChildren().remove(view);
 	    }
+    	
+    	public void replaceImage(ImageView old, Entity entity) {
+    		removeImage(old);
+    		dungeonController.replaceSquares(entity.getImage(), entity.getX(), entity.getY());
+    	}
     }
     
     /**

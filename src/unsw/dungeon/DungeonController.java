@@ -54,6 +54,10 @@ public class DungeonController {
     public ObservableList<Node> getSquaresChildren() {
     	return squares.getChildren();
     }
+    
+    public void replaceSquares(ImageView image, int x, int y) {
+    	squares.add(image, x, y);
+    }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {

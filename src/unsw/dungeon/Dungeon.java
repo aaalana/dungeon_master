@@ -6,6 +6,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -199,6 +202,11 @@ public class Dungeon implements Observer {
     			if (entity instanceof Wall) {
     				return true;
     			} else if (entity instanceof Door) {
+    				ImageView old = entity.getImage();
+    				if (!entity.block(player)) {
+    					entity.updateImage(new ImageView(new Image("/open_door.png")));
+    					imageManager.replaceImage(old, entity);
+    				}
     				return entity.block(player);
     			}
     		}
@@ -253,7 +261,7 @@ public class Dungeon implements Observer {
     				enemies.removeEnemy(enemy);
     				entities.remove(enemy);
     				enemy.killOff();
-    				imageManager.removeImage(enemy);
+    				imageManager.removeImage(enemy.getImage());
 	    		} else if (player.getState() instanceof NormalState) {
 	    			if (sword == null) {
 		    			player.killOff();
@@ -292,7 +300,7 @@ public class Dungeon implements Observer {
     		if (player.getX() == item.getX() && player.getY() == item.getY()) {
     			if (player.collectItem(item)) {
     				items.remove(item);
-    				imageManager.removeImage(item);
+    				imageManager.removeImage(item.getImage());
     				if (item instanceof Treasure) {
     					treasures.removeTreasure((Treasure) item);   	
                     }
