@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Door extends Blocker {
 	private int id;
 	private boolean locked;
@@ -16,6 +19,7 @@ public class Door extends Blocker {
 		if (key != null && (matchingKey(key))) {
 			key.useItem(player);
 			unlock();
+			this.updateImage(new ImageView(new Image("/open_door.png")));
 			System.out.println("Player unlocked door.");
 			return false;
 		} else if (this.locked) {

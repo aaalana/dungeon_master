@@ -1,20 +1,24 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.ImageView;
 
 /**
  * An entity in the dungeon.
  * @author Robert Clifton-Everest
  *
  */
-public class Entity {
+public abstract class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
     public MoveStrategy moveable;
-    
+    private ImageView image;
+  
     /**
      * Create an entity positioned in square (x,y)
      * @param x
@@ -56,4 +60,13 @@ public class Entity {
     public String getClassName() {
     	return getClass().getName();
     }
+   
+  	public void updateImage(ImageView view) {
+  		this.image = view;
+  	}
+  	
+  	public ImageView getImage() {
+  		return image;
+  	}
+  	
 }

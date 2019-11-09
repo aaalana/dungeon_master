@@ -20,7 +20,8 @@ import javafx.scene.layout.GridPane;
 public class DungeonControllerLoader extends DungeonLoader {
 
     private List<ImageView> entities;
-
+    private static DungeonController dungeonController;
+    
     //Images
     private Image playerImage;
     private Image wallImage;
@@ -38,6 +39,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
+      
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
@@ -55,15 +57,15 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity entity, Image image) {
+    public ImageView onLoad(Entity entity, Image image) {
         ImageView view = new ImageView(image);
         addEntity(entity, view);
+        return view;
     }
-    
-    @Override
+    /*
     public void loadImage(Entity entity) {
     	if (entity instanceof Player) {
-    		onLoad(entity, playerImage);    		
+    		entity.updateImage(onLoad(entity, playerImage));
     	} else if (entity instanceof Wall) {
     		onLoad(entity, wallImage);
     	} else if (entity instanceof Exit) {
@@ -87,7 +89,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	} else if (entity instanceof Portal) {
     		onLoad(entity, portalImage);
     	}
-    }
+    }*/
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -122,7 +124,13 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
-
+    
+    public static class ImageManager {
+    	void removeImage(Entity entity) {
+    		dungeonController.getSquaresChildren().remove(entity.getImage());
+	    }
+    }
+    
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
@@ -130,7 +138,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        DungeonControllerLoader.dungeonController = new DungeonController(load(), entities);
+        return dungeonController;
     }
 
 

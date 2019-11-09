@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.ImageView;
+
 public class Exit extends Obstacle {
 	private ExitGoal exitGoal;
 	
@@ -16,8 +18,7 @@ public class Exit extends Obstacle {
 	public void setExitGoal(ExitGoal exitGoal) {
 		this.exitGoal = exitGoal;
 	}
-
-
+	
 	@Override
 	public void trigger(boolean state) {
 		// End the application when leaving the maze
@@ -27,7 +28,4 @@ public class Exit extends Obstacle {
 			
 		}
 	}
-	
-	
-	
 }

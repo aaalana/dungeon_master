@@ -3,7 +3,11 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -46,6 +50,10 @@ public class DungeonController {
             squares.getChildren().add(entity);
 
     }
+    
+    public ObservableList<Node> getSquaresChildren() {
+    	return squares.getChildren();
+    }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
@@ -78,7 +86,7 @@ public class DungeonController {
         }
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
-        dungeon.moveEnemies();
+        //dungeon.moveEnemies();
         
         if (player.getItemByName("sword") != null) {
     		player.useSword();
@@ -87,10 +95,10 @@ public class DungeonController {
         // detects when to kill creatures after all creatures have moved
         dungeon.killCreature(null);
     }
-    
+ 
     public boolean checkMove(int x, int y, String direction) {
     	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
     }
-   
+    
 }
 

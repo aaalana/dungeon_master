@@ -55,7 +55,7 @@ class PortalSystemTest {
 		sys.addPortal(portal);
 		sys.addPortal(portal2);
 		
-		// transporting a null portal
+		// transporting player through a null portal
 		int originalX = player.getX();
 		int originalY = player.getY();
 		

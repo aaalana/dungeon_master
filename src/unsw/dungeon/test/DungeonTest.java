@@ -78,8 +78,8 @@ class DungeonTest {
 		Portal portal2 = new Portal(8,0,0,dungeon);
 		Switch _switch = new Switch(3,2);
 		Switch _switch2 = new Switch(1,1);
-		Boulder boulder = new Boulder(dungeon, 3,2, new ItMoves());
-		Boulder boulder2 = new Boulder(dungeon, 2,2, new ItMoves());
+		Boulder boulder = new Boulder(3, 2, new ItMoves());
+		Boulder boulder2 = new Boulder(2, 2, new ItMoves());
 		Exit exit = new Exit(15,6);
 		
 		// check empty list

@@ -32,9 +32,11 @@ public class Dungeon implements Observer {
     private TreasureSystem treasures;
     private SwitchSystem switches;
     private Player player;
-
+    
     private Goal goal;
-
+    
+    private DungeonControllerLoader.ImageManager imageManager;
+    
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -54,8 +56,9 @@ public class Dungeon implements Observer {
         this.player = null;
 
         this.goal = null;
+        
+        this.imageManager = new DungeonControllerLoader.ImageManager();
     }
-
 
     public void setGoal(Goal goal) {
         this.goal = goal;
@@ -150,14 +153,6 @@ public class Dungeon implements Observer {
     }
     
     /**
-     * remove an item from the items list
-     * @param item
-     */
-    public void removeItem(Item item) {
-    	items.remove(item);
-    }
-    
-    /**
      * add an blocker to the blockers list
      * @param blocker
      */
@@ -248,6 +243,7 @@ public class Dungeon implements Observer {
      */
     public void killCreature(Sword sword) {
     	List<Enemy> tempList = new ArrayList<>(enemies.getEnemies());	
+    	
     	for (Enemy enemy: tempList) {
     		if (enemy == null) 
     			continue;
@@ -255,17 +251,22 @@ public class Dungeon implements Observer {
     		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
     			if (player.getState() instanceof InvincibilityState) {
     				enemies.removeEnemy(enemy);
+    				entities.remove(enemy);
     				enemy.killOff();
+    				imageManager.removeImage(enemy);
 	    		} else if (player.getState() instanceof NormalState) {
 	    			if (sword == null) {
-	    			player.killOff();
-	    			
-	    			// close application to end game
-	    			System.exit(0);
+		    			player.killOff();
+		    			entities.remove(player);
+		    			player = null;
+		    		   
+		    			// close application to end game
+		    			System.exit(0);
 	    			} else if (sword.getStatus()) {
 	        			// kill the enemy
 	        			enemies.removeEnemy(enemy);
-	    				enemy.killOff();
+	    				entities.remove(enemy);
+	        			enemy.killOff();
 	    				sword.reduceUses();
 	    				
 	    				// get the sword back to not in use
@@ -283,12 +284,15 @@ public class Dungeon implements Observer {
      */
     public void removeFromGround() {
     	List<Item> tempList = new ArrayList<>(items);
+    	List<Entity> removed = new ArrayList<>();
+    	
     	for (Item item: tempList) {
     		if (item == null) continue;
     		
     		if (player.getX() == item.getX() && player.getY() == item.getY()) {
     			if (player.collectItem(item)) {
     				items.remove(item);
+    				imageManager.removeImage(item);
     				if (item instanceof Treasure) {
     					treasures.removeTreasure((Treasure) item);   	
                     }
@@ -367,6 +371,6 @@ public class Dungeon implements Observer {
     		System.exit(0);
     	}
     }
-    
+ 
 }
 
