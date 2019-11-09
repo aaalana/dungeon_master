@@ -90,7 +90,7 @@ public class DungeonController {
         }
     	dungeon.updateObstacle();
         dungeon.removeFromGround(); 
-        //dungeon.moveEnemies();
+        dungeon.moveEnemies();
         
         if (player.getItemByName("sword") != null) {
     		player.useSword();

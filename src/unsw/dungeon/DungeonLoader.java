@@ -208,5 +208,4 @@ public abstract class DungeonLoader {
 	public abstract ImageView onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities
-    //protected abstract void loadImage(Entity entity);
 }
