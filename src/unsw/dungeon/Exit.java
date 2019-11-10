@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import javafx.scene.image.ImageView;
-
 public class Exit extends Obstacle {
 	private ExitGoal exitGoal;
 	

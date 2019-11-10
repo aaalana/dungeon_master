@@ -8,12 +8,12 @@ public class DeadState implements PlayerState {
 	}
 
 	@Override
-	public void drinkInvincibilityPotion(Item potion) {
+	public void drinkPotion(Item potion) {
 		System.out.println("The player's dead. Can't do anything.");
 	}
 
 	@Override
-	public void expelInvincibilityPotion(Item potion) {
+	public void expelPotion(Item potion) {
 		System.out.println("The player's dead. Can't do anything.");
 	}
 	
@@ -21,16 +21,4 @@ public class DeadState implements PlayerState {
 	public void killPlayer() {
 		System.out.println("Can't kill a dead player.");
 	}
-
-	@Override
-	public void drinkSpeedPotion(Item potion) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void expelSpeedPotion(Item potion) {
-		// TODO Auto-generated method stub
-		
-	}	
 }

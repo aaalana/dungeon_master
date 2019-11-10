@@ -3,25 +3,25 @@ package unsw.dungeon;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class InvincibilityPotion extends Item {
+public class SpeedPotion extends Item {
 	public Timer timer;
 	public int timeLeft;
 	
-    public InvincibilityPotion(int x, int y) {
-        super(x, y, "invincibility");
-    	this.timeLeft = 5;
+    public SpeedPotion(int x, int y) {
+        super(x, y, "potion");
+    	this.timeLeft = 3;
 		this.timer = new Timer();
     }
    
     @Override
 	public void useItem(Player player) {
-		System.out.println("5 second countdown for invincibility potion initiated.");
-		InvincibilityPotion potion = this;
+		System.out.println("3 second countdown for speed potion initiated.");
+		SpeedPotion potion = this;
 		TimerTask task = new TimerTask() {
 			public void run() {
 				player.expelPotion(potion);
 			}
 		};
-		timer.schedule(task, 5000);
+		timer.schedule(task, 3000);
 	}
 }

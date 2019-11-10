@@ -12,6 +12,7 @@ public class Player extends LivingCreature {
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
+    private PlayerState speedState;
     private PlayerState state;
     private ArrayList<Item> inventory;
    
@@ -27,6 +28,7 @@ public class Player extends LivingCreature {
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
+        speedState = new SpeedState(this);
         this.state = normalState;
     }
     
@@ -45,16 +47,16 @@ public class Player extends LivingCreature {
      * Changes the player's state to invincibilityState
      * @param potion
      */
-    public void drinkInvincibilityPotion(Item potion) {
-    	state.drinkInvincibilityPotion(potion);
+    public void drinkPotion(Item potion) {
+    	state.drinkPotion(potion);
     }
 	
     /**
      * Changes the player's state to normalState
      * @param potion
      */
-    public void expelInvincibilityPotion(Item potion) {
-    	state.expelInvincibilityPotion(potion);
+    public void expelPotion(Item potion) {
+    	state.expelPotion(potion);
     }
     
     @Override
@@ -70,6 +72,14 @@ public class Player extends LivingCreature {
 		return invincibilityState;
 	}
     
+    /**
+	 * Gets the speedState
+	 * @return deadState
+	 */
+	public PlayerState getSpeedState() {
+		return speedState;
+	}
+	
     /**
      * Gets the normalState
      * @return normalState
@@ -119,11 +129,15 @@ public class Player extends LivingCreature {
     		inventory.add(item);
     		printInventory();
     		return true;
-    	} else if (item instanceof InvincibilityPotion) {
+    	} else if (item instanceof InvincibilityPotion && getItemByName("speedy") == null) {
     		inventory.add(item);
-    		drinkInvincibilityPotion(item);
+    		drinkPotion(item);
     		printInventory();
     		return true;
+    	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
+    		inventory.add(item);
+    		drinkPotion(item);
+    		printInventory();
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
     		printInventory();

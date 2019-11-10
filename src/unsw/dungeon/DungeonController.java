@@ -3,8 +3,6 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -68,21 +66,37 @@ public class DungeonController {
         case UP:
         	if (checkMove(player.getX(), player.getY() - 1, "up")) {
         		player.tryToMove("up", dungeon, player);
+        		
+        		if (player.getState() instanceof SpeedState) {
+        			player.tryToMove("up", dungeon, player);
+        		}
         	}
             break;
         case DOWN:
         	if (checkMove(player.getX(), player.getY() + 1, "down")) {
         		player.tryToMove("down", dungeon, player);
+        		
+        		if (player.getState() instanceof SpeedState) {
+        			player.tryToMove("down", dungeon, player);
+        		}
         	}
             break;
         case LEFT:
         	if (checkMove(player.getX() - 1, player.getY(), "left")) {
         		player.tryToMove("left", dungeon, player); 
+        		
+        		if (player.getState() instanceof SpeedState) {
+        			player.tryToMove("left", dungeon, player);
+        		}
         	}
             break;
         case RIGHT:
         	if (checkMove(player.getX() + 1, player.getY(), "right")) {
-        		player.tryToMove("right", dungeon, player);  
+        		player.tryToMove("right", dungeon, player); 
+        		
+        		if (player.getState() instanceof SpeedState) {
+        			player.tryToMove("right", dungeon, player);
+        		}
         	}
             break;
         default:

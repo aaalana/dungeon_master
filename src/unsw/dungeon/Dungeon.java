@@ -292,7 +292,6 @@ public class Dungeon implements Observer {
      */
     public void removeFromGround() {
     	List<Item> tempList = new ArrayList<>(items);
-    	List<Entity> removed = new ArrayList<>();
     	
     	for (Item item: tempList) {
     		if (item == null) continue;

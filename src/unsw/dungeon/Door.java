@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class Door extends Blocker {
 	private int id;
 	private boolean locked;

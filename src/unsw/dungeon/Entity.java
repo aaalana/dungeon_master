@@ -1,9 +1,7 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
 
 /**

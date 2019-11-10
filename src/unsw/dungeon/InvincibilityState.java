@@ -8,13 +8,13 @@ public class InvincibilityState implements PlayerState {
 	}
 
 	@Override
-	public void drinkInvincibilityPotion(Item potion) {
+	public void drinkPotion(Item potion) {
 		System.out.println("The player is now invincible for +5 seconds.");
 		potion.useItem(this.player);
 	}
 
 	@Override
-	public void expelInvincibilityPotion(Item potion) {
+	public void expelPotion(Item potion) {
 		System.out.println("One invincibility potion was all used up.");
 		player.removeItem(potion);
 		
@@ -28,17 +28,4 @@ public class InvincibilityState implements PlayerState {
 	public void killPlayer() {
 		player.setState(player.getDeadState());
 	}
-
-	@Override
-	public void drinkSpeedPotion(Item potion) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void expelSpeedPotion(Item potion) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

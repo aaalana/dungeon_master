@@ -8,35 +8,18 @@ public class SpeedState implements PlayerState {
 	}
 
 	@Override
-	public void drinkInvincibilityPotion(Item potion) {
-		System.out.println("The player is now invincible for +5 seconds.");
+	public void drinkPotion(Item potion) {
+		System.out.println("The player is now speedy for +3 seconds.");
 		potion.useItem(this.player);
 	}
 
 	@Override
-	public void expelInvincibilityPotion(Item potion) {
-		System.out.println("One invincibility potion was all used up.");
+	public void expelPotion(Item potion) {
+		System.out.println("One speed potion was all used up.");
 		player.removeItem(potion);
 		
 		if (!player.hasCertainItem(potion)) {
-			System.out.println("The player is no longer invincible.");
-			player.setState(player.getNormalState());
-		}
-	}
-	
-	@Override
-	public void drinkSpeedPotion(Item potion) {
-		System.out.println("The player is now invincible for +5 seconds.");
-		potion.useItem(this.player);
-	}
-
-	@Override
-	public void expelSpeedPotion(Item potion) {
-		System.out.println("One invincibility potion was all used up.");
-		player.removeItem(potion);
-		
-		if (!player.hasCertainItem(potion)) {
-			System.out.println("The player is no longer invincible.");
+			System.out.println("The player returned to normal state.");
 			player.setState(player.getNormalState());
 		}
 	}
