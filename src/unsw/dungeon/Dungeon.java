@@ -63,6 +63,10 @@ public class Dungeon implements Observer {
         this.imageManager = new DungeonControllerLoader.ImageManager();
     }
 
+    /**
+     * sets the overall goal of the dungeon
+     * @param goal
+     */
     public void setGoal(Goal goal) {
         this.goal = goal;
     }
@@ -116,7 +120,7 @@ public class Dungeon implements Observer {
     }
     
     public void addSwitch(Switch switchItem) {
-        this.switches.addSwitch(switchItem);
+        switches.addSwitch(switchItem);
     }
 
     /**
@@ -275,6 +279,7 @@ public class Dungeon implements Observer {
 	        			enemies.removeEnemy(enemy);
 	    				entities.remove(enemy);
 	        			enemy.killOff();
+	        			imageManager.removeImage(enemy.getImage());
 	    				sword.reduceUses();
 	    				
 	    				// get the sword back to not in use

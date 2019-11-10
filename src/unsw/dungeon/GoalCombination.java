@@ -15,5 +15,4 @@ public class GoalCombination extends Goal {
 		subGoals.add(goal);
 	}*/
 
-	
 }
