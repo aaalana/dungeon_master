@@ -26,5 +26,17 @@ public class NormalState implements PlayerState {
 		System.out.println("Player died. :(");
 		System.out.println("-----GAME OVER-----");
 	}
+
+	@Override
+	public void drinkSpeedPotion(Item potion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void expelSpeedPotion(Item potion) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

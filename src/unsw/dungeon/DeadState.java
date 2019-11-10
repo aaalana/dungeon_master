@@ -20,5 +20,17 @@ public class DeadState implements PlayerState {
 	@Override
 	public void killPlayer() {
 		System.out.println("Can't kill a dead player.");
+	}
+
+	@Override
+	public void drinkSpeedPotion(Item potion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void expelSpeedPotion(Item potion) {
+		// TODO Auto-generated method stub
+		
 	}	
 }
