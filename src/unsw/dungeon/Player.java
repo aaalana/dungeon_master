@@ -155,7 +155,6 @@ public class Player extends LivingCreature {
     	return false;
     }
     
- 
  // temp testing: print out the inventory
  // REMOVE THIS FUNCTION LATER
     public void printInventory() {

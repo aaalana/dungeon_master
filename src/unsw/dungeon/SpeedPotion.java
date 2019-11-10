@@ -5,11 +5,9 @@ import java.util.TimerTask;
 
 public class SpeedPotion extends Item {
 	public Timer timer;
-	public int timeLeft;
 	
     public SpeedPotion(int x, int y) {
         super(x, y, "speed");
-    	this.timeLeft = 3;
 		this.timer = new Timer();
     }
    
