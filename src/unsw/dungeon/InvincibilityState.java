@@ -21,6 +21,8 @@ public class InvincibilityState implements PlayerState {
 		if (!player.hasCertainItem(potion)) {
 			System.out.println("The player is no longer invincible.");
 			player.setState(player.getNormalState());
+		} else {
+			drinkPotion(player.getItemByName("invincibility"));
 		}
 	}
 	

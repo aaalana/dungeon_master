@@ -42,7 +42,7 @@ class PlayerTest {
 		InvincibilityPotion potion2 = new InvincibilityPotion(7, 3);
 		
 		// test the player's invincibility time period
-		player.drinkInvincibilityPotion(potion);
+		player.drinkPotion(potion);
 		assertSame(player.getInvincibilityState(), player.getState());
 		
 		try {
@@ -53,9 +53,9 @@ class PlayerTest {
 		}
 		
 		// when the player drinks another potion while invincibility is on
-		player.drinkInvincibilityPotion(potion);
+		player.drinkPotion(potion);
 		assertSame(player.getInvincibilityState(), player.getState());
-		player.drinkInvincibilityPotion(potion2);
+		player.drinkPotion(potion2);
 		
 		try {
 			// 4 seconds tested instead of 5 because of CPU lag

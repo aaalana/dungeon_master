@@ -62,48 +62,64 @@ public class DungeonController {
         // testing: check if the player's state
     	// System.out.println(player.getState());
     	
+    	PlayerState oldState = player.getState();
     	switch (event.getCode()) {
         case UP:
         	if (checkMove(player.getX(), player.getY() - 1, "up")) {
         		player.tryToMove("up", dungeon, player);
+        		selfManageDungeon();
         		
-        		if (player.getState() instanceof SpeedState) {
+        		if (checkMove(player.getX(), player.getY() - 1, "up") &&
+        			player.getState() instanceof SpeedState && 
+        			oldState instanceof SpeedState) {
         			player.tryToMove("up", dungeon, player);
+        			selfManageDungeon();
         		}
         	}
             break;
         case DOWN:
         	if (checkMove(player.getX(), player.getY() + 1, "down")) {
         		player.tryToMove("down", dungeon, player);
+        		selfManageDungeon();
         		
-        		if (player.getState() instanceof SpeedState) {
+        		if (checkMove(player.getX(), player.getY() + 1, "down") && 
+        			player.getState() instanceof SpeedState && 
+        			oldState instanceof SpeedState) {
         			player.tryToMove("down", dungeon, player);
+        			selfManageDungeon();
         		}
         	}
             break;
         case LEFT:
         	if (checkMove(player.getX() - 1, player.getY(), "left")) {
         		player.tryToMove("left", dungeon, player); 
+        		selfManageDungeon();
         		
-        		if (player.getState() instanceof SpeedState) {
+        		if (checkMove(player.getX() - 1, player.getY(), "left")  && 
+        			player.getState() instanceof SpeedState && 
+        			oldState instanceof SpeedState) {
         			player.tryToMove("left", dungeon, player);
+        			selfManageDungeon();
         		}
         	}
             break;
         case RIGHT:
         	if (checkMove(player.getX() + 1, player.getY(), "right")) {
         		player.tryToMove("right", dungeon, player); 
+        		selfManageDungeon();
         		
-        		if (player.getState() instanceof SpeedState) {
+        		if (checkMove(player.getX() + 1, player.getY(), "right") &&
+        			player.getState() instanceof SpeedState && 
+        			oldState instanceof SpeedState) {
         			player.tryToMove("right", dungeon, player);
+        			selfManageDungeon();
         		}
         	}
             break;
         default:
             break; 
         }
-    	dungeon.updateObstacle();
-        dungeon.removeFromGround(); 
+    	
         dungeon.moveEnemies();
         
         if (player.getItemByName("sword") != null) {
@@ -114,6 +130,14 @@ public class DungeonController {
         dungeon.killCreature(null);
     }
  
+    /**
+     * runs functions that allow the dungeon to manipulate the obstacles and items within it
+     */
+    public void selfManageDungeon() {
+    	dungeon.updateObstacle();
+        dungeon.removeFromGround(); 
+    }
+    
     public boolean checkMove(int x, int y, String direction) {
     	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
     }

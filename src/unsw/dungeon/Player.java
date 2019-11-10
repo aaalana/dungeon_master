@@ -129,15 +129,24 @@ public class Player extends LivingCreature {
     		inventory.add(item);
     		printInventory();
     		return true;
-    	} else if (item instanceof InvincibilityPotion && getItemByName("speedy") == null) {
-    		inventory.add(item);
-    		drinkPotion(item);
+    	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
+    		if (getItemByName("invincibility") == null) {
+    			inventory.add(item);
+    			drinkPotion(item);
+    		} else {
+    			inventory.add(item);
+    		}
     		printInventory();
     		return true;
     	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
-    		inventory.add(item);
-    		drinkPotion(item);
+    		if (getItemByName("speed") == null) {
+    			inventory.add(item);
+    			drinkPotion(item);
+    		} else {
+    			inventory.add(item);
+    		}
     		printInventory();
+    		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
     		printInventory();

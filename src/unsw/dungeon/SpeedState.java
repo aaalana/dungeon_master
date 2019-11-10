@@ -21,6 +21,8 @@ public class SpeedState implements PlayerState {
 		if (!player.hasCertainItem(potion)) {
 			System.out.println("The player returned to normal state.");
 			player.setState(player.getNormalState());
+		} else {
+			drinkPotion(player.getItemByName("speed"));
 		}
 	}
 	

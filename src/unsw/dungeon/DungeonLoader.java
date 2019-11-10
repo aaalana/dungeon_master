@@ -87,6 +87,13 @@ public abstract class DungeonLoader {
             entity = invincibility;
             dungeon.addItem(invincibility);
         	break;
+        case "speed":
+            SpeedPotion speed = new SpeedPotion(x, y);
+            ImageView spView = onLoad(speed, new Image("/bubbly.png"));
+            speed.updateImage(spView);
+            entity = speed;
+            dungeon.addItem(speed);
+        	break;
         case "switch":
             Switch _switch = new Switch(x, y);
             ImageView sView = onLoad(_switch, new Image("/pressure_plate.png"));

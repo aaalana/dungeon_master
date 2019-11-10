@@ -5,11 +5,9 @@ import java.util.TimerTask;
 
 public class InvincibilityPotion extends Item {
 	public Timer timer;
-	public int timeLeft;
 	
     public InvincibilityPotion(int x, int y) {
         super(x, y, "invincibility");
-    	this.timeLeft = 5;
 		this.timer = new Timer();
     }
    

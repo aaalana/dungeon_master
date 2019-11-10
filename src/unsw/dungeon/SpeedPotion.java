@@ -8,7 +8,7 @@ public class SpeedPotion extends Item {
 	public int timeLeft;
 	
     public SpeedPotion(int x, int y) {
-        super(x, y, "potion");
+        super(x, y, "speed");
     	this.timeLeft = 3;
 		this.timer = new Timer();
     }
