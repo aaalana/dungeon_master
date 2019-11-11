@@ -59,7 +59,9 @@ public class Player extends LivingCreature {
     	state.expelPotion(potion);
     }
     
-    @Override
+    /**
+     * Kills off the player by setting the player to deadState
+     */
     public void killOff() {
     	state.killPlayer();
     }

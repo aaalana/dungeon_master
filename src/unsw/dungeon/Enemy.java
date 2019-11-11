@@ -40,10 +40,4 @@ public class Enemy extends LivingCreature {
     	}
     	
     }
-    
-    @Override
-    public void killOff() {
-    	System.out.println("Enemy killed");
-    }
-
 }

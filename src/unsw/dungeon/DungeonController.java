@@ -43,6 +43,8 @@ public class DungeonController {
                 squares.add(new ImageView(ground), x, y);
             }
         }
+        
+        // Add inventory
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);

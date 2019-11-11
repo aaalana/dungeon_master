@@ -31,7 +31,7 @@ public class TreasureSystem implements Subject {
 		this.treasures.add(treasure);
 	}
 
-	public void removeTreasure(Treasure treasure) {
+	public <T> void removeTreasure(T treasure) {
 		this.treasures.remove(treasure);
 		this.update();
 	}

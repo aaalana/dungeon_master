@@ -31,8 +31,8 @@ public class EnemySystem implements Subject {
 		this.enemies.add((Enemy) enemy);
 	}
 	
-	public void removeEnemy(Enemy enemy) {
-		this.enemies.remove(enemy);
+	public <T> void removeEnemy(T enemy) {
+		enemies.remove(enemy);
 		if (this.enemies.size() == 0) {
 			this.update();
 		}

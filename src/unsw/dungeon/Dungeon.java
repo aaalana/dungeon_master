@@ -24,12 +24,13 @@ import javafx.scene.image.ImageView;
 public class Dungeon implements Observer {
 
     private int width, height;
+    
     private List<Entity> entities;
-    private EnemySystem enemies;
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
-
+    
+    private EnemySystem enemies;
     private BoulderSystem boulders;
     private PortalSystem portals;
     private TreasureSystem treasures;
@@ -37,7 +38,6 @@ public class Dungeon implements Observer {
     private Player player;
     
     private Goal goal;
-    
     private DungeonControllerLoader.ImageManager imageManager;
     
     public Dungeon(int width, int height) {
@@ -139,6 +139,10 @@ public class Dungeon implements Observer {
     	portals.addPortal(portal);
     }
     
+    /**
+     * Adds a treasure to the treasure system
+     * @param treasure
+     */
     public void addTreasure(Treasure treasure) {
         treasures.addTreasure(treasure);
     }
@@ -165,6 +169,30 @@ public class Dungeon implements Observer {
      */
     public void addBlocker(Blocker blocker) {
     	blockers.add(blocker);
+    }
+    
+    /**
+     * Removes entities from the dungeon
+     * @param <T>
+     * @param entity
+     */
+    public <T extends Entity> void removeEntity(T entity)  {
+    	entities.remove(entity);
+    	
+    	if (entity instanceof Item) {
+    		items.remove(entity);
+    		
+    		if (entity instanceof Treasure) 
+				treasures.removeTreasure(entity);   	
+            
+    	} else if (entity instanceof Enemy) {
+    		enemies.removeEnemy(entity);
+    	} else if (entity.equals(player)) {
+    		player.killOff();
+    		player = null;
+    		System.exit(0);
+    	}
+    	imageManager.removeImage(entity.getImage());
     }
     
     /**
@@ -257,32 +285,19 @@ public class Dungeon implements Observer {
     	List<Enemy> tempList = new ArrayList<>(enemies.getEnemies());	
     	
     	for (Enemy enemy: tempList) {
-    		if (enemy == null) 
-    			continue;
+    		if (enemy == null) continue;
     		
     		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
     			if (player.getState() instanceof InvincibilityState) {
-    				enemies.removeEnemy(enemy);
-    				entities.remove(enemy);
-    				enemy.killOff();
-    				imageManager.removeImage(enemy.getImage());
+    				removeEntity(enemy);
 	    		} else if (player.getState() instanceof NormalState) {
+	    			// kill the player
 	    			if (sword == null) {
-		    			player.killOff();
-		    			entities.remove(player);
-		    			player = null;
-		    		   
-		    			// close application to end game
-		    			System.exit(0);
+	    				removeEntity(player);
+		    		// kill the enemy
 	    			} else if (sword.getStatus()) {
-	        			// kill the enemy
-	        			enemies.removeEnemy(enemy);
-	    				entities.remove(enemy);
-	        			enemy.killOff();
-	        			imageManager.removeImage(enemy.getImage());
-	    				sword.reduceUses();
-	    				
-	    				// get the sword back to not in use
+	    				removeEntity(enemy);
+	        			sword.reduceUses();
 	    				sword.useItem(player);
 	        		}
 	    		}
@@ -300,17 +315,9 @@ public class Dungeon implements Observer {
     	
     	for (Item item: tempList) {
     		if (item == null) continue;
-    		
-    		if (player.getX() == item.getX() && player.getY() == item.getY()) {
-    			if (player.collectItem(item)) {
-    				items.remove(item);
-    				imageManager.removeImage(item.getImage());
-    				if (item instanceof Treasure) {
-    					treasures.removeTreasure((Treasure) item);   	
-                    }
-    			}
-                
-    		}
+    		if (player.getX() == item.getX() && player.getY() == item.getY() &&
+    			player.collectItem(item)) 
+    			removeEntity(item);
     	}
     }
     
@@ -322,11 +329,9 @@ public class Dungeon implements Observer {
      */
     public void updateObstacle() {
     	for (Obstacle o : this.obstacles) {
-    		if (o == null) 
-    			continue;
+    		if (o == null) continue;
     		o.trigger(shareSquare(o));
     	}
-    	
     	switches.checkSwitches();
     }
     
@@ -383,6 +388,5 @@ public class Dungeon implements Observer {
     		System.exit(0);
     	}
     }
- 
 }
 
