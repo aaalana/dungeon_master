@@ -7,11 +7,12 @@ import java.util.ArrayList;
  *
  */
 public class Player extends LivingCreature {
-
-    private Dungeon dungeon;
+	
+	private Dungeon dungeon;
     private PlayerState invincibilityState;
     private PlayerState normalState;
     private PlayerState deadState;
+    private PlayerState speedState;
     private PlayerState state;
     private ArrayList<Item> inventory;
    
@@ -20,34 +21,15 @@ public class Player extends LivingCreature {
      * @param x
      * @param y
      */
-    public Player(Dungeon dungeon, int x, int y) {
+    public Player(int x, int y, Dungeon dungeon) {
         super(x, y);
         this.dungeon = dungeon;
         inventory = new ArrayList<Item>();
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
+        speedState = new SpeedState(this);
         this.state = normalState;
-    }
-
-	public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
-    }
-
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
     }
     
     /**
@@ -62,63 +44,71 @@ public class Player extends LivingCreature {
     }
     	
     /**
-     * 
+     * Changes the player's state to invincibilityState
      * @param potion
      */
-    public void drinkInvincibilityPotion(Item potion) {
-    	state.drinkInvincibilityPotion(potion);
+    public void drinkPotion(Item potion) {
+    	state.drinkPotion(potion);
     }
 	
     /**
-     * 
+     * Changes the player's state to normalState
      * @param potion
      */
-    public void expelInvincibilityPotion(Item potion) {
-    	state.expelInvincibilityPotion(potion);
+    public void expelPotion(Item potion) {
+    	state.expelPotion(potion);
     }
     
     /**
-     * 
+     * Kills off the player by setting the player to deadState
      */
     public void killOff() {
     	state.killPlayer();
     }
     
     /**
-     * 
-     * @return
+     * Gets the invincibilityState
+     * @return invincibilityState
      */
     public PlayerState getInvincibilityState() {
 		return invincibilityState;
 	}
     
     /**
-     * 
-     * @return
+	 * Gets the speedState
+	 * @return deadState
+	 */
+	public PlayerState getSpeedState() {
+		return speedState;
+	}
+	
+    /**
+     * Gets the normalState
+     * @return normalState
      */
 	public PlayerState getNormalState() {
 		return normalState;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the deadState
+	 * @return deadState
 	 */
 	public PlayerState getDeadState() {
 		return deadState;
 	}
 	
 	/**
-	 * 
-	 * @param s
+	 * Sets the player's state
+	 * @param state
 	 */
-	public void setState(PlayerState s) {
-		this.state = s;
+	public void setState(PlayerState state) {
+		this.state = state;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the player's state
+	 * @return player's state
 	 */
 	public PlayerState getState() {
 		return state;
@@ -130,6 +120,9 @@ public class Player extends LivingCreature {
 	 * @return true when the item has been
 	 */
     public boolean collectItem(Item item) {
+    	if (item == null)
+    		return false;
+    	
     	if (item instanceof Sword && !hasCertainItem(item)) {
     		inventory.add(item);
     		printInventory();
@@ -138,21 +131,38 @@ public class Player extends LivingCreature {
     		inventory.add(item);
     		printInventory();
     		return true;
-    	} else if (item instanceof InvincibilityPotion) {
-    		inventory.add(item);
-    		drinkInvincibilityPotion(item);
+    	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
+    		activatePotion("invincibility", item);
+    		printInventory();
+    		return true;
+    	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
+    		activatePotion("speed", item);
     		printInventory();
     		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
     		inventory.add(item);
     		printInventory();
     		return true;
-    	}
+    	} 
     	return false;
-    
     }
+    
+    /**
+     * Chooses when the activate a potion
+     * @param name
+     * @param item
+     */
+    public void activatePotion(String name, Item item) {
+    	if (getItemByName(name) == null) {
+			inventory.add(item);
+			drinkPotion(item);
+		} else {
+			inventory.add(item);
+		}	
+    }
+    
  // temp testing: print out the inventory
- // REMOVE LATER
+ // REMOVE THIS FUNCTION LATER
     public void printInventory() {
 		System.out.println("Inventory: [");
 		for (Item i : inventory) {
@@ -160,17 +170,34 @@ public class Player extends LivingCreature {
 		}
 		System.out.println("]");
     }
+    
     /**
      * Check if the player has a sword in the inventory
      * @return
      */
 	public boolean hasCertainItem(Item obj) {
-		for (Item i : inventory) {
-    		if (i.getClass().equals(obj.getClass())) {
+		for (Item item : inventory) {
+    		if (item.isSameItem(obj)) {
     			return true;
     		} 
     	}
 		return false;
+	}
+	
+	/**
+	 * -gets an item from the inventory given its name
+	 * -this function is most useful for items that can 
+	 *  only be collected once 
+	 * @param item
+	 * @return type of item
+	 */
+	public Item getItemByName(String name) {
+		for (Item item : inventory) {
+			if (item.sameName(name)) {
+				return item;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -180,4 +207,28 @@ public class Player extends LivingCreature {
 	public void removeItem(Item item) {
 		inventory.remove(item);
 	}
+	
+    /**
+     * If a player has a sword, the player can attempt to use the sword to kill surrounding enemies
+     */
+    public void useSword() {
+    	if (getItemByName("sword") != null) {
+    		Sword sword = (Sword) getItemByName("sword");
+    		
+    		// sets the sword status to being used
+    		sword.useItem(this);
+    		
+    		// kills the enemy is in range of 2 squares from the player
+    		dungeon.killCreature(sword);
+    		
+    		// reset the sword back to not being in use
+    		sword.useItem(this);
+    		
+    		// remove the item from the inventory when the sword is all used up
+    		if (sword.getUses() == 0) {
+    			System.out.println("Sword was used up.");
+    			removeItem(sword);
+    		}
+    	}
+    }
 }

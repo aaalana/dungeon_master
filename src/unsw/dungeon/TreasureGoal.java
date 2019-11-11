@@ -2,10 +2,7 @@ package unsw.dungeon;
 
 public class TreasureGoal extends Goal {
 
-	public TreasureGoal() {
-	
+	public TreasureGoal(Dungeon dungeon) {
+		super(dungeon);
 	}
-
-	
-
 }

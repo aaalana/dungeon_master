@@ -56,7 +56,8 @@ public class Portal extends Obstacle {
 	}
 
 	@Override
-	public boolean getState() {
-		return this.state;
+	public void setExitGoal(ExitGoal exitGoal) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,22 +1,29 @@
 package unsw.dungeon;
 
 public class Exit extends Obstacle {
-	private boolean triggered;
+	private ExitGoal exitGoal;
 	
 	public Exit(int x, int y) {
 		super(x, y);
-		this.triggered = false;
+	}
+	
+	
+	public ExitGoal getExitGoal() {
+		return exitGoal;
+	}
+
+
+	public void setExitGoal(ExitGoal exitGoal) {
+		this.exitGoal = exitGoal;
 	}
 	
 	@Override
 	public void trigger(boolean state) {
-		// might want to stop them from moving as a temporarily fix
-		// need to find a way to restart the game?
-		this.triggered = state;
-	}
-	
-	@Override
-	public boolean getState() {
-		return this.triggered;
+		// End the application when leaving the maze
+		if (state) {
+			System.out.println("Player exited the dungeon.");
+			exitGoal.setComplete();
+			
+		}
 	}
 }

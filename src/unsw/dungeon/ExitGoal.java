@@ -2,8 +2,8 @@ package unsw.dungeon;
 
 public class ExitGoal extends Goal {
 
-	public ExitGoal() {
-		
+	public ExitGoal(Dungeon dungeon) {
+		super(dungeon);
 	}
 
 }

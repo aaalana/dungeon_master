@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Loads a dungeon from a .json file.
@@ -44,8 +45,8 @@ public abstract class DungeonLoader {
         
         JSONObject goals = json.getJSONObject("goal-condition");
         System.out.println(goals.toString(2));
-        loadGoals(goals, dungeon);
-        //dungeon.setGoal(goals);
+        Goal finalGoal = loadGoals(goals, dungeon);
+        dungeon.setGoal(finalGoal);
         return dungeon;
     }
 
@@ -57,79 +58,100 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(dungeon, x, y);
+            Player player = new Player(x, y, dungeon);
             dungeon.setPlayer(player);
-            loadImage(player);
+            ImageView pView = onLoad(player, new Image("/human_new.png"));
+            player.setImage(pView);
             entity = player;
-            dungeon.addLivingCreature(player);
             break;
         case "wall":
-            Wall wall = new Wall(x, y);
-            loadImage(wall);
+            Wall wall = new Wall(x, y, new CantMove());
+            ImageView wView = onLoad(wall, new Image("/brick_brown_0.png"));
+            wall.setImage(wView);
             entity = wall;
             dungeon.addBlocker(wall);
             break;
         // TODO Handle other possible entities
         case "treasure":
             Treasure treasure = new Treasure(x, y);
-            loadImage(treasure);
             entity = treasure;
+            ImageView tView = onLoad(treasure, new Image("/gold_pile.png"));
+            treasure.setImage(tView);
+            dungeon.addTreasure(treasure);
             dungeon.addItem(treasure);
         	break;
         case "invincibility":
             InvincibilityPotion invincibility = new InvincibilityPotion(x, y);
-            loadImage(invincibility);
+            ImageView iView = onLoad(invincibility, new Image("/brilliant_blue_new.png"));
+            invincibility.setImage(iView);
             entity = invincibility;
             dungeon.addItem(invincibility);
         	break;
+        case "speed":
+            SpeedPotion speed = new SpeedPotion(x, y);
+            ImageView spView = onLoad(speed, new Image("/bubbly.png"));
+            speed.setImage(spView);
+            entity = speed;
+            dungeon.addItem(speed);
+        	break;
         case "switch":
             Switch _switch = new Switch(x, y);
-            loadImage(_switch);
+            ImageView sView = onLoad(_switch, new Image("/pressure_plate.png"));
+            _switch.setImage(sView);
             entity = _switch;
             dungeon.addObstacle(_switch);
+            dungeon.addSwitch(_switch);
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(dungeon, x, y);
-            loadImage(boulder);
+            Boulder boulder = new Boulder(x, y, new ItMoves());
+            ImageView bView = onLoad(boulder, new Image("/boulder.png"));
+            boulder.setImage(bView);
             entity = boulder;
             dungeon.addBlocker(boulder);
+            dungeon.addBoulder(boulder);
         	break;
         case "sword":
             Sword sword = new Sword(x, y);
-            loadImage(sword);
+            ImageView swView = onLoad(sword, new Image("/greatsword_1_new.png"));
+            sword.setImage(swView);
             entity = sword;
             dungeon.addItem(sword);
         	break;
         case "enemy":
-            Enemy enemy = new Enemy(x, y);
-            loadImage(enemy);
+            Enemy enemy = new Enemy(dungeon, x, y);
+            ImageView eView = onLoad(enemy, new Image("/deep_elf_master_archer.png"));
+            enemy.setImage(eView);
             entity = enemy;
-            dungeon.addLivingCreature(enemy);
+            dungeon.addEnemy(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
-            loadImage(exit);
+            ImageView exView = onLoad(exit, new Image("/exit.png"));
+            exit.setImage(exView);
             entity = exit;
             dungeon.addObstacle(exit);
          	break;
         case "key":
         	int keyId = json.getInt("id");
             Key key = new Key(x, y, keyId);
-            loadImage(key);
+            ImageView kView = onLoad(key, new Image("/key.png"));
+            key.setImage(kView);
             entity = key;
             dungeon.addItem(key);
         	break;
         case "door":
         	int doorId = json.getInt("id");
-        	Door door = new Door(x, y, doorId);
-        	loadImage(door);
+        	Door door = new Door(x, y, doorId, new CantMove());
+        	ImageView dView = onLoad(door, new Image("/closed_door.png"));
+            door.setImage(dView);
         	entity = door;
         	dungeon.addBlocker(door);
         	break;
         case "portal":
         	int portalId = json.getInt("id");
         	Portal portal = new Portal(x, y, portalId, dungeon);
-        	loadImage(portal);
+        	ImageView poView = onLoad(portal, new Image("/portal.png"));
+            portal.setImage(poView);
         	entity = portal;
         	dungeon.addObstacle(portal);
         	dungeon.addPortals(portal);
@@ -140,72 +162,57 @@ public abstract class DungeonLoader {
     
     private Goal loadGoals(JSONObject goals, Dungeon dungeon){
         String type = goals.getString("goal");
-        
+        System.out.println(goals);
         Goal goal = null;
         switch(type) {
         	// if the goals is AND, add all goals
             case "AND":
             	JSONArray subgoals = goals.getJSONArray("subgoals");
                 
-            	ANDGoal ANDgoals = new ANDGoal();
+            	ANDGoal ANDgoals = new ANDGoal(dungeon);
 				for (int i = 0; i < subgoals.length(); i++) {
 				    Goal subgoal = loadGoals(subgoals.getJSONObject(i), dungeon);
 				    ANDgoals.addGoal(subgoal);
 				}
+                goal = ANDgoals;
 				break;
             case "OR":
             	JSONArray subgoals2 = goals.getJSONArray("subgoals");
                 
-            	ORGoal ORgoals = new ORGoal();
+            	ORGoal ORgoals = new ORGoal(dungeon);
                 for (int i = 0; i < subgoals2.length(); i++) {
                     Goal subgoal = loadGoals(subgoals2.getJSONObject(i), dungeon);
                     ORgoals.addGoal(subgoal);
                 }
+                goal = ORgoals;
                 break;
             case "exit":
-                ExitGoal exitGoal = new ExitGoal();
+                ExitGoal exitGoal = new ExitGoal(dungeon);
                 goal = exitGoal;
-                addObserver(exitGoal);
+                dungeon.setExitGoal(exitGoal);
                 break;
             case "enemies":
-                EnemyGoal enemyGoal = new EnemyGoal();
+                EnemyGoal enemyGoal = new EnemyGoal(dungeon);
                 goal = enemyGoal;
-                addObserver(enemyGoal);
+                dungeon.setEnemyGoal(enemyGoal);
                 break;
             case "treasure":
-                TreasureGoal treasureGoal = new TreasureGoal();
+                TreasureGoal treasureGoal = new TreasureGoal(dungeon);
                 goal = treasureGoal;
-                addObserver(treasureGoal);
+                dungeon.setTreasureGoal(treasureGoal);
                 break;
             case "boulders":
-                BoulderGoal boulderGoal = new BoulderGoal();
+                BoulderGoal boulderGoal = new BoulderGoal(dungeon);
                 goal = boulderGoal;
-                addObserver(boulderGoal);
+                dungeon.setSwitchGoal(boulderGoal);
                 break;
             default:
                 break;
         }
         return goal;
     }
-    
-    public void addObserver(ExitGoal goal) {
-    	
-    }
-  
-    public void addObserver(EnemyGoal goal) {
-    	
-    }
-    
-    public void addObserver(BoulderGoal goal) {
-    	
-    }
-    
-    public void addObserver(TreasureGoal goal) {
-    	
-    }
-  
-	public abstract void onLoad(Entity entity, Image image);
+      
+	public abstract ImageView onLoad(Entity entity, Image image);
 
     // TODO Create additional abstract methods for the other entities
-    protected abstract void loadImage(Entity entity);
 }

@@ -2,13 +2,12 @@ package unsw.dungeon;
 
 public class Wall extends Blocker {
     
-	public Wall(int x, int y) {
-        super(x, y);
+	public Wall(int x, int y, MoveStrategy movementType) {
+        super(x, y, movementType);
     }
-
+	
 	@Override
-	public void block() {
-		// TODO Auto-generated method stub
-		
+	public boolean block(Player player) {
+		return true;
 	}
 }

@@ -1,6 +1,6 @@
 {
-	"width": 20,
-	"height": 18,
+	"width": 18,
+	"height": 16,
 	"entities": [
 	  {
 	    "x": 0,
@@ -181,6 +181,12 @@
 	    "x": 4,
 	    "y": 3,
 	    "type": "wall"
+	  },
+	  {
+	    "x": 8,
+	    "y": 3,
+	    "type": "key",
+	    "id": 0
 	  },
 	  {
 	    "x": 15,
@@ -503,6 +509,12 @@
 	    "type": "wall"
 	  },
 	  {
+	    "x": 14,
+	    "y": 14,
+	    "type": "key",
+	    "id": 1
+	  },
+	  {
 	    "x": 17,
 	    "y": 14,
 	    "type": "wall"
@@ -598,21 +610,9 @@
 	    "type": "wall"
 	  },
 	  {
-	    "x": 14,
-	    "y": 14,
-	    "type": "key",
-	    "id": 1
-	  },
-	  {
 	    "x": 13,
 	    "y": 14,
 	    "type": "door",
-	    "id": 0
-	  },
-	  {
-	    "x": 8,
-	    "y": 3,
-	    "type": "key",
 	    "id": 0
 	  },
 	  {
@@ -653,7 +653,7 @@
 	  }
 	],
 	"goal-condition": {
-	  "goal": "AND",
+	  "goal": "OR",
 	  "subgoals": [
 	    {
 	      "goal": "enemies"
