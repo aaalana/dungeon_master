@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -181,10 +182,8 @@ public class Dungeon implements Observer {
     	
     	if (entity instanceof Item) {
     		items.remove(entity);
-    		
     		if (entity instanceof Treasure) 
 				treasures.removeTreasure(entity);   	
-            
     	} else if (entity instanceof Enemy) {
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {
@@ -234,18 +233,14 @@ public class Dungeon implements Observer {
     			if (entity instanceof Wall) {
     				return true;
     			} else if (entity instanceof Door) {
-    				ImageView old = entity.getImage();
-    				if (!entity.block(player)) {
-    					entity.updateImage(new ImageView(new Image("/open_door.png")));
-    					imageManager.replaceImage(old, entity);
-    				}
+    				((Door) entity).replaceDoorImage(player, imageManager);
     				return entity.block(player);
     			}
     		}
     	}
     	return false;
     }
-        
+    
     /**
      * Checks if two particular entities are sharing the same square in relation to 
      * particular obstacles
@@ -292,18 +287,18 @@ public class Dungeon implements Observer {
     				removeEntity(enemy);
 	    		} else if (player.getState() instanceof NormalState) {
 	    			// kill the player
-	    			if (sword == null) {
+	    			if (sword == null) 
 	    				removeEntity(player);
 		    		// kill the enemy
-	    			} else if (sword.getStatus()) {
+	    			 else if (sword.getStatus()) {
 	    				removeEntity(enemy);
-	        			sword.reduceUses();
-	    				sword.useItem(player);
-	        		}
+	    				sword.reduceUses();
+	    			 }
 	    		}
     		}
     	}
     }
+    
     
     /**
      * -Signals the player to attempt to collect an item into the player's inventory 
@@ -346,6 +341,10 @@ public class Dungeon implements Observer {
     	return boulders.pushBoulder(x, y, direction);
     }
     
+    /**
+     * Sets the goal for killing enemies
+     * @param enemyGoal
+     */
     public void setEnemyGoal(EnemyGoal enemyGoal) {
         if (this.enemies != null) {
             enemies.setEnemyGoal(enemyGoal);

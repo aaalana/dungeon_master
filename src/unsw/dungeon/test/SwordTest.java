@@ -32,7 +32,7 @@ class SwordTest {
 		
 		// default should have 5 uses
 		assertEquals(5, sword.getUses());
-		
+	
 		// reduce use by 1
 		sword.reduceUses();
 		assertEquals(4, sword.getUses());
@@ -51,6 +51,6 @@ class SwordTest {
 		
 		// reduce use by 1
 		sword.reduceUses();
-		assertEquals(0, sword.getUses());	
+		assertEquals(0, sword.getUses());
 	}
 }

@@ -1,5 +1,9 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
+
 public class Door extends Blocker {
 	private int id;
 	private boolean locked;
@@ -14,8 +18,7 @@ public class Door extends Blocker {
 	public boolean block(Player player) {
 		Key key = (Key)player.getItemByName("key");
 		if (key != null && (matchingKey(key))) {
-			key.useItem(player);
-			unlock();
+			unlock(player, key);
 			System.out.println("Player unlocked door.");
 			return false;
 		} else if (this.locked) {
@@ -30,7 +33,8 @@ public class Door extends Blocker {
 	/**
 	 * sets the door's state to unlocked
 	 */
-	public void unlock() {
+	public void unlock(Player player, Key key) {
+		key.useItem(player);
 		this.locked = false;
 	}
 	
@@ -50,5 +54,18 @@ public class Door extends Blocker {
 	 */
 	public boolean matchingKey(Key key) {
 		return this.id == key.getId();
+	}
+	
+	/**
+	 * Changes the door icon from closed to open
+	 * @param player
+	 * @param imageManager
+	 */
+	public void replaceDoorImage(Player player, ImageManager imageManager) {
+		if (!block(player)) {
+			ImageView old = this.getImage();
+			this.setImage(new ImageView(new Image("/open_door.png")));
+			this.replaceImage(old, imageManager);
+		}
 	}
 }

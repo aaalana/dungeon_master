@@ -44,10 +44,11 @@ class DungeonTest {
 	void testCheckBlocker() {
 		Dungeon dungeon = new Dungeon(18,16);
 		Player player = new Player(0, 0, dungeon);
-		Wall wall = new Wall(0,0, new CantMove());
-		Wall wall2 = new Wall(1,0, new CantMove());
-		Door door = new Door(2,1,0, new CantMove());
-		
+		Wall wall = new Wall(0, 0, new CantMove());
+		Wall wall2 = new Wall(1, 0, new CantMove());
+		Door door = new Door(2, 1, 0, new CantMove());
+		Key key = new Key(2, 1, 0);
+	
 		// check empty list
 		assertFalse(dungeon.checkBlocker(0,0));
 		assertFalse(dungeon.checkBlocker(9,0));
@@ -64,10 +65,7 @@ class DungeonTest {
 		assertTrue(dungeon.checkBlocker(1,0));
 		assertTrue(dungeon.checkBlocker(2,1));
 		
-		// unlocked door and revisiting door
-		door.unlock();
-		assertFalse(dungeon.checkBlocker(2,1));
-		assertFalse(dungeon.checkBlocker(2,1));
+		// note: unlocked door is tested in front-end
 	}
 	
 	@Test

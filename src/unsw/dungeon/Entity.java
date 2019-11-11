@@ -3,6 +3,7 @@ package unsw.dungeon;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 /**
  * An entity in the dungeon.
@@ -59,8 +60,13 @@ public abstract class Entity {
     	return getClass().getName();
     }
    
-  	public void updateImage(ImageView view) {
+  	public void setImage(ImageView view) {
   		this.image = view;
+  		
+  	}
+  	
+  	public void replaceImage(ImageView old, ImageManager imageManager) {
+  		imageManager.replaceImage(old, this);
   	}
   	
   	public ImageView getImage() {

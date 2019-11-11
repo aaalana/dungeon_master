@@ -61,13 +61,13 @@ public abstract class DungeonLoader {
             Player player = new Player(x, y, dungeon);
             dungeon.setPlayer(player);
             ImageView pView = onLoad(player, new Image("/human_new.png"));
-            player.updateImage(pView);
+            player.setImage(pView);
             entity = player;
             break;
         case "wall":
             Wall wall = new Wall(x, y, new CantMove());
             ImageView wView = onLoad(wall, new Image("/brick_brown_0.png"));
-            wall.updateImage(wView);
+            wall.setImage(wView);
             entity = wall;
             dungeon.addBlocker(wall);
             break;
@@ -76,28 +76,28 @@ public abstract class DungeonLoader {
             Treasure treasure = new Treasure(x, y);
             entity = treasure;
             ImageView tView = onLoad(treasure, new Image("/gold_pile.png"));
-            treasure.updateImage(tView);
+            treasure.setImage(tView);
             dungeon.addTreasure(treasure);
             dungeon.addItem(treasure);
         	break;
         case "invincibility":
             InvincibilityPotion invincibility = new InvincibilityPotion(x, y);
             ImageView iView = onLoad(invincibility, new Image("/brilliant_blue_new.png"));
-            invincibility.updateImage(iView);
+            invincibility.setImage(iView);
             entity = invincibility;
             dungeon.addItem(invincibility);
         	break;
         case "speed":
             SpeedPotion speed = new SpeedPotion(x, y);
             ImageView spView = onLoad(speed, new Image("/bubbly.png"));
-            speed.updateImage(spView);
+            speed.setImage(spView);
             entity = speed;
             dungeon.addItem(speed);
         	break;
         case "switch":
             Switch _switch = new Switch(x, y);
             ImageView sView = onLoad(_switch, new Image("/pressure_plate.png"));
-            _switch.updateImage(sView);
+            _switch.setImage(sView);
             entity = _switch;
             dungeon.addObstacle(_switch);
             dungeon.addSwitch(_switch);
@@ -105,7 +105,7 @@ public abstract class DungeonLoader {
         case "boulder":
             Boulder boulder = new Boulder(x, y, new ItMoves());
             ImageView bView = onLoad(boulder, new Image("/boulder.png"));
-            boulder.updateImage(bView);
+            boulder.setImage(bView);
             entity = boulder;
             dungeon.addBlocker(boulder);
             dungeon.addBoulder(boulder);
@@ -113,21 +113,21 @@ public abstract class DungeonLoader {
         case "sword":
             Sword sword = new Sword(x, y);
             ImageView swView = onLoad(sword, new Image("/greatsword_1_new.png"));
-            sword.updateImage(swView);
+            sword.setImage(swView);
             entity = sword;
             dungeon.addItem(sword);
         	break;
         case "enemy":
             Enemy enemy = new Enemy(dungeon, x, y);
             ImageView eView = onLoad(enemy, new Image("/deep_elf_master_archer.png"));
-            enemy.updateImage(eView);
+            enemy.setImage(eView);
             entity = enemy;
             dungeon.addEnemy(enemy);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
             ImageView exView = onLoad(exit, new Image("/exit.png"));
-            exit.updateImage(exView);
+            exit.setImage(exView);
             entity = exit;
             dungeon.addObstacle(exit);
          	break;
@@ -135,7 +135,7 @@ public abstract class DungeonLoader {
         	int keyId = json.getInt("id");
             Key key = new Key(x, y, keyId);
             ImageView kView = onLoad(key, new Image("/key.png"));
-            key.updateImage(kView);
+            key.setImage(kView);
             entity = key;
             dungeon.addItem(key);
         	break;
@@ -143,7 +143,7 @@ public abstract class DungeonLoader {
         	int doorId = json.getInt("id");
         	Door door = new Door(x, y, doorId, new CantMove());
         	ImageView dView = onLoad(door, new Image("/closed_door.png"));
-            door.updateImage(dView);
+            door.setImage(dView);
         	entity = door;
         	dungeon.addBlocker(door);
         	break;
@@ -151,7 +151,7 @@ public abstract class DungeonLoader {
         	int portalId = json.getInt("id");
         	Portal portal = new Portal(x, y, portalId, dungeon);
         	ImageView poView = onLoad(portal, new Image("/portal.png"));
-            portal.updateImage(poView);
+            portal.setImage(poView);
         	entity = portal;
         	dungeon.addObstacle(portal);
         	dungeon.addPortals(portal);
