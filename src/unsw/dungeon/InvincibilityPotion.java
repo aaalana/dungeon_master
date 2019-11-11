@@ -3,6 +3,8 @@ package unsw.dungeon;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
+
 public class InvincibilityPotion extends Item {
 	public Timer timer;
 	
@@ -17,7 +19,9 @@ public class InvincibilityPotion extends Item {
 		InvincibilityPotion potion = this;
 		TimerTask task = new TimerTask() {
 			public void run() {
-				player.expelPotion(potion);
+				Platform.runLater(() -> {
+					player.expelPotion(potion);
+	            });
 			}
 		};
 		timer.schedule(task, 5000);

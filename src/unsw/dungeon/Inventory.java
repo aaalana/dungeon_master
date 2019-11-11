@@ -57,11 +57,14 @@ public class Inventory {
      * @param item
      */
 	public void removeItem(Item item) {
-		System.out.println(item.getImage() + " removed"); 
 		getImageManager().removeImage(item.getImage());
 		items.remove(item);
 	}
 
+	/**
+	 * Gets the image manager from the dungeon
+	 * @return
+	 */
 	public DungeonControllerLoader.ImageManager getImageManager() {
 		return dungeon.getImageManager();
 	}
