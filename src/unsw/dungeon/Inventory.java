@@ -18,23 +18,28 @@ public class Inventory {
 	 * @param dungeon
 	 */
 	public void addItem(Player player, Item item) {
-		occupySlot(item);
 		
 		if (item instanceof Sword && !hasCertainItem(item)) {
 			items.add(item);
     		printInventory();
+    		occupySlot(item);
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		items.add(item);
     		printInventory();
+    		occupySlot(item);
     	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
     		activatePotion(player, "invincibility", item);
     		printInventory();
+    		occupySlot(item);
     	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
+    		System.out.println("here");
     		activatePotion(player, "speed", item);
     		printInventory();
-    	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
+    		occupySlot(item);
+    	} else if (item instanceof Treasure) {
     		items.add(item);
     		printInventory();
+    		occupySlot(item);
     	}
 	}
 	
