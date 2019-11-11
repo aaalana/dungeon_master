@@ -81,7 +81,7 @@ public class DungeonController {
     public void replaceSquares(ImageView image, int x, int y) {
     	squares.add(image, x, y);
     }
-
+    
     @FXML
     public void handleKeyPress(KeyEvent event) {
         // testing: check if the player's state
@@ -148,11 +148,8 @@ public class DungeonController {
         default:
             break; 
         }
-    	
-        if (player.getItemByName("sword") != null) {
-    		player.useSword();
-    	}
-        
+        player.useSword();
+       
         // detects when to kill creatures after all creatures have moved
         dungeon.killCreature(null);
     }

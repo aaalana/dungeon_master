@@ -16,7 +16,8 @@ public class Door extends Blocker {
 	
 	@Override
 	public boolean block(Player player) {
-		Key key = (Key)player.getItemByName("key");
+		Key key = (Key)player.getItem("key");
+		
 		if (key != null && (matchingKey(key))) {
 			unlock(player, key);
 			System.out.println("Player unlocked door.");
@@ -62,10 +63,8 @@ public class Door extends Blocker {
 	 * @param imageManager
 	 */
 	public void replaceDoorImage(Player player, ImageManager imageManager) {
-		if (!block(player)) {
-			ImageView old = this.getImage();
-			this.setImage(new ImageView(new Image("/open_door.png")));
-			this.replaceImage(old, imageManager);
-		}
+		ImageView old = this.getImage();
+		this.setImage(new ImageView(new Image("/open_door.png")));
+		this.replaceImage(old, imageManager);
 	}
 }

@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class InvincibilityState implements PlayerState {
-	Player player;
+	private Player player;
 	
 	public InvincibilityState(Player player) {
 		this.player = player;
@@ -18,11 +18,11 @@ public class InvincibilityState implements PlayerState {
 		System.out.println("One invincibility potion was all used up.");
 		player.removeItem(potion);
 		
-		if (!player.hasCertainItem(potion)) {
+		if (player.getItem("invincibility") == null) {
 			System.out.println("The player is no longer invincible.");
 			player.setState(player.getNormalState());
 		} else {
-			drinkPotion(player.getItemByName("invincibility"));
+			drinkPotion(player.getItem("invincibility"));
 		}
 	}
 	

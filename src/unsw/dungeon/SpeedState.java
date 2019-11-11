@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class SpeedState implements PlayerState {
-	Player player;
+	private Player player;
 	
 	public SpeedState(Player player) {
 		this.player = player;
@@ -18,11 +18,11 @@ public class SpeedState implements PlayerState {
 		System.out.println("One speed potion was all used up.");
 		player.removeItem(potion);
 		
-		if (!player.hasCertainItem(potion)) {
+		if (player.getItem("speed") == null) {
 			System.out.println("The player returned to normal state.");
 			player.setState(player.getNormalState());
 		} else {
-			drinkPotion(player.getItemByName("speed"));
+			drinkPotion(player.getItem("speed"));
 		}
 	}
 	

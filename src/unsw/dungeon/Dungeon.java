@@ -6,10 +6,6 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import unsw.dungeon.DungeonControllerLoader.ImageManager;
-
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -27,6 +23,7 @@ public class Dungeon implements Observer {
     private int width, height;
     
     private List<Entity> entities;
+    
     private List<Obstacle> obstacles;
     private List<Item> items;
     private List<Blocker> blockers;
@@ -96,6 +93,14 @@ public class Dungeon implements Observer {
         return player;
     }
 
+    /**
+     * Gets the imageManager of the dungeon
+     * @return
+     */
+    public DungeonControllerLoader.ImageManager getImageManager() {
+    	return imageManager;
+    }
+    
     /**
      * Sets the player entity of the dungeon
      * @param player
@@ -185,13 +190,13 @@ public class Dungeon implements Observer {
     		if (entity instanceof Treasure) 
 				treasures.removeTreasure(entity);   	
     	} else if (entity instanceof Enemy) {
+    		imageManager.removeImage(entity.getImage());
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {
     		player.killOff();
     		player = null;
     		System.exit(0);
     	}
-    	imageManager.removeImage(entity.getImage());
     }
     
     /**
@@ -233,8 +238,10 @@ public class Dungeon implements Observer {
     			if (entity instanceof Wall) {
     				return true;
     			} else if (entity instanceof Door) {
-    				((Door) entity).replaceDoorImage(player, imageManager);
-    				return entity.block(player);
+    				boolean canBlock = entity.block(player);
+    				if (!canBlock) 
+    					((Door) entity).replaceDoorImage(player, imageManager);
+    				return canBlock;
     			}
     		}
     	}

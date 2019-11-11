@@ -164,45 +164,7 @@ class PlayerTest {
 	}
 	
 	@Test
-	void testHasCertainItem() {
-		Dungeon dungeon = new Dungeon(18,16);
-		Player player = new Player(0, 0, dungeon);
-		Treasure treasure = new Treasure(1,2);
-		Sword sword = new Sword(5,6);
-		Key key = new Key(7,7,0);
-		InvincibilityPotion potion = new InvincibilityPotion(2,4);
-		
-		// empty inventory
-		assertFalse(player.hasCertainItem(null));
-		assertFalse(player.hasCertainItem(treasure));
-		assertFalse(player.hasCertainItem(sword));
-		assertFalse(player.hasCertainItem(key));
-		assertFalse(player.hasCertainItem(potion));
-		
-		// has items in inventory
-		// checks that it works for different instances and classes
-		player.collectItem(sword);
-		assertTrue(player.hasCertainItem(sword));
-		
-		Sword sword2 = new Sword(9,6);
-		assertTrue(player.hasCertainItem(sword2));
-		
-		assertFalse(player.hasCertainItem(key));
-		
-		Key key2 = new Key(7,7,9);
-		player.collectItem(key);
-		assertTrue(player.hasCertainItem(key));
-		assertTrue(player.hasCertainItem(key2));
-		
-		player.collectItem(potion);
-		assertTrue(player.hasCertainItem(potion));
-		
-		player.collectItem(treasure);
-		assertTrue(player.hasCertainItem(treasure));
-	}
-	
-	@Test
-	void testGetItemByName() {
+	void testgetItem() {
 		Dungeon dungeon = new Dungeon(18, 16);
 		Player player = new Player(0, 9, dungeon);
 		Sword sword = new Sword(5, 6);
@@ -211,25 +173,25 @@ class PlayerTest {
 		InvincibilityPotion potion = new InvincibilityPotion(2,4);
 		
 		// empty inventory
-		assertNull(player.getItemByName("sword"));
-		assertNull(player.getItemByName("rubbish"));
-		assertNull(player.getItemByName("rjiojsh"));
+		assertNull(player.getItem("sword"));
+		assertNull(player.getItem("rubbish"));
+		assertNull(player.getItem("rjiojsh"));
 		
 		// has items in inventory
 		player.collectItem(sword);
-		assertEquals(sword, player.getItemByName("sword"));
+		assertEquals(sword, player.getItem("sword"));
 		
 		// does not have item in non-empty inventory
-		assertNull(player.getItemByName("treasure"));
+		assertNull(player.getItem("treasure"));
 		
 		// has items in inventory: other entities
 		player.collectItem(treasure);
-		assertEquals(treasure, player.getItemByName("treasure"));
+		assertEquals(treasure, player.getItem("treasure"));
 		
 		player.collectItem(key);
-		assertEquals(key, player.getItemByName("key"));
+		assertEquals(key, player.getItem("key"));
 		
 		player.collectItem(potion);
-		assertEquals(potion, player.getItemByName("potion"));
+		assertEquals(potion, player.getItem("potion"));
 	}
 }

@@ -1,5 +1,4 @@
 package unsw.dungeon;
-import java.util.ArrayList;
 
 /**
  * The player entity
@@ -14,7 +13,7 @@ public class Player extends LivingCreature {
     private PlayerState deadState;
     private PlayerState speedState;
     private PlayerState state;
-    private ArrayList<Item> inventory;
+    private Inventory inventory;
    
     /**
      * Create a player positioned in square (x,y)
@@ -24,7 +23,7 @@ public class Player extends LivingCreature {
     public Player(int x, int y, Dungeon dungeon) {
         super(x, y);
         this.dungeon = dungeon;
-        inventory = new ArrayList<Item>();
+        inventory = new Inventory(dungeon);
         invincibilityState = new InvincibilityState(this);
         normalState = new NormalState(this);
         deadState = new DeadState(this);
@@ -120,100 +119,34 @@ public class Player extends LivingCreature {
 	 * @return true when the item has been
 	 */
     public boolean collectItem(Item item) {
-    	if (item == null)
-    		return false;
-    	
-    	if (item instanceof Sword && !hasCertainItem(item)) {
-    		inventory.add(item);
-    		printInventory();
-    		return true;
-    	} else if (item instanceof Key && !hasCertainItem(item))  {
-    		inventory.add(item);
-    		printInventory();
-    		return true;
-    	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
-    		activatePotion("invincibility", item);
-    		printInventory();
-    		return true;
-    	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
-    		activatePotion("speed", item);
-    		printInventory();
-    		return true;
-    	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
-    		inventory.add(item);
-    		printInventory();
-    		return true;
-    	} 
-    	return false;
+    	if (item == null) return false;
+    	inventory.addItem(this, item);
+    	return inventory.hasCertainItem(item);
     }
-    
-    /**
-     * Chooses when the activate a potion
-     * @param name
-     * @param item
-     */
-    public void activatePotion(String name, Item item) {
-    	if (getItemByName(name) == null) {
-			inventory.add(item);
-			drinkPotion(item);
-		} else {
-			inventory.add(item);
-		}	
-    }
-    
- // temp testing: print out the inventory
- // REMOVE THIS FUNCTION LATER
-    public void printInventory() {
-		System.out.println("Inventory: [");
-		for (Item i : inventory) {
-			System.out.println(i + ",");
-		}
-		System.out.println("]");
-    }
-    
-    /**
-     * Check if the player has a sword in the inventory
-     * @return
-     */
-	public boolean hasCertainItem(Item obj) {
-		for (Item item : inventory) {
-    		if (item.isSameItem(obj)) {
-    			return true;
-    		} 
-    	}
-		return false;
-	}
-	
-	/**
-	 * -gets an item from the inventory given its name
-	 * -this function is most useful for items that can 
-	 *  only be collected once 
-	 * @param item
-	 * @return type of item
-	 */
-	public Item getItemByName(String name) {
-		for (Item item : inventory) {
-			if (item.sameName(name)) {
-				return item;
-			}
-		}
-		return null;
-	}
-	
+   
 	/**
 	 * Removes an item from the inventory
 	 * @param item
 	 */
 	public void removeItem(Item item) {
-		inventory.remove(item);
+		inventory.removeItem(item);
+	}
+	
+	/**
+	 * Allows the player to get an item from the inventory
+	 * @param name
+	 * @return
+	 */
+	public Item getItem(String name) {
+		return inventory.getItemByName(name);
 	}
 	
     /**
      * If a player has a sword, the player can attempt to use the sword to kill surrounding enemies
      */
     public void useSword() {
-    	if (getItemByName("sword") != null) {
-    		Sword sword = (Sword) getItemByName("sword");
+    	if (inventory.getItemByName("sword") != null) {
+    		Sword sword = (Sword) inventory.getItemByName("sword");
     		
     		// sets the sword status to being used
     		sword.useItem(this);

@@ -4,34 +4,170 @@ import java.util.ArrayList;
 
 public class Inventory {
 	private ArrayList<Item> items;
-	private DungeonControllerLoader.ImageManager imageManager;
-	private boolean[] occupiedSlots;
+	private Dungeon dungeon;
 	
-	public Inventory() {
+	public Inventory(Dungeon dungeon) {
 		this.items = new ArrayList<Item>();
-		this.imageManager = new DungeonControllerLoader.ImageManager();
-		this.occupiedSlots = new boolean[4];
+		this.dungeon = dungeon;
 	}
 	
-	public void addItem(Item item, Dungeon dungeon) {
-		items.add(item);
-		occupySlot(item, dungeon);
+	/**
+	 * Selectively allows some items to be added to the inventory
+	 * @param player
+	 * @param item
+	 * @param dungeon
+	 */
+	public void addItem(Player player, Item item) {
+		occupySlot(item);
+		
+		if (item instanceof Sword && !hasCertainItem(item)) {
+			items.add(item);
+    		printInventory();
+    	} else if (item instanceof Key && !hasCertainItem(item))  {
+    		items.add(item);
+    		printInventory();
+    	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
+    		activatePotion(player, "invincibility", item);
+    		printInventory();
+    	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
+    		activatePotion(player, "speed", item);
+    		printInventory();
+    	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
+    		items.add(item);
+    		printInventory();
+    	}
 	}
 	
+	 /**
+     * Automatically signals the activation any potion added to the inventory
+     * @param name
+     * @param item
+     */
+    public void activatePotion(Player player, String name, Item item) {
+    	if (getItemByName(name) == null) {
+			items.add(item);
+			player.drinkPotion(item);
+		} else {
+			items.add(item);
+		}	
+    }
+	
+    /**
+     * Removes an item from the inventory
+     * @param item
+     */
 	public void removeItem(Item item) {
+		System.out.println(item.getImage() + " removed"); 
+		getImageManager().removeImage(item.getImage());
 		items.remove(item);
-		imageManager.removeImage(item.getImage());
+	}
+
+	public DungeonControllerLoader.ImageManager getImageManager() {
+		return dungeon.getImageManager();
 	}
 	
-	public void occupySlot(Item item, Dungeon dungeon) {
+	/**
+	 * Moves the item from the dungeon into the inventory
+	 * @param item
+	 * @param dungeon
+	 */
+	public void occupySlot(Item item) {
 		int i = 0;
+		if (hasCertainItem(item)) {
+			for (int x = 9; x < 16; x = x + 2) {
+				if (getStoredItemType(x).equals(item.getClassName())) {
+					item.x().set(x);
+					item.y().set(dungeon.getHeight() + 2);
+					return;
+				} 
+				i++;
+			}		
+		}
+		
 		for (int x = 9; x < 16; x = x + 2) {
-			if (!occupiedSlots[i]) {
+			if (getStoredItemType(x).equals("None")) {
 				item.x().set(x);
 				item.y().set(dungeon.getHeight() + 2);
-				occupiedSlots[i] = true;
 				break;
-			}
+			} 
+			i++;
 		}	
+	}
+	
+	/**
+	 * Gets the item type from the inventory given an x coordinate
+	 * @param dungeon
+	 * @param x
+	 * @return
+	 */
+	public String getStoredItemType(int x) {
+	    for (Item item : this.items) {
+    		if (item == null) continue; 
+    		if (item.getX() == x) {
+    			return item.getClassName();
+    		}
+    	}
+    	return "None";
+	}
+	
+	// temp testing: print out the inventory
+	// REMOVE THIS FUNCTION LATER
+	public void printInventory() {
+		System.out.println("Inventory: [");
+		for (Item i : items) {
+			System.out.println(i + ",");
+		}
+		System.out.println("]");
+	}
+	
+	/**
+	 * check if the inventory contains a certain item
+	 * @return
+	 */
+	public boolean hasCertainItem(Item obj) {
+		for (Item item : items) {
+			if (item.isSameItem(obj)) 
+				return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * gets the items from the inventory
+	 * @return
+	 */
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+	
+	/**
+	 * -gets an item from the inventory given its name
+	 * -this function is most useful for items that can 
+	 *  only be collected once 
+	 * @param item
+	 * @return type of item
+	 */
+	public Item getItemByName(String name) {
+		for (Item item : items) {
+			if (item.sameName(name)) {
+				return item;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Counts the number of items that's in the inventory by its name
+	 * @param name
+	 * @return
+	 */
+	public int countItemByType(String name) {
+		int count = 0;
+		for (Item item : items) {
+			if (item.sameName(name)) {
+				count++;
+			}
+		}
+		return count;
 	}
 }
