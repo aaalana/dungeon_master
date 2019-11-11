@@ -86,20 +86,19 @@ public class DungeonControllerLoader extends DungeonLoader {
      *
      */
     public static class ImageManager {
-    	/*
+    	/**
     	 * removes an image from the game
+    	 * @param view
     	 */
     	public void removeImage(ImageView view) {
     		dungeonController.getSquaresChildren().remove(view);
 	    }
     	
     	/**
-    	 * replaces an image from the game
-    	 * @param old
+    	 * adds an image from the game
     	 * @param entity
     	 */
-    	public void replaceImage(ImageView old, Entity entity) {
-    		removeImage(old);
+    	public void addImage(Entity entity) {
     		dungeonController.replaceSquares(entity.getImage(), entity.getX(), entity.getY());
     	}
     }

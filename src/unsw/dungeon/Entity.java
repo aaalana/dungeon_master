@@ -95,7 +95,8 @@ public abstract class Entity {
   	 * @param imageManager
   	 */
   	public void replaceImage(ImageView old, ImageManager imageManager) {
-  		imageManager.replaceImage(old, this);
+  		imageManager.removeImage(old);
+  		imageManager.addImage(this);
   	}
   	
   	/**
