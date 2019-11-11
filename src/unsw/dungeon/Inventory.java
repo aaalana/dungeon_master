@@ -159,18 +159,19 @@ public class Inventory {
 		return null;
 	}
 	
-	/**
-	 * Counts the number of items that's in the inventory by its name
-	 * @param name
-	 * @return
-	 */
-	public int countItemByType(String name) {
-		int count = 0;
-		for (Item item : items) {
-			if (item.sameName(name)) {
-				count++;
-			}
-		}
-		return count;
-	}
+	// not in use - use to show the number of items the player has later?s
+//	/**
+//	 * Counts the number of items that's in the inventory by its name
+//	 * @param name
+//	 * @return
+//	 */
+//	public int countItemByType(String name) {
+//		int count = 0;
+//		for (Item item : items) {
+//			if (item.sameName(name)) {
+//				count++;
+//			}
+//		}
+//		return count;
+//	}
 }
