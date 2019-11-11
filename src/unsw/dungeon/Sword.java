@@ -3,7 +3,7 @@ package unsw.dungeon;
 public class Sword extends Item {
 	
 	private boolean inUse;
-	private int usesLeft = 5;
+	private int usesLeft;
 	
     public Sword(int x, int y) {
         super(x, y, "sword");
