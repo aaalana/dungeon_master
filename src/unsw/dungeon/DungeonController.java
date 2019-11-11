@@ -101,6 +101,7 @@ public class DungeonController {
         			selfManageDungeon();
         		}
         	}
+        	dungeon.moveEnemies();
             break;
         case DOWN:
         	if (checkMove(player.getX(), player.getY() + 1, "down")) {
@@ -114,6 +115,7 @@ public class DungeonController {
         			selfManageDungeon();
         		}
         	}
+        	dungeon.moveEnemies();
             break;
         case LEFT:
         	if (checkMove(player.getX() - 1, player.getY(), "left")) {
@@ -127,6 +129,7 @@ public class DungeonController {
         			selfManageDungeon();
         		}
         	}
+        	dungeon.moveEnemies();
             break;
         case RIGHT:
         	if (checkMove(player.getX() + 1, player.getY(), "right")) {
@@ -140,13 +143,12 @@ public class DungeonController {
         			selfManageDungeon();
         		}
         	}
+        	dungeon.moveEnemies();
             break;
         default:
             break; 
         }
     	
-        dungeon.moveEnemies();
-        
         if (player.getItemByName("sword") != null) {
     		player.useSword();
     	}
