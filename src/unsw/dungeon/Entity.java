@@ -29,18 +29,34 @@ public abstract class Entity {
         this.moveable = movingType;
     }
 
+    /**
+     * Gets the x property 
+     * @return
+     */
     public IntegerProperty x() {
         return x;
     }
-
+    
+    /**
+     * Gets the y property 
+     * @return
+     */
     public IntegerProperty y() {
         return y;
     }
 
+    /**
+     * Gets the y coordinate of the entity's position
+     * @return
+     */
     public int getY() {
         return y().get();
     }
 
+    /**
+     * Gets the x coordinate of the entity's position
+     * @return
+     */
     public int getX() {
         return x().get();
     }
@@ -56,19 +72,36 @@ public abstract class Entity {
     	moveable.move(direction, dungeon, entity);
     }
 
+    /**
+     * Gets the class name of the entity
+     * @return
+     */
     public String getClassName() {
     	return getClass().getName();
     }
    
+    /**
+     * sets the image of the entity
+     * @param view
+     */
   	public void setImage(ImageView view) {
   		this.image = view;
   		
   	}
   	
+  	/**
+  	 * replaces the entity's image
+  	 * @param old
+  	 * @param imageManager
+  	 */
   	public void replaceImage(ImageView old, ImageManager imageManager) {
   		imageManager.replaceImage(old, this);
   	}
   	
+  	/**
+  	 * Gets the image of the entity
+  	 * @return
+  	 */
   	public ImageView getImage() {
   		return image;
   	}

@@ -132,21 +132,11 @@ public class Player extends LivingCreature {
     		printInventory();
     		return true;
     	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
-    		if (getItemByName("invincibility") == null) {
-    			inventory.add(item);
-    			drinkPotion(item);
-    		} else {
-    			inventory.add(item);
-    		}
+    		activatePotion("invincibility", item);
     		printInventory();
     		return true;
     	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
-    		if (getItemByName("speed") == null) {
-    			inventory.add(item);
-    			drinkPotion(item);
-    		} else {
-    			inventory.add(item);
-    		}
+    		activatePotion("speed", item);
     		printInventory();
     		return true;
     	} else if (!(item instanceof Sword) && !(item instanceof Key)) {
@@ -155,6 +145,20 @@ public class Player extends LivingCreature {
     		return true;
     	} 
     	return false;
+    }
+    
+    /**
+     * Chooses when the activate a potion
+     * @param name
+     * @param item
+     */
+    public void activatePotion(String name, Item item) {
+    	if (getItemByName(name) == null) {
+			inventory.add(item);
+			drinkPotion(item);
+		} else {
+			inventory.add(item);
+		}	
     }
     
  // temp testing: print out the inventory

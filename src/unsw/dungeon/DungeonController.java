@@ -36,7 +36,10 @@ public class DungeonController {
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
-
+        Image tiles = new Image("/tiles.png");
+        Image slot = new Image("/darkTiles.png");
+        Image wood = new Image("/wood.png");
+        
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
@@ -44,8 +47,28 @@ public class DungeonController {
             }
         }
         
-        // Add inventory
-
+        // create inventory
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+        	squares.add(new ImageView(wood), x, dungeon.getHeight());
+        }
+        
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+            for (int y = dungeon.getHeight() + 1; y < dungeon.getHeight() + 4; y++) {
+                if (x == 0 || x == 7 || x == dungeon.getWidth() - 1) {
+                	squares.add(new ImageView(wood), x, y);
+                } else if ((x == 9 || x == 11 || x == 13 || x == 15) && y == dungeon.getHeight() + 2) {
+                	squares.add(new ImageView(slot), x, y);
+                } else {
+                	squares.add(new ImageView(tiles), x, y);
+                }
+            }
+        }
+        
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+        	squares.add(new ImageView(wood), x, dungeon.getHeight() + 4);
+        }
+     
+        // add entities
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
 
