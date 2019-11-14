@@ -275,7 +275,7 @@ public class Dungeon implements Observer {
      * Signals enemies to move
      */
     public void moveEnemies() {
-    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY());
+    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY(), getPlayer().isInvincible());
     }
 
     /**

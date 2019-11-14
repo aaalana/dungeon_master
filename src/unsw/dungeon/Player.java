@@ -113,6 +113,10 @@ public class Player extends LivingCreature {
 		return state;
 	}
 	
+	public boolean isInvincible() {
+		return state instanceof InvincibilityState;
+	}
+	
 	/**
 	 * Adds an item to the inventory. Swords and Keys can only be picked up one at a time.
 	 * @param item

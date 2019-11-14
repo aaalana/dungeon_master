@@ -38,13 +38,14 @@ public class EnemySystem implements Subject {
 		}
 	}
 	
-	 public void moveEnemies(int playerX, int playerY) {
+	 public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
+		 System.out.println(isInvincible);
 	    	for (Entity entity : this.enemies) {
 	    		if (entity == null) continue;
 	    		
 	    		if (entity instanceof unsw.dungeon.Enemy) {
 	    			Enemy enemy = (Enemy) entity;
-	    			enemy.searchPlayer(playerX, playerY);
+	    			enemy.searchPlayer(playerX, playerY, isInvincible);
 	    		}
 	    	}
 	    }
