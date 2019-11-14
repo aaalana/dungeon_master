@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
@@ -75,8 +76,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @return
      * @throws FileNotFoundException
      */
-    public DungeonController loadController() throws FileNotFoundException {
-        DungeonControllerLoader.dungeonController = new DungeonController(load(), entities);
+    public DungeonController loadController(Stage primaryStage) throws FileNotFoundException {
+        DungeonControllerLoader.dungeonController = new DungeonController(load(), entities, primaryStage);
         return dungeonController;
     }
 
@@ -100,6 +101,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     	 */
     	public void addImage(Entity entity) {
     		dungeonController.replaceSquares(entity.getImage(), entity.getX(), entity.getY());
+    	}
+    	
+    	/**
+    	 * Brings the image of an entity to the front (in front of all other imageViews)
+    	 * @param image
+    	 */
+    	public void toFront(ImageView image) {
+    		image.toFront();
     	}
     }
 }

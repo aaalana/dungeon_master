@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -27,9 +34,15 @@ public class DungeonController {
 
     private Dungeon dungeon;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+    private Stage stage;
+    
+    @FXML
+    private Button pause;
+    
+    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Stage primaryStage) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
+        this.stage = primaryStage;
         this.initialEntities = new ArrayList<>(initialEntities);
     }
 
@@ -68,10 +81,23 @@ public class DungeonController {
         	squares.add(new ImageView(wood), x, dungeon.getHeight() + 4);
         }
      
+        // add a pause menu button
+        Button btn = new Button("||");
+        //btn.setGraphic(new ImageView(new Image("/exit.png")));
+        //btn.setText("Pause Game");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pauseMenu();
+            }
+        });
+         
         // add entities
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
-
+        
+        squares.add(btn, 2, dungeon.getHeight() + 2);
+        
     }
     
     public ObservableList<Node> getSquaresChildren() {
@@ -80,6 +106,56 @@ public class DungeonController {
     
     public void replaceSquares(ImageView image, int x, int y) {
     	squares.add(image, x, y);
+    }
+    
+    public void pauseMenu() {
+    	Popup popup = generatePauseMenu();
+   
+		if (!popup.isShowing())
+			popup.show(stage);
+		else {
+			popup.hide();
+		    System.out.println("Hello World!");
+		}
+    }
+    
+    public Popup generatePauseMenu() {
+       	Popup popup = new Popup();
+    	Label label = new Label("hello");
+    	label.setStyle(" -fx-background-color: white;");
+    	label.setMinWidth(80); 
+        label.setMinHeight(50); 
+        Button resume = new Button("Resume");
+        Button restart = new Button("Restart");
+        Button exit = new Button("Exit");
+        
+    	popup.getContent().add(label);
+    	popup.getContent().add(resume);
+    	popup.getContent().add(restart);
+    	popup.getContent().add(exit);
+    	
+        resume.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popup.hide();
+            }
+        });
+        
+        restart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popup.hide();
+            }
+        });
+        
+        exit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
+        
+    	return popup;
     }
     
     @FXML
