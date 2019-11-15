@@ -9,13 +9,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -49,10 +46,7 @@ public class DungeonController {
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
-        Image tiles = new Image("/tiles.png");
-        Image slot = new Image("/darkTiles.png");
-        Image wood = new Image("/wood.png");
-        
+    
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
@@ -60,8 +54,34 @@ public class DungeonController {
             }
         }
         
-        // create inventory
-        for (int x = 0; x < dungeon.getWidth(); x++) {
+        // add an inventory
+        loadInventory();
+     
+        // add a pause menu button
+        Button btn = new Button("||");
+        PauseMenu pauseMenu = new PauseMenu(stage);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pauseMenu.showPopUp();
+            }
+        });
+        squares.add(btn, 2, dungeon.getHeight() + 2);
+        
+        // add entities
+        for (ImageView entity : initialEntities)
+            squares.getChildren().add(entity);
+    }
+    
+    /**
+     * Creates a inventory for the game's frontend
+     */
+    public void loadInventory() {
+        Image tiles = new Image("/tiles.png");
+        Image slot = new Image("/darkTiles.png");
+        Image wood = new Image("/wood.png");
+        
+    	for (int x = 0; x < dungeon.getWidth(); x++) {
         	squares.add(new ImageView(wood), x, dungeon.getHeight());
         }
         
@@ -80,24 +100,6 @@ public class DungeonController {
         for (int x = 0; x < dungeon.getWidth(); x++) {
         	squares.add(new ImageView(wood), x, dungeon.getHeight() + 4);
         }
-     
-        // add a pause menu button
-        Button btn = new Button("||");
-        //btn.setGraphic(new ImageView(new Image("/exit.png")));
-        //btn.setText("Pause Game");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pauseMenu();
-            }
-        });
-         
-        // add entities
-        for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
-        
-        squares.add(btn, 2, dungeon.getHeight() + 2);
-        
     }
     
     public ObservableList<Node> getSquaresChildren() {
@@ -106,56 +108,6 @@ public class DungeonController {
     
     public void replaceSquares(ImageView image, int x, int y) {
     	squares.add(image, x, y);
-    }
-    
-    public void pauseMenu() {
-    	Popup popup = generatePauseMenu();
-   
-		if (!popup.isShowing())
-			popup.show(stage);
-		else {
-			popup.hide();
-		    System.out.println("Hello World!");
-		}
-    }
-    
-    public Popup generatePauseMenu() {
-       	Popup popup = new Popup();
-    	Label label = new Label("hello");
-    	label.setStyle(" -fx-background-color: white;");
-    	label.setMinWidth(80); 
-        label.setMinHeight(50); 
-        Button resume = new Button("Resume");
-        Button restart = new Button("Restart");
-        Button exit = new Button("Exit");
-        
-    	popup.getContent().add(label);
-    	popup.getContent().add(resume);
-    	popup.getContent().add(restart);
-    	popup.getContent().add(exit);
-    	
-        resume.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popup.hide();
-            }
-        });
-        
-        restart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popup.hide();
-            }
-        });
-        
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-        
-    	return popup;
     }
     
     @FXML
@@ -240,6 +192,10 @@ public class DungeonController {
     
     public boolean checkMove(int x, int y, String direction) {
     	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
+    }
+    
+    public void signalMovement() {
+    	
     }
     
 }
