@@ -248,7 +248,6 @@ public class Dungeon implements Observer {
     					((Door) entity).replaceDoorImage(player, imageManager);
     				
     				return entity.block(player);
-
     			}
     		}
     	}
@@ -397,7 +396,6 @@ public class Dungeon implements Observer {
      * - Otherwise, false is returned
      */
     public boolean updateGoal() {
-        System.out.println("A goal was just completed");
     	if (goal.getStatus()) {
     		return true;
     	}
