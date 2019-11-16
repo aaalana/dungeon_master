@@ -18,6 +18,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.util.ArrayList;
 
 /**
  * Pause menu used when the user wants to pause the game
@@ -28,13 +29,15 @@ public class PauseMenu {
 	private Stage stage;
 	private VBox vbox;
 	private Label label;
+	private Label goal;
 	private Button resume;
 	private Button restart;
 	private Button exit;
 	
-	public PauseMenu(Stage stage) {
+	public PauseMenu(Stage stage, Goal dGoal) {
 		this.stage = stage;
-		this.label = createLabel();
+		this.label = createTitleLabel();
+		this.goal = createGoalLabel(dGoal);
 	    this.resume = resumeHandler();
 	    this.restart = restartHandler();
 	    this.exit = exitHandler();
@@ -62,9 +65,10 @@ public class PauseMenu {
 	public void generatePauseMenu() {
         // add buttons and labels into a vBox structure
         ObservableList<Node> list = vbox.getChildren(); 
-		list.addAll(label, resume, restart, exit);
+		list.addAll(label, goal, resume, restart, exit);
 		
-		VBox.setMargin(label, new Insets(40, 30, 20, 30));  
+		VBox.setMargin(label, new Insets(30, 30, 10, 30));  
+		VBox.setMargin(goal, new Insets(10, 30, 10, 30));
 		VBox.setMargin(resume, new Insets(10, 30, 20, 30));  
 		VBox.setMargin(restart, new Insets(10, 30, 20, 30)); 
 		VBox.setMargin(exit, new Insets(10, 30, 30, 30)); 
@@ -74,12 +78,54 @@ public class PauseMenu {
 	 * Creates the Pause Menu title
 	 * @return
 	 */
-	public Label createLabel() {
+	public Label createTitleLabel() {
         label = new Label("P A U S E   S C R E E N");
        	label.setStyle("-fx-font-weight: bold;");
        	label.setFont(new Font("Arial", 15));
        	return label;
 	}
+	
+	/**
+	 * Creates a label that shows the goals of the dungeon
+	 * @return
+	 */
+	public Label createGoalLabel(Goal dGoal) {
+		String goalText="Goal: ";
+        goalText = extractGoal(dGoal, goalText);
+		goal = new Label(goalText);
+       	goal.setFont(new Font("Arial", 14));
+       	return goal;
+	}
+	
+	/**
+	 * Transforms the dungeon goals as text 
+	 * @param dGoal
+	 * @param goalText
+	 * @return
+	 */
+	public String extractGoal(Goal dGoal, String goalText) {
+		if (dGoal.isSameType("unsw.dungeon.TreasureGoal")) {
+	    	goalText = goalText + "treasure";
+	    } else if (dGoal.isSameType("unsw.dungeon.BoulderGoal")) {
+	    	goalText = goalText + "switches";
+	    } else if (dGoal.isSameType("unsw.dungeon.ExitGoal")) {
+	    	goalText = goalText + "exit";
+	    } else if (dGoal.isSameType("unsw.dungeon.EnemyGoal")) {
+	    	goalText = goalText + "enemy";
+	    } else if (dGoal.isSameType("unsw.dungeon.ANDGoal")) {
+	    	ArrayList<Goal> goalList = ((ANDGoal) dGoal).getGoal();
+	    	for (Goal g : goalList) {
+	    		goalText = goalText + extractGoal(g, "") + "  ";
+	    	}
+	    } else if (dGoal.isSameType("unsw.dungeon.ORGoal")) {
+	    	ArrayList<Goal> goalList = ((ORGoal) dGoal).getGoal();
+	    	for (Goal g : goalList) {
+	    		goalText = goalText + extractGoal(g, "") + "  ";
+	    	}
+		}
+		return goalText;
+	}
+	
 	
 	/**
 	 * Creates the VBox layout which acts as the pause Menu's structural base

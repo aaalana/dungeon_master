@@ -54,7 +54,7 @@ public class DungeonController {
         this.endScreen = new EndScreen(stage);
         this.stack = new StackPane();
         this.pause = new Button("||");
-        this.pauseMenu = new PauseMenu(stage);
+        this.pauseMenu = new PauseMenu(stage, dungeon.getGoal());
     }
 
     @FXML

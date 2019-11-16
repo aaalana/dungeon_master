@@ -32,6 +32,15 @@ public class Goal implements Subject {
 	}
 	
 	/**
+	 * Given a  string, the function checks if the type given is the
+	 * same as that of the goal
+	 * @return true when the type is the same and false otherwise
+	 */
+	public boolean isSameType(String type) {
+		return getClassName().equals(type);
+	}
+	
+	/**
 	 * Sets the goal as complete
 	 */
 	public void setComplete() {

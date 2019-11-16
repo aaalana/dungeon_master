@@ -23,6 +23,11 @@ public class ANDGoal extends GoalCombination implements GoalComponent {
 	}
 	
 	@Override
+	public ArrayList<Goal> getGoal() {
+		return goals;
+	}
+	
+	@Override
 	public boolean getStatus() {
 		// Checks the status of the goal when it is an AND goal
 		// returns true when all goals are completed and false otherwise

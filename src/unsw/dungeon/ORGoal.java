@@ -23,6 +23,11 @@ public class ORGoal extends GoalCombination implements GoalComponent {
 	}
 	
 	@Override
+	public ArrayList<Goal> getGoal() {
+		return goals;
+	}
+	
+	@Override
 	public boolean getStatus() {
 	    //Checks the status of the goal when it is an OR goal
 		// returns true when at least one goal has been completed and false otherwise
