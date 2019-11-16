@@ -1,0 +1,332 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Cannot create worker GC thread. Out of system resources.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (workerManager.hpp:70), pid=29519, tid=29527
+#
+# JRE version:  (11.0.4+11) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.4+11-LTS, mixed mode, aot, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF-8 unsw.dungeon.DungeonApplication
+
+Host: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz, 56 cores, 251G, Debian 6.0.10
+Time: Sat Nov 16 14:48:52 2019 AEDT elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f6e0c010000):  JavaThread "Unknown thread" [_thread_in_vm, id=29527, stack(0x00007f6e1228b000,0x00007f6e1238c000)]
+
+Stack: [0x00007f6e1228b000,0x00007f6e1238c000],  sp=0x00007f6e1238a5f0,  free space=1021k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xe0f71a]  VMError::report_and_die(int, char const*, char const*, __va_list_tag*, Thread*, unsigned char*, void*, void*, char const*, int, unsigned long)+0x18a
+V  [libjvm.so+0xe1051b]  VMError::report_and_die(Thread*, char const*, int, unsigned long, VMErrorType, char const*, __va_list_tag*)+0x2b
+V  [libjvm.so+0x6ab7b8]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*, ...)+0xd8
+V  [libjvm.so+0xe3bdd5]  AbstractWorkGang::add_workers(unsigned int, bool)+0x1e5
+V  [libjvm.so+0x79f10e]  G1ConcurrentMark::G1ConcurrentMark(G1CollectedHeap*, G1RegionToSpaceMapper*, G1RegionToSpaceMapper*)+0x58e
+V  [libjvm.so+0x78a1c3]  G1CollectedHeap::initialize()+0x5f3
+V  [libjvm.so+0xdcb8d1]  Universe::initialize_heap()+0x41
+V  [libjvm.so+0xdcbb87]  universe_init()+0x47
+V  [libjvm.so+0x86ab87]  init_globals()+0x57
+V  [libjvm.so+0xda9c59]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x309
+V  [libjvm.so+0x91e246]  JNI_CreateJavaVM+0x56
+C  [libjli.so+0x47b1]  JavaMain+0x81
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000000001ba3d90, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00007f6e0c026000 GCTaskThread "GC Thread#0" [stack: 0x00007f6e116fa000,0x00007f6e117fa000] [id=29528]
+
+[error occurred during error reporting (printing all threads), id 0xb, SIGSEGV (0xb) at pc=0x00007f6e12ca9801]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f6e0c00eb50] Heap_lock - owner thread: 0x00007f6e0c010000
+
+Heap address: 0x0000000082000000, size: 30688 MB, Compressed Oops mode: Non-zero based: 0x0000000082000000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 00:20 20923827                           /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/bin/java
+00601000-00602000 rw-p 00001000 00:20 20923827                           /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/bin/java
+01ba0000-01bc1000 rw-p 00000000 00:00 0                                  [heap]
+82000000-800000000 ---p 00000000 00:00 0 
+7f6da4d30000-7f6dec000000 ---p 00000000 00:00 0 
+7f6dec000000-7f6dec021000 rw-p 00000000 00:00 0 
+7f6dec021000-7f6df0000000 ---p 00000000 00:00 0 
+7f6df3804000-7f6df3a74000 rwxp 00000000 00:00 0 
+7f6df3a74000-7f6df3d93000 ---p 00000000 00:00 0 
+7f6df3d93000-7f6df4003000 rwxp 00000000 00:00 0 
+7f6df4003000-7f6dfb2cb000 ---p 00000000 00:00 0 
+7f6dfb2cb000-7f6dfb53b000 rwxp 00000000 00:00 0 
+7f6dfb53b000-7f6e02804000 ---p 00000000 00:00 0 
+7f6e02804000-7f6e0c000000 r--s 00000000 00:20 21448325                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/modules
+7f6e0c000000-7f6e0c0a6000 rw-p 00000000 00:00 0 
+7f6e0c0a6000-7f6e10000000 ---p 00000000 00:00 0 
+7f6e10e7f000-7f6e11205000 rw-p 00000000 00:00 0 
+7f6e11205000-7f6e11206000 ---p 00000000 00:00 0 
+7f6e11206000-7f6e11307000 rw-p 00000000 00:00 0 
+7f6e11307000-7f6e11406000 rw-p 00000000 00:00 0 
+7f6e11406000-7f6e116f8000 rw-p 00000000 00:00 0 
+7f6e116f8000-7f6e116f9000 ---p 00000000 00:00 0 
+7f6e116f9000-7f6e117fa000 rw-p 00000000 00:00 0 
+7f6e117fa000-7f6e117ff000 rw-p 00000000 00:00 0 
+7f6e117ff000-7f6e118e5000 ---p 00000000 00:00 0 
+7f6e118e5000-7f6e118ea000 rw-p 00000000 00:00 0 
+7f6e118ea000-7f6e119d0000 ---p 00000000 00:00 0 
+7f6e119d0000-7f6e119ea000 r-xp 00000000 00:20 21448328                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjimage.so
+7f6e119ea000-7f6e11be9000 ---p 0001a000 00:20 21448328                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjimage.so
+7f6e11be9000-7f6e11beb000 rw-p 00019000 00:20 21448328                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjimage.so
+7f6e11beb000-7f6e11bfd000 rw-p 00000000 00:00 0 
+7f6e11bfd000-7f6e11c04000 r-xp 00000000 00:20 21448342                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libzip.so
+7f6e11c04000-7f6e11e04000 ---p 00007000 00:20 21448342                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libzip.so
+7f6e11e04000-7f6e11e05000 rw-p 00007000 00:20 21448342                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libzip.so
+7f6e11e05000-7f6e11e48000 r--s 00000000 08:01 3597014                    /var/cache/nscd/passwd
+7f6e11e48000-7f6e11e71000 r-xp 00000000 00:20 21448332                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjava.so
+7f6e11e71000-7f6e12071000 ---p 00029000 00:20 21448332                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjava.so
+7f6e12071000-7f6e12073000 rw-p 00029000 00:20 21448332                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libjava.so
+7f6e12073000-7f6e12080000 r-xp 00000000 00:20 21448352                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libverify.so
+7f6e12080000-7f6e1227f000 ---p 0000d000 00:20 21448352                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libverify.so
+7f6e1227f000-7f6e12281000 rw-p 0000c000 00:20 21448352                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/libverify.so
+7f6e12281000-7f6e12283000 r--p 00000000 08:01 2229063                    /lib/x86_64-linux-gnu/librt-2.28.so
+7f6e12283000-7f6e12287000 r-xp 00002000 08:01 2229063                    /lib/x86_64-linux-gnu/librt-2.28.so
+7f6e12287000-7f6e12289000 r--p 00006000 08:01 2229063                    /lib/x86_64-linux-gnu/librt-2.28.so
+7f6e12289000-7f6e1228a000 r--p 00007000 08:01 2229063                    /lib/x86_64-linux-gnu/librt-2.28.so
+7f6e1228a000-7f6e1228b000 rw-p 00008000 08:01 2229063                    /lib/x86_64-linux-gnu/librt-2.28.so
+7f6e1228b000-7f6e1228f000 ---p 00000000 00:00 0 
+7f6e1228f000-7f6e1238c000 rw-p 00000000 00:00 0 
+7f6e1238c000-7f6e12399000 r--p 00000000 08:01 2229033                    /lib/x86_64-linux-gnu/libm-2.28.so
+7f6e12399000-7f6e12438000 r-xp 0000d000 08:01 2229033                    /lib/x86_64-linux-gnu/libm-2.28.so
+7f6e12438000-7f6e1250d000 r--p 000ac000 08:01 2229033                    /lib/x86_64-linux-gnu/libm-2.28.so
+7f6e1250d000-7f6e1250e000 r--p 00180000 08:01 2229033                    /lib/x86_64-linux-gnu/libm-2.28.so
+7f6e1250e000-7f6e1250f000 rw-p 00181000 08:01 2229033                    /lib/x86_64-linux-gnu/libm-2.28.so
+7f6e1250f000-7f6e1364d000 r-xp 00000000 00:20 21448296                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/server/libjvm.so
+7f6e1364d000-7f6e1384d000 ---p 0113e000 00:20 21448296                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/server/libjvm.so
+7f6e1384d000-7f6e13922000 r--p 0113e000 00:20 21448296                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/server/libjvm.so
+7f6e13922000-7f6e1395c000 rw-p 01213000 00:20 21448296                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/server/libjvm.so
+7f6e1395c000-7f6e139c7000 rw-p 00000000 00:00 0 
+7f6e139c7000-7f6e139cb000 rw-p 00000000 00:00 0 
+7f6e139cb000-7f6e139ed000 r--p 00000000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e139ed000-7f6e13b35000 r-xp 00022000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e13b35000-7f6e13b81000 r--p 0016a000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e13b81000-7f6e13b82000 ---p 001b6000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e13b82000-7f6e13b86000 r--p 001b6000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e13b86000-7f6e13b88000 rw-p 001ba000 08:01 2228805                    /lib/x86_64-linux-gnu/libc-2.28.so
+7f6e13b88000-7f6e13b8c000 rw-p 00000000 00:00 0 
+7f6e13b8c000-7f6e13b8d000 r--p 00000000 08:01 2229029                    /lib/x86_64-linux-gnu/libdl-2.28.so
+7f6e13b8d000-7f6e13b8e000 r-xp 00001000 08:01 2229029                    /lib/x86_64-linux-gnu/libdl-2.28.so
+7f6e13b8e000-7f6e13b8f000 r--p 00002000 08:01 2229029                    /lib/x86_64-linux-gnu/libdl-2.28.so
+7f6e13b8f000-7f6e13b90000 r--p 00002000 08:01 2229029                    /lib/x86_64-linux-gnu/libdl-2.28.so
+7f6e13b90000-7f6e13b91000 rw-p 00003000 08:01 2229029                    /lib/x86_64-linux-gnu/libdl-2.28.so
+7f6e13b91000-7f6e13ba0000 r-xp 00000000 00:20 21448323                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/jli/libjli.so
+7f6e13ba0000-7f6e13da0000 ---p 0000f000 00:20 21448323                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/jli/libjli.so
+7f6e13da0000-7f6e13da1000 rw-p 0000f000 00:20 21448323                   /tmp_amd/ravel/export/ravel/3/cs2511/jdk-jfx/lib/jli/libjli.so
+7f6e13da1000-7f6e13da7000 r--p 00000000 08:01 2229059                    /lib/x86_64-linux-gnu/libpthread-2.28.so
+7f6e13da7000-7f6e13db6000 r-xp 00006000 08:01 2229059                    /lib/x86_64-linux-gnu/libpthread-2.28.so
+7f6e13db6000-7f6e13dbc000 r--p 00015000 08:01 2229059                    /lib/x86_64-linux-gnu/libpthread-2.28.so
+7f6e13dbc000-7f6e13dbd000 r--p 0001a000 08:01 2229059                    /lib/x86_64-linux-gnu/libpthread-2.28.so
+7f6e13dbd000-7f6e13dbe000 rw-p 0001b000 08:01 2229059                    /lib/x86_64-linux-gnu/libpthread-2.28.so
+7f6e13dbe000-7f6e13dc2000 rw-p 00000000 00:00 0 
+7f6e13dc2000-7f6e13ddc000 r-xp 00000000 08:01 2228507                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f6e13ddc000-7f6e13fdb000 ---p 0001a000 08:01 2228507                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f6e13fdb000-7f6e13fdc000 r--p 00019000 08:01 2228507                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f6e13fdc000-7f6e13fdd000 rw-p 0001a000 08:01 2228507                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f6e13fdd000-7f6e13fde000 r--p 00000000 08:01 2228513                    /lib/x86_64-linux-gnu/libcloneforkinterceptor.so
+7f6e13fde000-7f6e13fdf000 r-xp 00001000 08:01 2228513                    /lib/x86_64-linux-gnu/libcloneforkinterceptor.so
+7f6e13fdf000-7f6e13fe0000 r--p 00002000 08:01 2228513                    /lib/x86_64-linux-gnu/libcloneforkinterceptor.so
+7f6e13fe0000-7f6e13fe1000 r--p 00002000 08:01 2228513                    /lib/x86_64-linux-gnu/libcloneforkinterceptor.so
+7f6e13fe1000-7f6e13fe2000 rw-p 00003000 08:01 2228513                    /lib/x86_64-linux-gnu/libcloneforkinterceptor.so
+7f6e13fe2000-7f6e13fe3000 rw-p 00000000 00:00 0 
+7f6e14008000-7f6e1400d000 rw-p 00000000 00:00 0 
+7f6e1400d000-7f6e14014000 ---p 00000000 00:00 0 
+7f6e14014000-7f6e1401c000 rw-s 00000000 08:01 1592691                    /tmp/hsperfdata_z5209503/29519 (deleted)
+7f6e1401c000-7f6e1401d000 ---p 00000000 00:00 0 
+7f6e1401d000-7f6e1401e000 r--p 00000000 00:00 0 
+7f6e1401e000-7f6e14020000 rw-p 00000000 00:00 0 
+7f6e14020000-7f6e14021000 r--p 00000000 08:01 2228797                    /lib/x86_64-linux-gnu/ld-2.28.so
+7f6e14021000-7f6e1403f000 r-xp 00001000 08:01 2228797                    /lib/x86_64-linux-gnu/ld-2.28.so
+7f6e1403f000-7f6e14047000 r--p 0001f000 08:01 2228797                    /lib/x86_64-linux-gnu/ld-2.28.so
+7f6e14047000-7f6e14048000 r--p 00026000 08:01 2228797                    /lib/x86_64-linux-gnu/ld-2.28.so
+7f6e14048000-7f6e14049000 rw-p 00027000 08:01 2228797                    /lib/x86_64-linux-gnu/ld-2.28.so
+7f6e14049000-7f6e1404a000 rw-p 00000000 00:00 0 
+7ffeb637d000-7ffeb639e000 rw-p 00000000 00:00 0                          [stack]
+7ffeb63bc000-7ffeb63be000 r--p 00000000 00:00 0                          [vvar]
+7ffeb63be000-7ffeb63c0000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: unsw.dungeon.DungeonApplication
+java_class_path (initial): /tmp_amd/cage/export/cage/1/z5209503/COMP2511/H16A-dungeon_master/bin:/tmp_amd/cage/export/cage/1/z5209503/COMP2511/H16A-dungeon_master/lib/json.jar:/opt/eclipse/plugins/org.junit.jupiter.api_5.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.jupiter.engine_5.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.jupiter.migrationsupport_5.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.jupiter.params_5.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.platform.commons_1.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.platform.engine_1.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.platform.launcher_1.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.platform.runner_1.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.platform.suite.api_1.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit.vintage.engine_5.4.0.v20190212-2109.jar:/opt/eclipse/plugins/org.opentest4j_1.1.1.v20190212-2109.jar:/opt/eclipse/plugins/org.apiguardian_1.0.0.v20190212-2109.jar:/opt/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar:/opt/eclipse/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 2                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 2                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 2147483648                                {product} {ergonomic}
+   size_t MaxHeapSize                              = 32178700288                               {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5824844                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122916698                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122916698                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=/import/cage/1/z5209503/bin-pc.amd64.linux:/import/cage/1/z5209503/bin:/usr/local/bin:/usr/bin:/bin
+SHELL=/usr/local/bin/bash
+DISPLAY=vx1.orchestra.cse.unsw.EDU.AU:76.0
+ARCH=pc.amd64.linux
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xe10560], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xe10560], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0xe10560], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0xc06000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0xc06000], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0xe10560], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.so+0xc05ea0], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGINT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGTERM: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGQUIT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Debian 6.0.10
+
+uname:Linux 4.9.0-0.bpo.11-amd64 #1 SMP Debian 4.9.189-3+deb9u2~deb8u1 (2019-11-12) x86_64
+libc:glibc 2.28 NPTL 2.28 
+rlimit: STACK 8192k, CORE 0k, NPROC 1031370, NOFILE 4096, AS infinity, DATA infinity, FSIZE infinity
+load average:17.94 18.74 18.93
+
+/proc/meminfo:
+MemTotal:       264059244 kB
+MemFree:        153562544 kB
+MemAvailable:   182557636 kB
+Buffers:         1145088 kB
+Cached:         25011504 kB
+SwapCached:            0 kB
+Active:         90609752 kB
+Inactive:        9878592 kB
+Active(anon):   74341780 kB
+Inactive(anon):   896736 kB
+Active(file):   16267972 kB
+Inactive(file):  8981856 kB
+Unevictable:       10084 kB
+Mlocked:           10084 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:              3300 kB
+Writeback:             0 kB
+AnonPages:      74342056 kB
+Mapped:          2213756 kB
+Shmem:            900096 kB
+Slab:            6820260 kB
+SReclaimable:    5595332 kB
+SUnreclaim:      1224928 kB
+KernelStack:      246912 kB
+PageTables:      1369744 kB
+NFS_Unstable:       2260 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    132029620 kB
+Committed_AS:   232419540 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:     3773176 kB
+DirectMap2M:    99940352 kB
+DirectMap1G:    166723584 kB
+
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads):
+2062740
+
+
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have):
+65530
+
+
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers):
+57344
+
+
+
+/etc/ld.so.preload:
+libcloneforkinterceptor.so
+
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0.000
+
+CPU:total 56 (initial active 2) (14 cores per cpu, 2 threads per core) family 6 model 79 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+CPU Model and flags from /proc/cpuinfo:
+model name	: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch epb invpcid_single ssbd ibrs ibpb stibp kaiser tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm rdseed adx smap intel_pt xsaveopt cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts md_clear flush_l1d
+
+Memory: 4k page, physical 264059244k(153562544k free), swap 0k(0k free)
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.4+11-LTS) for linux-amd64 JRE (Zulu11.33+15-CA) (11.0.4+11-LTS), built on Jul 23 2019 16:08:33 by "zulu_re" with gcc 4.9.2 20150212 (Red Hat 4.9.2-6)
+
+END.
