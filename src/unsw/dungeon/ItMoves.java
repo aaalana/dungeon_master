@@ -30,7 +30,7 @@ public class ItMoves implements MoveStrategy {
 	 */
 	public void moveUp(Dungeon dungeon, Entity entity) {
         if (entity.getY() > 0)
-        	entity.setPosition(entity.getX() - 1, entity.getY() - 1);
+        	entity.setPosition(entity.getX(), entity.getY() - 1);
     }
 
 	/**
