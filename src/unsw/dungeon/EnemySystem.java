@@ -3,22 +3,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnemySystem implements Subject {
-	private List<Enemy> enemies;
-	private List<Enemy2> enemies2;
+	private List<Archer> archers;
+	private List<Crab> crabs;
 	private EnemyGoal enemyGoal;
 
 	public EnemySystem() {
 		super();
-		this.enemies = new ArrayList<Enemy>(); 
-		this.enemies2 = new ArrayList<Enemy2>();
+		this.archers = new ArrayList<Archer>(); 
+		this.crabs = new ArrayList<Crab>();
 	}
 
 	public List<Enemy> getEnemies() {
+		List<Enemy> enemies = new ArrayList<Enemy>();
+		enemies.addAll(crabs);
+		enemies.addAll(archers);
 		return enemies;
 	}
 
-	public void setEnemies(List<Enemy> enemies) {
-		this.enemies = enemies;
+	public void setArchers(List<Archer> archers) {
+		this.archers = archers;
 	}
 
 	public List<Enemy2> getEnemies2() {
@@ -37,53 +40,46 @@ public class EnemySystem implements Subject {
 		this.enemyGoal = enemyGoal;
 	}
 	
-	public void addEnemy(Entity enemy) {
-		this.enemies.add((Enemy) enemy);
+	public void addArcher(Archer enemy) {
+		archers.add(enemy);
 	}
 	
-	public void addEnemy2(Entity enemy) {
-		this.enemies2.add((Enemy2) enemy);
+	public void addCrab(Entity enemy) {
+		crabs.add((Crab) enemy);
 	}
 	
 	public <T> void removeEnemy(T enemy) {
-		enemies.remove(enemy);
-		if (this.enemies.size() == 0) {
-			this.update();
+		if (enemy instanceof unsw.dungeon.Archer) {
+			archers.remove(enemy);
+		} else {
+			crabs.remove(enemy);
 		}
+		
+		if (archers.size() == 0 && crabs.size() == 0) 
+			this.update();
 	}
 
-	public void removeEnemy(Enemy2 enemy) {
-		enemies2.remove(enemy);
-		if (this.enemies.size() == 0) {
-			this.update();
-		}
-
-	}
 
 	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
-    	for (Entity entity : this.enemies) {
+    	for (Archer entity : this.archers) {
     		if (entity == null) continue;
     		
-    		if (entity instanceof unsw.dungeon.Enemy) {
-    			Enemy enemy = (Enemy) entity;
-    			enemy.searchPlayer(playerX, playerY, isInvincible);
+    		if (entity instanceof unsw.dungeon.Archer) {
+    			entity.searchPlayer(playerX, playerY, isInvincible);
     		}
     	}
     	
-    	for (Entity entity : this.enemies2) {
+    	for (Crab entity : this.crabs) {
     		if (entity == null) continue;
     		
-    		if (entity instanceof unsw.dungeon.Enemy2) {
-    			Enemy2 enemy = (Enemy2) entity;
-    			enemy.searchPlayer(playerX, playerY, isInvincible);
+    		if (entity instanceof unsw.dungeon.Crab) {
+    			entity.searchPlayer(playerX, playerY, isInvincible);
     		}
     	}
     }
-	 
-
+	
 	public void update() {
-		System.out.println("All enemies are dead, updating goals");
+		System.out.println("All archers are dead, updating goals");
 		enemyGoal.updateGoal();
 	}
-
 }

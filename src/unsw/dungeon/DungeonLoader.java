@@ -125,11 +125,11 @@ public abstract class DungeonLoader {
             dungeon.addItem(sword);
         	break;
         case "enemy":
-            Enemy enemy = new Enemy(dungeon, x, y);
-            ImageView eView = onLoad(enemy, new Image("/deep_elf_master_archer.png"));
-            enemy.setImage(eView);
-            entity = enemy;
-            dungeon.addEnemy(enemy);
+            Archer archer = new Archer(dungeon, x, y);
+            ImageView eView = onLoad(archer, new Image("/deep_elf_master_archer.png"));
+            archer.setImage(eView);
+            entity = archer;
+            dungeon.addArcher(archer);
         	break;
         case "exit":
         	Exit exit = new Exit(x, y);
@@ -164,12 +164,11 @@ public abstract class DungeonLoader {
         	dungeon.addPortals(portal);
         	break;
         case "enemy2":
-        	Enemy2 enemy2 = new Enemy2(dungeon, x, y);
-            ImageView e2View = onLoad(enemy2, new Image("/crab.png"));
-            enemy2.setImage(e2View);
-            entity = enemy2;
-            dungeon.addEnemy2(enemy2);
-        	
+        	Crab crab = new Crab(dungeon, x, y);
+            ImageView e2View = onLoad(crab, new Image("/crab.png"));
+            crab.setImage(e2View);
+            entity = crab;
+            dungeon.addCrab(crab);
         }
         dungeon.addEntity(entity);
     }

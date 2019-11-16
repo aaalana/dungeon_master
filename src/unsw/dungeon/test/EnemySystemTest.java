@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
 
-class EnemySystemTest {
+class ArcherSystemTest {
 
 	@Test
 	void testGetEnemies() {
 		EnemySystem sys = new EnemySystem();
 		Dungeon dungeon = new Dungeon(18,16);
-		Enemy e1 = new Enemy(dungeon, 2, 3);
-		Enemy e2 = new Enemy(dungeon, 8, 3);
-		Enemy e3 = new Enemy(dungeon, 8, 7);
+		Archer e1 = new Archer(dungeon, 2, 3);
+		Archer e2 = new Archer(dungeon, 8, 3);
+		Archer e3 = new Archer(dungeon, 8, 7);
 		
 		ArrayList<Entity> enemies = new ArrayList<Entity>();
 		
@@ -27,8 +27,8 @@ class EnemySystemTest {
 		enemies.add(e1);
 		enemies.add(e2);
 		
-		sys.addEnemy(e1);
-		sys.addEnemy(e2);
+		sys.addArcher(e1);
+		sys.addArcher(e2);
 		assertEquals(enemies, sys.getEnemies());
 		
 		// different lists
