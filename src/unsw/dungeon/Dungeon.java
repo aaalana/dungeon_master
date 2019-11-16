@@ -194,8 +194,6 @@ public class Dungeon implements Observer {
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {
     		player.killOff();
-    		player = null;
-    		System.exit(0);
     	}
     }
     
@@ -386,13 +384,15 @@ public class Dungeon implements Observer {
 
     /**
      * Keeps track of when a goal has been completed
-     * - If the overall goal is complete, then the game will exit.
+     * - If the overall goal is complete, then true is returned
+     * - Otherwise, false is returned
      */
-    public void updateGoal() {
+    public boolean updateGoal() {
         System.out.println("A goal was just completed");
     	if (goal.getStatus() == true) {
-    		System.exit(0);
+    		return true;
     	}
+    	return false;
     }
 }
 

@@ -19,22 +19,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class PauseMenu {
+public class EndScreen {
 	private Stage stage;
 	private VBox vbox;
 	private Label label;
-	private Button resume;
 	private Button restart;
 	private Button exit;
+	boolean showing;
 	
-	public PauseMenu(Stage stage) {
+	public EndScreen(Stage stage) {
 		this.stage = stage;
-		this.label = createLabel();
-	    this.resume = resumeHandler();
+		this.label = null;
 	    this.restart = restartHandler();
 	    this.exit = exitHandler();
 		this.vbox = createVBox();
-		generatePauseMenu();
+		this.showing = false;
 	}
 
 	/**
@@ -42,6 +41,7 @@ public class PauseMenu {
 	 */
 	public void showPopUp() {
 		vbox.setVisible(true);
+		this.showing = true;
 	}
 	
 	/**
@@ -52,28 +52,43 @@ public class PauseMenu {
 	}
 	
 	/**
+	 * Checks if the end screen is visible
+	 * @return
+	 */
+	public boolean getShowing() {
+		return showing;
+	}
+	
+	/**
 	 * Generates a pause menu
 	 */
-	public void generatePauseMenu() {
-        // add buttons and labels into a vBox structure
-        ObservableList<Node> list = vbox.getChildren(); 
-		list.addAll(label, resume, restart, exit);
-		
-		VBox.setMargin(label, new Insets(40, 30, 20, 30));  
-		VBox.setMargin(resume, new Insets(10, 30, 20, 30));  
+	public void generateEndScreen(Boolean status) {
+	    // set the label by the winning status of the game 
+	    label = createLabel(status);
+	    
+	    // set the margins for the vBox children
+	  	VBox.setMargin(label, new Insets(40, 30, 20, 30)); 
 		VBox.setMargin(restart, new Insets(10, 30, 20, 30)); 
 		VBox.setMargin(exit, new Insets(10, 30, 30, 30)); 
-    }
+		
+	    // add buttons and label into a vBox structure
+	    ObservableList<Node> list = vbox.getChildren(); 
+		list.addAll(label, restart, exit);
+	}
 	
 	/**
 	 * Creates the Pause Menu title
 	 * @return
 	 */
-	public Label createLabel() {
-        label = new Label("P A U S E   S C R E E N");
-       	label.setStyle("-fx-font-weight: bold;");
-       	label.setFont(new Font("Arial", 20));
-       	return label;
+	public Label createLabel(boolean status) {
+		if (status)
+			label = new Label("Y O U  W I N !");
+		else 
+			label = new Label("G A M E  O V E R !");
+	   	
+		label.setStyle("-fx-font-weight: bold;");
+	   	label.setFont(new Font("Arial", 20));
+	   	return label;
 	}
 	
 	/**
@@ -82,12 +97,12 @@ public class PauseMenu {
 	 */
 	public VBox createVBox() {
 	 	vbox = new VBox();
-        
+	    
 	 	vbox.setSpacing(10);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setVisible(false);
+	    vbox.setAlignment(Pos.CENTER);
+	    vbox.setVisible(false);
         
-        BackgroundImage myBI= new BackgroundImage(new Image("/full_background.png"),
+	    BackgroundImage myBI= new BackgroundImage(new Image("/full_background.png"), 
 												  null, 
 										          BackgroundRepeat.NO_REPEAT, 
 											      null, 
@@ -99,31 +114,11 @@ public class PauseMenu {
 		"-fx-border-width: 3;\n" +
 		"-fx-border-style: dashed;\n";  
 		vbox.setStyle(cssLayout);
-        
+	     		
 		vbox.setMaxWidth(Region.USE_PREF_SIZE);
 		vbox.setMaxHeight(Region.USE_PREF_SIZE);
 		
 		return vbox;
-	}
-
-	/**
-	 * Creates and styles a resume button
-	 * @return
-	 */
-	public Button resumeHandler() {
-		resume = new Button("RESUME");
-		resume.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
-		resume.setPrefHeight(80);
-	    resume.setPrefWidth(250);
-	        
-		resume.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                vbox.setVisible(false);
-            }
-        });
-		
-		return resume;
 	}
 	
 	/**
@@ -131,11 +126,11 @@ public class PauseMenu {
 	 * @return
 	 */
 	public Button restartHandler() {
-		restart = new Button("RESTART");
+		restart = new Button("START AGAIN?");
 	    restart.setStyle("-fx-background-color:#b07356; -fx-text-fill: white;");
 	    restart.setPrefHeight(80);
-        restart.setPrefWidth(250);
-      
+	    restart.setPrefWidth(250);
+	  
 		restart.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -147,7 +142,7 @@ public class PauseMenu {
 					e.printStackTrace();
 				}
 			}
-        });
+	    });
 		
 		return restart;
 	}
@@ -157,7 +152,7 @@ public class PauseMenu {
 	 * @return
 	 */
 	public Button exitHandler() {
-		exit = new Button("EXIT");
+		exit = new Button("EXIT GAME");
 	    exit.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
 	    exit.setPrefHeight(80);
         exit.setPrefWidth(250);
@@ -168,7 +163,6 @@ public class PauseMenu {
                 System.exit(0);
             }
         });
-	    
 	    return exit;
 	}    
 }

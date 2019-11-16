@@ -45,7 +45,6 @@ public class Goal implements Subject {
 		dungeon.updateGoal();
 	}
 
-
 	public void updateGoal() {
 		this.setComplete();
 		dungeon.updateGoal();

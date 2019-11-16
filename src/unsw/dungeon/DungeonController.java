@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -34,6 +35,11 @@ public class DungeonController {
 
     private Stage stage;
     
+    private EndScreen endScreen;
+   
+    @FXML
+    private StackPane stack;
+    
     @FXML
     private Button pause;
     
@@ -42,12 +48,14 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.stage = primaryStage;
         this.initialEntities = new ArrayList<>(initialEntities);
+        this.endScreen = new EndScreen(stage);
+        this.stack = new StackPane();
     }
 
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
-    
+       
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) 
@@ -60,9 +68,13 @@ public class DungeonController {
         // add a pause button
         createPauseButton();
         
+        // add in the end screen
+        stack.getChildren().add(endScreen.getPopUp());
+        
         // add entities
         for (ImageView entity : initialEntities)
             getSquaresChildren().add(entity);
+        
     }
     
     /**
@@ -100,11 +112,12 @@ public class DungeonController {
     public void createPauseButton() {
         Button btn = new Button("||");
         PauseMenu pauseMenu = new PauseMenu(stage);
+        stack.getChildren().add(pauseMenu.getPopUp());
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                pauseMenu.showPopUp();
+            	pauseMenu.showPopUp();
             }
         });
         squares.add(btn, 2, dungeon.getHeight() + 2);
@@ -112,31 +125,51 @@ public class DungeonController {
     
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	PlayerState oldState = player.getState();
-    	switch (event.getCode()) {
-        case UP:
-        	signalMovement(player.getX(), player.getY() - 1, "up", oldState); 
-            break;
-        case DOWN:
-        	signalMovement(player.getX(), player.getY() + 1, "down", oldState); 
-            break;
-        case LEFT:
-        	signalMovement(player.getX() - 1, player.getY(), "left", oldState); 
-            break;
-        case RIGHT:
-        	signalMovement(player.getX() + 1, player.getY(), "right", oldState); 
-            break;
-        default:
-            break; 
-        }
-    
-    	// signal when the player should be using its sword
-        player.useSword();
-       
-        // detects when to kill creatures after all creatures have moved
-        dungeon.killCreature(null);
+    	if (!endScreen.getShowing()) {
+	    	squares.setFocusTraversable(true);
+	    	
+	    	PlayerState oldState = player.getState();
+	    	switch (event.getCode()) {
+	        case UP:
+	        	signalMovement(player.getX(), player.getY() - 1, "up", oldState); 
+	            break;
+	        case DOWN:
+	        	signalMovement(player.getX(), player.getY() + 1, "down", oldState); 
+	            break;
+	        case LEFT:
+	        	signalMovement(player.getX() - 1, player.getY(), "left", oldState); 
+	            break;
+	        case RIGHT:
+	        	signalMovement(player.getX() + 1, player.getY(), "right", oldState); 
+	            break;
+	        default:
+	            break; 
+	        }
+	    
+	    	// signal when the player should be using its sword
+	        player.useSword();
+	       
+	        // detects when to kill creatures after all creatures have moved
+	        dungeon.killCreature(null);
+		
+	        // end the game when the user wins/loses
+	        endGame();
+    	}
     }
    
+    /**
+     * Shows the endScreen when the game is finished
+     */
+    public void endGame() {
+		if (player.getState() instanceof DeadState) {
+			endScreen.generateEndScreen(false);
+	     	endScreen.showPopUp();
+	    } else if (dungeon.updateGoal()) {
+	    	endScreen.generateEndScreen(true);
+	    	endScreen.showPopUp();
+	    }
+    }
+    
     /**
      * Checks if the player's movement should be blocked by an entity
      * @param x
