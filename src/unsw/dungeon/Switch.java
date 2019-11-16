@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Switch entity
+ * @author z5209503
+ *
+ */
 public class Switch extends Obstacle {
 	private boolean triggered;
 
@@ -10,12 +15,12 @@ public class Switch extends Obstacle {
  
     @Override
     public void trigger(boolean state){
-    	// temporary testing - remove later
     	if (state)
     		System.out.println("switch triggered!");
     	else
     		System.out.println("switch untriggered!");
     	
+    	// sets the triggered state of the switch
     	this.triggered = state;
     }
     
