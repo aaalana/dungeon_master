@@ -127,7 +127,6 @@ public class DungeonController {
     
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	System.out.print(endScreen.getShowing());
     	if (!endScreen.getShowing()) {
 	    	
 	    	PlayerState oldState = player.getState();

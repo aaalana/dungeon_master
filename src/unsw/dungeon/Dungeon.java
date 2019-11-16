@@ -215,7 +215,6 @@ public class Dungeon implements Observer {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
-    			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
     			return entity.getClassName();
     		}
     	}
@@ -233,13 +232,13 @@ public class Dungeon implements Observer {
     		if (entity == null) continue;
     		
     		if (entity.getX() == x && entity.getY() == y) {
-    			if (entity instanceof Wall) {
+    			if (entity.block(player)) {
     				return true;
-    			} else if (entity instanceof Door) {
-    				boolean canBlock = entity.block(player);
-    				if (!canBlock) 
-    					((Door) entity).replaceDoorImage(player, imageManager);
-    				return canBlock;
+    			} else {
+    				// -If the entity, can't block, it must be an unlocked door
+        		    // -replace the image of the locked door to an unlocked door
+    				((Door) entity).replaceDoorImage(player, imageManager);
+    				return false;
     			}
     		}
     	}

@@ -44,14 +44,11 @@ public class BoulderSystem {
     			if (direction == "up" && (this.checkBoulder(x, y - 1) == true || dungeon.checkSquare(x, y - 1) == "unsw.dungeon.Wall")) return false;
     			if (direction == "down" && (this.checkBoulder(x, y + 1) == true || dungeon.checkSquare(x, y + 1) == "unsw.dungeon.Wall")) return false;
     			
-
     			// If not, then move the boulder and return true
     			boulder.tryToMove(direction, dungeon, boulder);
-    				
     			return true;
     		}
     	}
-    	
     	//If there's no boulder there, return true
     	return true;
     }

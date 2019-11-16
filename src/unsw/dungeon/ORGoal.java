@@ -24,7 +24,7 @@ public class ORGoal extends GoalCombination implements GoalComponent {
 		System.out.println("Checking if all the goals were completed");
 		for (Goal goal : goals) {
 			if (goal.getStatus() == true) {
-				System.out.println("The goal: " + goal.getClass().getName() + " was completed");
+				System.out.println("The goal: " + goal.getClassName() + " was completed");
 				return true;
 			}
 		}

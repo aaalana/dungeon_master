@@ -7,7 +7,9 @@ import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 /**
  * An entity in the dungeon.
+ * This class acts as the context class for the implementation of strategy pattern.
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  *
  */
 public abstract class Entity {

@@ -109,8 +109,7 @@ public class Player extends LivingCreature {
 	 */
     public boolean collectItem(Item item) {
     	if (item == null) return false;
-    	inventory.addItem(this, item);
-    	return inventory.hasCertainItem(item);
+    	return inventory.addItem(this, item);
     }
    
 	/**

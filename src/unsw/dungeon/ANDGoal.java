@@ -24,7 +24,7 @@ public class ANDGoal extends GoalCombination implements GoalComponent {
 		System.out.println("Checking if all the goals were completed");
 		for (Goal goal : goals) {
 			if (goal.getStatus() == false) {
-				System.out.println("The goal: " + goal.getClass().getName() + " was not completed");
+				System.out.println("The goal: " + goal.getClassName() + " was not completed");
 				return false;
 			}
 		}
