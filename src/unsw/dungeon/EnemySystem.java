@@ -20,6 +20,14 @@ public class EnemySystem implements Subject {
 	public void setEnemies(List<Enemy> enemies) {
 		this.enemies = enemies;
 	}
+
+	public List<Enemy2> getEnemies2() {
+		return enemies2;
+	}
+
+	public void setEnemies2(List<Enemy2> enemies) {
+		this.enemies2 = enemies;
+	}
 	
 	public Goal getEnemyGoal() {
 		return enemyGoal;
