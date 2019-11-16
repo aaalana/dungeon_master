@@ -23,6 +23,14 @@ public class EnemySystem implements Subject {
 	public void setArchers(List<Archer> archers) {
 		this.archers = archers;
 	}
+
+	public List<Enemy2> getEnemies2() {
+		return enemies2;
+	}
+
+	public void setEnemies2(List<Enemy2> enemies) {
+		this.enemies2 = enemies;
+	}
 	
 	public Goal getEnemyGoal() {
 		return enemyGoal;
@@ -50,6 +58,7 @@ public class EnemySystem implements Subject {
 		if (archers.size() == 0 && crabs.size() == 0) 
 			this.update();
 	}
+
 
 	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
     	for (Archer entity : this.archers) {

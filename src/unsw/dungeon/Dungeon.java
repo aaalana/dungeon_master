@@ -209,7 +209,7 @@ public class Dungeon implements Observer {
     		items.remove(entity);
     		if (entity instanceof Treasure) 
 				treasures.removeTreasure(entity);   	
-    	} else if (entity instanceof Enemy) {
+    	} else if (entity instanceof Enemy || entity instanceof Enemy2) {
     		imageManager.removeImage(entity.getImage());
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {
@@ -322,6 +322,26 @@ public class Dungeon implements Observer {
 	    		}
     		}
     	}
+
+
+        for (Enemy2 enemy: enemies.getEnemies2()) {
+            if (enemy == null) continue;
+            
+            if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
+                if (player.getState() instanceof InvincibilityState) {
+                    removeEntity(enemy);
+                } else if (player.getState() instanceof NormalState) {
+                    // kill the player
+                    if (sword == null) 
+                        removeEntity(player);
+                    // kill the enemy
+                     else if (sword.getStatus()) {
+                        removeEntity(enemy);
+                        sword.reduceUses();
+                     }
+                }
+            }
+        }
     }
     
     
