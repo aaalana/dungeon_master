@@ -200,6 +200,15 @@ public class DungeonController {
 			dungeon.updateObstacle();
 	        dungeon.removeFromGround(); 
 	        
+	        if (direction.equals("left"))
+	        	x--;
+	        else if (direction.equals("right"))
+	        	x++;
+	        else if (direction.equals("up"))
+	        	y--;
+	        else
+	        	y++;
+	        
 			if (checkMove(x, y, direction) && player.getState() instanceof SpeedState && 
 				oldState instanceof SpeedState) {
 				player.tryToMove(direction, dungeon, player);
