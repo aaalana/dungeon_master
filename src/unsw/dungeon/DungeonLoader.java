@@ -163,6 +163,13 @@ public abstract class DungeonLoader {
         	dungeon.addObstacle(portal);
         	dungeon.addPortals(portal);
         	break;
+        case "enemy2":
+        	Enemy2 enemy2 = new Enemy2(dungeon, x, y);
+            ImageView e2View = onLoad(enemy2, new Image("/crab.png"));
+            enemy2.setImage(e2View);
+            entity = enemy2;
+            dungeon.addEnemy2(enemy2);
+        	
         }
         dungeon.addEntity(entity);
     }

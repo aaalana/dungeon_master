@@ -125,6 +125,11 @@ public class Dungeon implements Observer {
     	enemies.addEnemy(enemy);
     }
     
+    public void addEnemy2(Enemy2 enemy) {
+    	System.out.println(enemy);
+    	enemies.addEnemy2(enemy);
+    }
+    
     /**
      * Adds a boulder to a boulder system
      * @param boulder
@@ -281,7 +286,7 @@ public class Dungeon implements Observer {
      * Signals enemies to move
      */
     public void moveEnemies() {
-    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY());
+    	enemies.moveEnemies(getPlayer().getX(), getPlayer().getY(), getPlayer().isInvincible());
     }
 
     /**

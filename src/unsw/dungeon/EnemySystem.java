@@ -4,11 +4,13 @@ import java.util.List;
 
 public class EnemySystem implements Subject {
 	private List<Enemy> enemies;
+	private List<Enemy2> enemies2;
 	private EnemyGoal enemyGoal;
 
 	public EnemySystem() {
 		super();
 		this.enemies = new ArrayList<Enemy>(); 
+		this.enemies2 = new ArrayList<Enemy2>();
 	}
 
 	public List<Enemy> getEnemies() {
@@ -31,32 +33,39 @@ public class EnemySystem implements Subject {
 		this.enemies.add((Enemy) enemy);
 	}
 	
+	public void addEnemy2(Entity enemy) {
+		this.enemies2.add((Enemy2) enemy);
+	}
+	
 	public <T> void removeEnemy(T enemy) {
 		enemies.remove(enemy);
 		if (this.enemies.size() == 0) {
 			this.update();
 		}
 	}
-	
-	/**
-	 * Moves the enemies in the dungeon
-	 * @param playerX
-	 * @param playerY
-	 */
-	public void moveEnemies(int playerX, int playerY) {
+
+
+	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
     	for (Entity entity : this.enemies) {
     		if (entity == null) continue;
     		
     		if (entity instanceof unsw.dungeon.Enemy) {
     			Enemy enemy = (Enemy) entity;
-    			enemy.searchPlayer(playerX, playerY);
+    			enemy.searchPlayer(playerX, playerY, isInvincible);
+    		}
+    	}
+    	
+    	for (Entity entity : this.enemies2) {
+    		if (entity == null) continue;
+    		
+    		if (entity instanceof unsw.dungeon.Enemy2) {
+    			Enemy2 enemy = (Enemy2) entity;
+    			enemy.searchPlayer(playerX, playerY, isInvincible);
     		}
     	}
     }
-	
-	/**
-	 * Updates the enemy goal
-	 */
+	 
+
 	public void update() {
 		System.out.println("All enemies are dead, updating goals");
 		enemyGoal.updateGoal();
