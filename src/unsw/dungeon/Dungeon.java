@@ -396,9 +396,8 @@ public class Dungeon implements Observer {
      * - Otherwise, false is returned
      */
     public boolean updateGoal() {
-    	if (goal.getStatus()) {
+    	if (goal.getStatus()) 
     		return true;
-    	}
     	return false;
     }
 }
