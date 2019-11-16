@@ -3,7 +3,7 @@ package unsw.dungeon;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
-import unsw.dungeon.DungeonController.ImageManager;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 /**
  * An entity in the dungeon.

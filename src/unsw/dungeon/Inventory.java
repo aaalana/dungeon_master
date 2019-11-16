@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-import unsw.dungeon.DungeonController.ImageManager;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 public class Inventory {
 	private ArrayList<Item> items;
@@ -12,7 +12,7 @@ public class Inventory {
 	public Inventory(Dungeon dungeon) {
 		this.items = new ArrayList<Item>();
 		this.dungeon = dungeon;
-		this.imageManager = new DungeonController.ImageManager();
+		this.imageManager = new DungeonControllerLoader.ImageManager();
 	}
 	
 	/**

@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import unsw.dungeon.DungeonController.ImageManager;
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 public class PortalSystem {
 	private List<Portal> portals;
@@ -11,7 +11,7 @@ public class PortalSystem {
 	
 	public PortalSystem() {
 		this.portals = new ArrayList<Portal>(); 
-		this.imageManager = new DungeonController.ImageManager();
+		this.imageManager = new DungeonControllerLoader.ImageManager();
 	}
 	
 	/**

@@ -62,7 +62,7 @@ public class DungeonController {
         
         // add entities
         for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
+            getSquaresChildren().add(entity);
     }
     
     /**
@@ -171,51 +171,29 @@ public class DungeonController {
 		}
 		dungeon.moveEnemies();
     }
-
-    /**
-     * Manages which images are shown in the front end section of the game.
-     * 
-     * Reason for use of a nested class:
-     * Since imageManager only uses the dungeonController functions, nesting places
-     * the code closer to where it is used and helps encapsulates the squares
-     * gridPane when the imageManager is used by other classes. 
-     * 
-     * @author z5209503
-     */
-    public static class ImageManager {
-    	private GridPane squares;
-    	
-    	/**
-    	 * removes an image from the game
-    	 * @param view
-    	 */
-    	public void removeImage(ImageView view) {
-    		getSquaresChildren().remove(view);
-	    }
-    	
-    	/**
-    	 * Gets the square's nodes
-    	 * @return
-    	 */
-    	public ObservableList<Node> getSquaresChildren() {
-        	return squares.getChildren();
-        }
-
-		/**
-    	 * adds an image from the game
-    	 * @param entity
-    	 */
-    	public void addImage(Entity entity) {
-    		squares.add(entity.getImage(), entity.getX(), entity.getY());
-    	}
-    	
-    	/**
-    	 * Brings the image of an entity to the front (in front of all other imageViews)
-    	 * @param image
-    	 */
-    	public void toFront(ImageView image) {
-    		image.toFront();
-    	}
+    
+  	/**
+	 * Gets the square's nodes
+	 * @return
+	 */
+	public ObservableList<Node> getSquaresChildren() {
+    	return squares.getChildren();
+    }
+	
+	/**
+	 * Removes an imageView from the gridPane
+	 * @return
+	 */
+	public void removeChild(ImageView view) {
+    	getSquaresChildren().remove(view);
+    }
+	
+	/**
+	 * Adds an imageView from the gridPane
+	 * @return
+	 */
+	public void addChild(ImageView view, int columnIndex, int rowIndex) {
+    	squares.add(view, columnIndex, rowIndex);
     }
 }
 

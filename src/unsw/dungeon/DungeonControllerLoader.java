@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class DungeonControllerLoader extends DungeonLoader {
 
     private List<ImageView> entities;
+    private static DungeonController dungeonController;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -77,6 +78,43 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController(Stage primaryStage) throws FileNotFoundException {
-        return new DungeonController(load(), entities, primaryStage);
+        dungeonController = new DungeonController(load(), entities, primaryStage);
+    	return dungeonController;
+    }
+    /**
+     * Manages which images are shown in the front end section of the game.
+     * 
+     * Reason for use of a nested class:
+     * Since imageManager only uses the dungeonController functions, nesting places
+     * the code closer to where it is used and helps encapsulates the squares
+     * gridPane when the imageManager is used by other classes. 
+     * 
+     * @author z5209503
+     */
+    public static class ImageManager {
+    	
+    	/**
+    	 * removes an image from the game
+    	 * @param view
+    	 */
+    	public void removeImage(ImageView view) {
+    		dungeonController.getSquaresChildren().remove(view);
+	    }
+    
+		/**
+    	 * adds an image from the game
+    	 * @param entity
+    	 */
+    	public void addImage(Entity entity) {
+    		dungeonController.addChild(entity.getImage(), entity.getX(), entity.getY());
+    	}
+    	
+    	/**
+    	 * Brings the image of an entity to the front (in front of all other imageViews)
+    	 * @param image
+    	 */
+    	public void toFront(ImageView image) {
+    		image.toFront();
+    	}
     }
 }
