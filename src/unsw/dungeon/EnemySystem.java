@@ -35,6 +35,10 @@ public class EnemySystem implements Subject {
 	 * Gets the enemy goal
 	 * @return
 	 */
+	public void setArchers(List<Archer> archers) {
+		this.archers = archers;
+	}
+	
 	public Goal getEnemyGoal() {
 		return enemyGoal;
 	}

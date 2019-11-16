@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface GoalComponent {
 	public void addGoal(Goal goal);
 	public ArrayList<Goal> getGoal();
+	public void addGoal(GoalCombination goal);
 }
