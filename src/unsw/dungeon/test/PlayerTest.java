@@ -3,11 +3,8 @@ package unsw.dungeon.test;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.application.Platform;
 import unsw.dungeon.*;
 
 class PlayerTest {
@@ -169,7 +166,6 @@ class PlayerTest {
 		Sword sword = new Sword(5, 6);
 		Treasure treasure = new Treasure(1,2);
 		Key key = new Key(7,7,0);
-		InvincibilityPotion potion = new InvincibilityPotion(2,4);
 		
 		// empty inventory
 		assertNull(player.getItem("sword"));
@@ -192,6 +188,6 @@ class PlayerTest {
 		
 		// collection of invincibility potion tested in the front end
 		// collection of speed potion tested in the front end
-		// (since these rely on timers are more easily tested when observed
+		// (since these rely on timers are tested when observed)
 	}
 }
