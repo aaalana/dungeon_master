@@ -43,6 +43,8 @@ public class DungeonController {
     @FXML
     private Button pause;
     
+    private PauseMenu pauseMenu;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Stage primaryStage) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -50,6 +52,8 @@ public class DungeonController {
         this.initialEntities = new ArrayList<>(initialEntities);
         this.endScreen = new EndScreen(stage);
         this.stack = new StackPane();
+        this.pause = new Button("||");
+        this.pauseMenu = new PauseMenu(stage);
     }
 
     @FXML
@@ -65,8 +69,8 @@ public class DungeonController {
         // add an inventory
         loadInventory();
        
-        // add a pause button
-        createPauseButton();
+        // add a pause button and menu
+        pauseButtonHandler();
         
         // add in the end screen
         stack.getChildren().add(endScreen.getPopUp());
@@ -106,21 +110,17 @@ public class DungeonController {
     }
     
     /**
-     * Helper function which creates a pause button for the game's front end 
-     * for the initialize function
+     * Handles the pause button to open the pause menu when clicked on
      */
-    public void createPauseButton() {
-        Button btn = new Button("||");
-        PauseMenu pauseMenu = new PauseMenu(stage);
-        stack.getChildren().add(pauseMenu.getPopUp());
-        
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    public void pauseButtonHandler() {
+    	stack.getChildren().add(pauseMenu.getPopUp());
+        squares.add(pause, 2, dungeon.getHeight() + 2);
+    	pause.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	pauseMenu.showPopUp();
             }
         });
-        squares.add(btn, 2, dungeon.getHeight() + 2);
     }
     
     @FXML
