@@ -70,6 +70,14 @@ public class Dungeon implements Observer {
     }
 
     /**
+     * Gets the final goal of the dungeon
+     * @return
+     */
+    public Goal getGoal() {
+    	return goal;
+    }
+    
+    /**
      * Gets the dungeon's width
      * @return width
      */
@@ -232,9 +240,9 @@ public class Dungeon implements Observer {
     		if (entity == null) continue;
     		
     		if (entity.getX() == x && entity.getY() == y) {
-    			if (entity.block(player)) {
+    			if (entity instanceof Wall) {
     				return true;
-    			} else {
+    			} else if (entity instanceof Door) {
     				// -If the entity, can't block, it must be an unlocked door
         		    // -replace the image of the locked door to an unlocked door
     				((Door) entity).replaceDoorImage(player, imageManager);
@@ -388,7 +396,7 @@ public class Dungeon implements Observer {
      */
     public boolean updateGoal() {
         System.out.println("A goal was just completed");
-    	if (goal.getStatus() == true) {
+    	if (goal.getStatus()) {
     		return true;
     	}
     	return false;

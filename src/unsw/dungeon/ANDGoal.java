@@ -16,14 +16,14 @@ public class ANDGoal extends GoalCombination implements GoalComponent {
 		goals.add(goal);
 	}
 	
-	/**
-	 * Checks the status of the goal when it is an AND goal
-	 * @return true when all goals are completed and false otherwise
-	 */
+	@Override
 	public boolean getStatus() {
+		// Checks the status of the goal when it is an AND goal
+		// returns true when all goals are completed and false otherwise
+		
 		System.out.println("Checking if all the goals were completed");
 		for (Goal goal : goals) {
-			if (goal.getStatus() == false) {
+			if (!goal.getStatus()) {
 				System.out.println("The goal: " + goal.getClassName() + " was not completed");
 				return false;
 			}

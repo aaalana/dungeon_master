@@ -72,7 +72,7 @@ public class PauseMenu {
 	public Label createLabel() {
         label = new Label("P A U S E   S C R E E N");
        	label.setStyle("-fx-font-weight: bold;");
-       	label.setFont(new Font("Arial", 20));
+       	label.setFont(new Font("Arial", 15));
        	return label;
 	}
 	
@@ -113,8 +113,8 @@ public class PauseMenu {
 	public Button resumeHandler() {
 		resume = new Button("RESUME");
 		resume.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
-		resume.setPrefHeight(80);
-	    resume.setPrefWidth(250);
+		resume.setPrefHeight(60);
+	    resume.setPrefWidth(150);
 	        
 		resume.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -133,8 +133,8 @@ public class PauseMenu {
 	public Button restartHandler() {
 		restart = new Button("RESTART");
 	    restart.setStyle("-fx-background-color:#b07356; -fx-text-fill: white;");
-	    restart.setPrefHeight(80);
-        restart.setPrefWidth(250);
+	    restart.setPrefHeight(60);
+        restart.setPrefWidth(150);
       
 		restart.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -159,8 +159,8 @@ public class PauseMenu {
 	public Button exitHandler() {
 		exit = new Button("EXIT");
 	    exit.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
-	    exit.setPrefHeight(80);
-        exit.setPrefWidth(250);
+	    exit.setPrefHeight(60);
+        exit.setPrefWidth(150);
         
 	    exit.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -1,7 +1,9 @@
 package unsw.dungeon;
 
-public class GoalCombination extends Goal {
+public abstract class GoalCombination extends Goal {
 	public GoalCombination(Dungeon dungeon) {
 		super(dungeon);
 	}
+	
+	public abstract boolean getStatus();
 }

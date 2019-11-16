@@ -12,30 +12,6 @@ public class TreasureSystem implements Subject {
 	}
 
 	/**
-	 * Gets the treasures list
-	 * @return treasures list
-	 */
-	public List<Treasure> getTreasures() {
-		return treasures;
-	}
-
-	/**
-	 * Sets the treasures list
-	 * @param treasures
-	 */
-	public void setTreasures(List<Treasure> treasures) {
-		this.treasures = treasures;
-	}
-
-	/**
-	 * Gets the treasure goal
-	 * @return
-	 */
-	public TreasureGoal getTreasureGoal() {
-		return treasureGoal;
-	}
-
-	/**
 	 * Sets the treasure goal
 	 * @param treasureGoal
 	 */

@@ -8,6 +8,6 @@ public class Boulder extends Blocker {
   
 	@Override
 	public boolean block(Player player) {
-		return true;
+		return false;
 	}
 }

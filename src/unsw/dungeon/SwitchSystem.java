@@ -14,30 +14,6 @@ public class SwitchSystem implements Subject {
 	}
 	
 	/**
-	 * Gets the switch list
-	 * @return
-	 */
-	public List<Switch> getSwitches() {
-		return switches;
-	}
-	
-	/**
-	 * Sets the switch list
-	 * @param switches
-	 */
-	public void setSwitches(List<Switch> switches) {
-		this.switches = switches;
-	}
-	
-	/**
-	 * Gets the boulder goal
-	 * @return
-	 */
-	public BoulderGoal getBoulderGoal() {
-		return boulderGoal;
-	}
-	
-	/**
 	 * Sets the boulder goal
 	 * @param boulderGoal
 	 */
