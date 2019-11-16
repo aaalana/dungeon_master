@@ -81,7 +81,7 @@ public class DungeonController {
             getSquaresChildren().add(entity);
         
         // allow the player to move
-    	squares.setFocusTraversable(true);
+    	squares.setFocusTraversable(true);  
     }
     
     /**
@@ -128,6 +128,7 @@ public class DungeonController {
     
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	
     	if (!endScreen.getShowing()) {
 	    	
 	    	PlayerState oldState = player.getState();
@@ -166,9 +167,11 @@ public class DungeonController {
 		if (player.getState() instanceof DeadState) {
 			endScreen.generateEndScreen(false);
 	     	endScreen.showPopUp();
+	     	pause.setDisable(true);
 	    } else if (dungeon.updateGoal()) {
 	    	endScreen.generateEndScreen(true);
 	    	endScreen.showPopUp();
+	    	pause.setDisable(true);
 	    }
     }
     
