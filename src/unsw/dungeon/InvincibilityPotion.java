@@ -5,6 +5,11 @@ import java.util.TimerTask;
 
 import javafx.application.Platform;
 
+/**
+ * Potion entity responsible for temporarily giving the player invincibility
+ * @author z5209503
+ *
+ */
 public class InvincibilityPotion extends Item {
 	public Timer timer;
 	
@@ -16,6 +21,7 @@ public class InvincibilityPotion extends Item {
     @Override
 	public void useItem(Player player) {
 		System.out.println("5 second countdown for invincibility potion initiated.");
+		
 		InvincibilityPotion potion = this;
 		TimerTask task = new TimerTask() {
 			public void run() {

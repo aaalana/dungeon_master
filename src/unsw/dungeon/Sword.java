@@ -13,20 +13,19 @@ public class Sword extends Item {
 
 	@Override
 	public void useItem(Player player) {
-		if (this.inUse) {
+		if (this.inUse) 
 			this.inUse = false;
-		} else {
+		else 
 			this.inUse = true;
-		}
 	}
 	
 	/**
 	 * Reduces the number of uses the sword has 
 	 */
 	public void reduceUses() {
-		if (usesLeft != 0) {
+		if (usesLeft != 0) 
 			usesLeft--;
-		}
+		
 		System.out.println("The sword has " + usesLeft + " use/s left.");
 	}
 	
@@ -40,7 +39,7 @@ public class Sword extends Item {
 	
 	/**
 	 * Gets the number of uses the sword has 
-	 * @return
+	 * @return usesLeft
 	 */
 	public int getUses() {
 		return usesLeft;

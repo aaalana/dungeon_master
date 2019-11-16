@@ -3,8 +3,6 @@ package unsw.dungeon.test;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
@@ -12,65 +10,63 @@ import unsw.dungeon.*;
 class PlayerTest {
 
 	@Test
-	void testTeleport() {
+	void testsetPosition() {
 		Dungeon dungeon = new Dungeon(18,16);
 		Player player = new Player(0,0, dungeon);
 		
 		// try the same location as the player
-		player.teleport(0, 0);
+		player.setPosition(0, 0);
 		assertEquals(0, player.getX());
 		assertEquals(0, player.getY());
 		
 		// try a different location from the player 
-		player.teleport(3, 4);
+		player.setPosition(3, 4);
 		assertEquals(3, player.getX());
 		assertEquals(4, player.getY());
 		
 		// trying out with another player for reliability
 		Player player2 = new Player(6,6, dungeon);
 		assertNotSame(new InvincibilityState(player2), player2.getInvincibilityState());
-		player2.teleport(0, 0);
+		player2.setPosition(0, 0);
 		assertEquals(0, player2.getX());
 		assertEquals(0, player2.getY());
 	}
 	
 	@Test
-	void testInvincibility() {
+	void testPotion() {
 		Dungeon dungeon = new Dungeon(18,16);
 		Player player = new Player(0,0, dungeon);
+		Player player2 = new Player(0,0, dungeon);
 		InvincibilityPotion potion = new InvincibilityPotion(2, 3);
 		InvincibilityPotion potion2 = new InvincibilityPotion(7, 3);
+		SpeedPotion potion3 = new SpeedPotion(2, 3);
+		SpeedPotion potion4 = new SpeedPotion(7, 3);
 		
 		// test the player's invincibility time period
 		player.drinkPotion(potion);
 		assertSame(player.getInvincibilityState(), player.getState());
 		
-		try {
-			TimeUnit.SECONDS.sleep(6);
-			assertSame(player.getNormalState(), player.getState());
-		} catch (Exception e) {
-			System.out.println("Delay failed.");
-		}
-		
 		// when the player drinks another potion while invincibility is on
-		player.drinkPotion(potion);
-		assertSame(player.getInvincibilityState(), player.getState());
 		player.drinkPotion(potion2);
-		
-		try {
-			// 4 seconds tested instead of 5 because of CPU lag
-			TimeUnit.SECONDS.sleep(4);
-			assertSame(player.getInvincibilityState(), player.getState());
-			TimeUnit.SECONDS.sleep(5);
-			assertSame(player.getNormalState(), player.getState());
-		} catch (Exception e) {
-			System.out.println("Delay failed.");
-		}
+		assertSame(player.getInvincibilityState(), player.getState());
 		
 		// when the player is killed off
-		assertSame(player.getNormalState(), player.getState());
 		player.killOff();
 		assertSame(player.getDeadState(), player.getState());
+		
+		// note: the timer for invincibility and speed states is tested in the 
+		// frontend
+		
+		// test the player's invincibility time period
+		player2.drinkPotion(potion3);
+		assertSame(player2.getSpeedState(), player2.getState());
+		
+		// when the player drinks another potion while invincibility is on
+		player2.drinkPotion(potion4);
+		assertSame(player2.getSpeedState(), player2.getState());
+		
+		// note: the timer for invincibility and speed states is tested in the 
+		// frontend
 	}
 	
 	@Test
@@ -170,7 +166,6 @@ class PlayerTest {
 		Sword sword = new Sword(5, 6);
 		Treasure treasure = new Treasure(1,2);
 		Key key = new Key(7,7,0);
-		InvincibilityPotion potion = new InvincibilityPotion(2,4);
 		
 		// empty inventory
 		assertNull(player.getItem("sword"));
@@ -191,7 +186,8 @@ class PlayerTest {
 		player.collectItem(key);
 		assertEquals(key, player.getItem("key"));
 		
-		player.collectItem(potion);
-		assertEquals(potion, player.getItem("potion"));
+		// collection of invincibility potion tested in the front end
+		// collection of speed potion tested in the front end
+		// (since these rely on timers are tested when observed)
 	}
 }

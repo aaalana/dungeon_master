@@ -20,6 +20,8 @@ public class Portal extends Obstacle {
 
 	@Override
 	public void trigger(boolean state) {
+		// if the player is entering the portal and is positioned on the portal,
+		// teleport the player to a connected portal
 		if (state && this.state) {
 			System.out.println("transporting player via portal");
 			getPortalAssist().transportPlayer(this, dungeon.getPlayer());
@@ -33,14 +35,14 @@ public class Portal extends Obstacle {
 	}
 	
 	/**
-	 * Set the portal's state
+	 * Sets the portal's state
 	 */
 	public void setState(boolean _state) {
 		this.state = _state;
 	}
 	
 	/**
-	 * gets the ID of the portal
+	 * Gets the ID of the portal
 	 * @return portal id
 	 */
 	public int getId() {

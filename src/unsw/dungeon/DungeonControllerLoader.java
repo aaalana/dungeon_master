@@ -10,12 +10,14 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
- * A DungeonLoader that also creates the necessary ImageViews for the UI,
- * connects them via listeners to the model, and creates a controller.
+ * The dungeonControllerLoader sets up the creation of the dungeonController.
+ * It collects ImageViews from the DungeonLoader for the UI and connects
+ * them via listeners to the model. 
+ * 
  * @author Robert Clifton-Everest
- *
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
@@ -68,24 +70,29 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
-    
+   
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
      * @return
      * @throws FileNotFoundException
      */
-    public DungeonController loadController() throws FileNotFoundException {
-        DungeonControllerLoader.dungeonController = new DungeonController(load(), entities);
-        return dungeonController;
+    public DungeonController loadController(Stage primaryStage) throws FileNotFoundException {
+        dungeonController = new DungeonController(load(), entities, primaryStage);
+    	return dungeonController;
     }
-
     /**
-     * Manages which images are shown in the frontend section of the game.
+     * Manages which images are shown in the front end section of the game.
+     * 
+     * Reason for use of a nested class:
+     * Since imageManager only uses the dungeonController functions, nesting places
+     * the code closer to where it is used and helps encapsulates the squares
+     * gridPane when the imageManager is used by other classes. 
+     * 
      * @author z5209503
-     *
      */
     public static class ImageManager {
+    	
     	/**
     	 * removes an image from the game
     	 * @param view
@@ -93,13 +100,21 @@ public class DungeonControllerLoader extends DungeonLoader {
     	public void removeImage(ImageView view) {
     		dungeonController.getSquaresChildren().remove(view);
 	    }
-    	
-    	/**
+    
+		/**
     	 * adds an image from the game
     	 * @param entity
     	 */
     	public void addImage(Entity entity) {
-    		dungeonController.replaceSquares(entity.getImage(), entity.getX(), entity.getY());
+    		dungeonController.addChild(entity.getImage(), entity.getX(), entity.getY());
+    	}
+    	
+    	/**
+    	 * Brings the image of an entity to the front (in front of all other imageViews)
+    	 * @param image
+    	 */
+    	public void toFront(ImageView image) {
+    		image.toFront();
     	}
     }
 }

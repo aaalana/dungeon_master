@@ -16,7 +16,7 @@ public class DungeonApplication extends Application {
 
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("crab.json");
 
-        DungeonController controller = dungeonLoader.loadController();
+        DungeonController controller = dungeonLoader.loadController(primaryStage);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);

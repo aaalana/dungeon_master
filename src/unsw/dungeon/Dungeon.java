@@ -70,6 +70,14 @@ public class Dungeon implements Observer {
     }
 
     /**
+     * Gets the final goal of the dungeon
+     * @return
+     */
+    public Goal getGoal() {
+    	return goal;
+    }
+    
+    /**
      * Gets the dungeon's width
      * @return width
      */
@@ -199,8 +207,6 @@ public class Dungeon implements Observer {
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {
     		player.killOff();
-    		player = null;
-    		System.exit(0);
     	}
     }
     
@@ -222,7 +228,6 @@ public class Dungeon implements Observer {
     	for (Entity entity : this.entities) {
     		if (entity == null) continue; 
     		if (entity.getX() == x && entity.getY() == y) {
-    			//System.out.println("Found the entity" + entity.getClass().getName() + "at co-ordinates (" + x + ", " + y + ")");
     			return entity.getClassName();
     		}
     	}
@@ -242,11 +247,12 @@ public class Dungeon implements Observer {
     		if (entity.getX() == x && entity.getY() == y) {
     			if (entity instanceof Wall) {
     				return true;
-    			} else if (entity instanceof Door) {
-    				boolean canBlock = entity.block(player);
-    				if (!canBlock) 
+    			} else {
+    				// change the locked door image to an unlocked door 
+    				if (!entity.block(player)) 
     					((Door) entity).replaceDoorImage(player, imageManager);
-    				return canBlock;
+    				
+    				return entity.block(player);
     			}
     		}
     	}
@@ -391,13 +397,14 @@ public class Dungeon implements Observer {
 
     /**
      * Keeps track of when a goal has been completed
-     * - If the overall goal is complete, then the game will exit.
+     * - If the overall goal is complete, then true is returned
+     * - Otherwise, false is returned
      */
-    public void updateGoal() {
-        System.out.println("A goal was just completed");
-    	if (goal.getStatus() == true) {
-    		System.exit(0);
+    public boolean updateGoal() {
+    	if (goal.getStatus()) {
+    		return true;
     	}
+    	return false;
     }
 }
 
