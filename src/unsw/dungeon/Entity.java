@@ -7,7 +7,9 @@ import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
 /**
  * An entity in the dungeon.
+ * This class acts as the context class for the implementation of strategy pattern.
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  *
  */
 public abstract class Entity {
@@ -59,6 +61,15 @@ public abstract class Entity {
      */
     public int getX() {
         return x().get();
+    }
+    
+    /**
+     * Sets the x and y coordinates of the entity's position
+     * @param x
+     */
+    public void setPosition(int x, int y) {
+    	x().set(x);
+    	y().set(y);
     }
     
     /**

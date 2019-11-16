@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Polymorphism 
+ * @author z5209503
+ *
+ */
 public abstract class Item extends Entity {
 	
 	String name;

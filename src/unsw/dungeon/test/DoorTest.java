@@ -1,7 +1,6 @@
 package unsw.dungeon.test;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +32,8 @@ class DoorTest {
 		assertTrue(door.block(player));
 		assertTrue(door2.block(player2));
 		
-		// right key at door
-		assertFalse(door.block(player2));
-		assertFalse(door2.block(player));
-		
+		// unlocking the door is tested in the 
+		// front end
 	}
 	
 	@Test

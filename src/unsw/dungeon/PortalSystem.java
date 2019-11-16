@@ -3,11 +3,15 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import unsw.dungeon.DungeonControllerLoader.ImageManager;
+
 public class PortalSystem {
 	private List<Portal> portals;
+	private ImageManager imageManager;
 	
 	public PortalSystem() {
 		this.portals = new ArrayList<Portal>(); 
+		this.imageManager = new DungeonControllerLoader.ImageManager();
 	}
 	
 	/**
@@ -41,7 +45,8 @@ public class PortalSystem {
 		Portal match = findMatchingPortal(portal);
 		match.setState(false);
 		try { 
-			player.teleport(match.getX(), match.getY()); 
+			player.setPosition(match.getX(), match.getY());
+			imageManager.toFront(player.getImage());
 	    } catch (NullPointerException e) { 
 	        System.out.println("Could not find a matching portal. Can't teleport player."); 
 	    } 

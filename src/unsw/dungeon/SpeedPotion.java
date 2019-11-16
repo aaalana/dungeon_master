@@ -5,6 +5,11 @@ import java.util.TimerTask;
 
 import javafx.application.Platform;
 
+/**
+ * Potion responsible for temporarily giving the player speed 
+ * @author z5209503
+ *
+ */
 public class SpeedPotion extends Item {
 	public Timer timer;
 	
@@ -16,6 +21,7 @@ public class SpeedPotion extends Item {
     @Override
 	public void useItem(Player player) {
 		System.out.println("3 second countdown for speed potion initiated.");
+		
 		SpeedPotion potion = this;
 		TimerTask task = new TimerTask() {
 			public void run() {

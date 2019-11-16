@@ -7,12 +7,16 @@ public class Exit extends Obstacle {
 		super(x, y);
 	}
 	
-	
+	/**
+	 * Gets the exit goal
+	 */
 	public ExitGoal getExitGoal() {
 		return exitGoal;
 	}
 
-
+	/**
+	 * Sets the exit goal 
+	 */
 	public void setExitGoal(ExitGoal exitGoal) {
 		this.exitGoal = exitGoal;
 	}
@@ -23,7 +27,6 @@ public class Exit extends Obstacle {
 		if (state) {
 			System.out.println("Player exited the dungeon.");
 			exitGoal.setComplete();
-			
 		}
 	}
 }

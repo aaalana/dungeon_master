@@ -34,6 +34,15 @@ public class Goal implements Subject {
 	}
 	
 	/**
+	 * Gets the type of goal in the form of a string
+	 * i.e. the name of the goal
+	 * @return
+	 */
+	public String getClassName() {
+		return getClass().getName();
+	}
+	
+	/**
 	 * 
 	 */
 	public void setComplete() {
@@ -44,7 +53,6 @@ public class Goal implements Subject {
 	public void update() {
 		dungeon.updateGoal();
 	}
-
 
 	public void updateGoal() {
 		this.setComplete();
