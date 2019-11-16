@@ -20,18 +20,27 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class PauseMenu {
-
 	private Stage stage;
 	private Popup popup;
+	private VBox vbox;
+	private Label label;
+	private Button resume;
+	private Button restart;
+	private Button exit;
 	
 	public PauseMenu(Stage stage) {
 		this.stage = stage;
 		this.popup = new Popup();
-		generatePauseMenu();
+		this.label = createLabel();
+	    this.resume = resumeHandler();
+	    this.restart = restartHandler();
+	    this.exit = exitHandler();
+		this.vbox = createVBox();
+	    generatePauseMenu();
 	}
 
 	/**
-	 * Signals the popup to show
+	 * Signals the popup to display itself
 	 */
 	public void showPopUp() {
 		popup.show(stage);
@@ -41,43 +50,27 @@ public class PauseMenu {
 	 * Generates a pause menu
 	 */
 	public void generatePauseMenu() {
-		popUpHandler();
-		
-        Label label = createLabel();
-       	Button resume = resumeHandler();
-       	Button restart = restartHandler();
-       	Button exit = exitHandler();
-       	
-       	VBox vbox = createVBox();
-       	
-		VBox.setMargin(label, new Insets(40, 30, 20, 30));  
-		VBox.setMargin(resume, new Insets(10, 30, 20, 30));  
-		VBox.setMargin(restart, new Insets(10, 30, 20, 30)); 
-		VBox.setMargin(exit, new Insets(10, 30, 30, 30));  
-		
-		ObservableList<Node> list = vbox.getChildren(); 
-		list.addAll(label, resume, restart, exit);
-		
-		popup.getContent().add(vbox);
-    }
-	
-	/**
-	 * Sets the pop up properties
-	 */
-	public void popUpHandler() {
-	    popup.setAutoFix(true);
+	    // set up the pop up properties
+		popup.setAutoFix(true);
         popup.setAutoHide(true);
         popup.setHideOnEscape(true);
         popup.setX(stage.getX() + 32 * 4);
         popup.setY(stage.getY() + 32 * 4); 
-	}
+		
+        // add buttons and labels into a vBox structure
+        ObservableList<Node> list = vbox.getChildren(); 
+		list.addAll(label, resume, restart, exit);
+		
+		// add the vBox into the popup
+		popup.getContent().add(vbox);
+    }
 	
 	/**
 	 * Creates the Pause Menu title
 	 * @return
 	 */
 	public Label createLabel() {
-        Label label = new Label("P A U S E   S C R E E N");
+        label = new Label("P A U S E   S C R E E N");
        	label.setStyle("-fx-font-weight: bold;");
        	label.setFont(new Font("Arial", 20));
        	return label;
@@ -88,21 +81,30 @@ public class PauseMenu {
 	 * @return
 	 */
 	public VBox createVBox() {
-	 	VBox vbox = new VBox();
-        vbox.setSpacing(10);
+	 	vbox = new VBox();
+        
+	 	vbox.setSpacing(10);
         vbox.setAlignment(Pos.CENTER);
+        
         BackgroundImage myBI= new BackgroundImage(new Image("/full_background.png"), 
 												  null, 
 										          BackgroundRepeat.NO_REPEAT, 
 											      null, 
 											      null);
 		vbox.setBackground(new Background(myBI));
+		
 		String cssLayout = "-fx-border-color: #42160f;\n" +
 		"-fx-border-insets: 7;\n" +
 		"-fx-border-width: 3;\n" +
 		"-fx-border-style: dashed;\n";  
 		vbox.setStyle(cssLayout);
-        return vbox;
+        
+		VBox.setMargin(label, new Insets(40, 30, 20, 30));  
+		VBox.setMargin(resume, new Insets(10, 30, 20, 30));  
+		VBox.setMargin(restart, new Insets(10, 30, 20, 30)); 
+		VBox.setMargin(exit, new Insets(10, 30, 30, 30));  
+		
+		return vbox;
 	}
 
 	/**
@@ -110,7 +112,7 @@ public class PauseMenu {
 	 * @return
 	 */
 	public Button resumeHandler() {
-		Button resume = new Button("RESUME");
+		resume = new Button("RESUME");
 		resume.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
 		resume.setPrefHeight(80);
 	    resume.setPrefWidth(250);
@@ -130,7 +132,7 @@ public class PauseMenu {
 	 * @return
 	 */
 	public Button restartHandler() {
-		Button restart = new Button("RESTART");
+		restart = new Button("RESTART");
 	    restart.setStyle("-fx-background-color:#b07356; -fx-text-fill: white;");
 	    restart.setPrefHeight(80);
         restart.setPrefWidth(250);
@@ -156,7 +158,7 @@ public class PauseMenu {
 	 * @return
 	 */
 	public Button exitHandler() {
-		Button exit = new Button("EXIT");
+		exit = new Button("EXIT");
 	    exit.setStyle("-fx-background-color: #b07356; -fx-text-fill: white;");
 	    exit.setPrefHeight(80);
         exit.setPrefWidth(250);

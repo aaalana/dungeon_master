@@ -47,7 +47,6 @@ class DungeonTest {
 		Wall wall = new Wall(0, 0, new CantMove());
 		Wall wall2 = new Wall(1, 0, new CantMove());
 		Door door = new Door(2, 1, 0, new CantMove());
-		Key key = new Key(2, 1, 0);
 	
 		// check empty list
 		assertFalse(dungeon.checkBlocker(0,0));
@@ -100,12 +99,12 @@ class DungeonTest {
 		
 		// exit - player not at exit and player at exit
 		assertFalse(dungeon.shareSquare(exit));
-		player.teleport(15,6);
+		player.setPosition(15,6);
 		assertTrue(dungeon.shareSquare(exit));
 		
 		// portal - player not at portal and player at portal
 		assertFalse(dungeon.shareSquare(portal));
-		player.teleport(1,0);
+		player.setPosition(1,0);
 		assertTrue(dungeon.shareSquare(portal));
 	}
 	

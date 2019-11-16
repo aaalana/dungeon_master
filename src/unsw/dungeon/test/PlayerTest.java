@@ -12,24 +12,24 @@ import unsw.dungeon.*;
 class PlayerTest {
 
 	@Test
-	void testTeleport() {
+	void testsetPosition() {
 		Dungeon dungeon = new Dungeon(18,16);
 		Player player = new Player(0,0, dungeon);
 		
 		// try the same location as the player
-		player.teleport(0, 0);
+		player.setPosition(0, 0);
 		assertEquals(0, player.getX());
 		assertEquals(0, player.getY());
 		
 		// try a different location from the player 
-		player.teleport(3, 4);
+		player.setPosition(3, 4);
 		assertEquals(3, player.getX());
 		assertEquals(4, player.getY());
 		
 		// trying out with another player for reliability
 		Player player2 = new Player(6,6, dungeon);
 		assertNotSame(new InvincibilityState(player2), player2.getInvincibilityState());
-		player2.teleport(0, 0);
+		player2.setPosition(0, 0);
 		assertEquals(0, player2.getX());
 		assertEquals(0, player2.getY());
 	}

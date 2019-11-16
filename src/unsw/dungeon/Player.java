@@ -30,17 +30,6 @@ public class Player extends LivingCreature {
         speedState = new SpeedState(this);
         this.state = normalState;
     }
-    
-    /**
-     * Teleports the player to another location. 
-     * This is used when the player enters a portal
-     * @param x
-     * @param y
-     */
-    public void teleport(int x, int y) {
-    	x().set(x);
-    	y().set(y);
-    }
     	
     /**
      * Changes the player's state to invincibilityState
@@ -125,7 +114,7 @@ public class Player extends LivingCreature {
     }
    
 	/**
-	 * Removes an item from the inventory
+	 * Allows the player to removes an item from the inventory
 	 * @param item
 	 */
 	public void removeItem(Item item) {

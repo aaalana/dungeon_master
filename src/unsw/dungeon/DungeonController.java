@@ -16,7 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
- * A JavaFX controller for the dungeon.
+ * A JavaFX controller for the dungeon. It is responsible for the management of the game's UI
+ * and providing automatic surveillance of the dungeon's entities. 
  * @author Robert Clifton-Everest
  *
  */
@@ -49,24 +50,15 @@ public class DungeonController {
     
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
-            for (int y = 0; y < dungeon.getHeight(); y++) {
+            for (int y = 0; y < dungeon.getHeight(); y++) 
                 squares.add(new ImageView(ground), x, y);
-            }
         }
         
         // add an inventory
         loadInventory();
-     
-        // add a pause menu button
-        Button btn = new Button("||");
-        PauseMenu pauseMenu = new PauseMenu(stage);
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pauseMenu.showPopUp();
-            }
-        });
-        squares.add(btn, 2, dungeon.getHeight() + 2);
+       
+        // add a pause button
+        createPauseButton();
         
         // add entities
         for (ImageView entity : initialEntities)
@@ -74,16 +66,16 @@ public class DungeonController {
     }
     
     /**
-     * Creates a inventory for the game's frontend
+     * Helper function which creates a inventory for the game's front end 
+     * for the initialize function
      */
     public void loadInventory() {
         Image tiles = new Image("/tiles.png");
         Image slot = new Image("/darkTiles.png");
         Image wood = new Image("/wood.png");
         
-    	for (int x = 0; x < dungeon.getWidth(); x++) {
+    	for (int x = 0; x < dungeon.getWidth(); x++) 
         	squares.add(new ImageView(wood), x, dungeon.getHeight());
-        }
         
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = dungeon.getHeight() + 1; y < dungeon.getHeight() + 4; y++) {
@@ -96,107 +88,134 @@ public class DungeonController {
                 }
             }
         }
-        
-        for (int x = 0; x < dungeon.getWidth(); x++) {
+       
+        for (int x = 0; x < dungeon.getWidth(); x++) 
         	squares.add(new ImageView(wood), x, dungeon.getHeight() + 4);
-        }
     }
     
-    public ObservableList<Node> getSquaresChildren() {
-    	return squares.getChildren();
-    }
-    
-    public void replaceSquares(ImageView image, int x, int y) {
-    	squares.add(image, x, y);
+    /**
+     * Helper function which creates a pause button for the game's front end 
+     * for the initialize function
+     */
+    public void createPauseButton() {
+        Button btn = new Button("||");
+        PauseMenu pauseMenu = new PauseMenu(stage);
+        
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pauseMenu.showPopUp();
+            }
+        });
+        squares.add(btn, 2, dungeon.getHeight() + 2);
     }
     
     @FXML
     public void handleKeyPress(KeyEvent event) {
-        // testing: check if the player's state
-    	// System.out.println(player.getState());
-    	
     	PlayerState oldState = player.getState();
     	switch (event.getCode()) {
         case UP:
-        	if (checkMove(player.getX(), player.getY() - 1, "up")) {
-        		player.tryToMove("up", dungeon, player);
-        		selfManageDungeon();
-        		
-        		if (checkMove(player.getX(), player.getY() - 1, "up") &&
-        			player.getState() instanceof SpeedState && 
-        			oldState instanceof SpeedState) {
-        			player.tryToMove("up", dungeon, player);
-        			selfManageDungeon();
-        		}
-        	}
-        	dungeon.moveEnemies();
+        	signalMovement(player.getX(), player.getY() - 1, "up", oldState); 
             break;
         case DOWN:
-        	if (checkMove(player.getX(), player.getY() + 1, "down")) {
-        		player.tryToMove("down", dungeon, player);
-        		selfManageDungeon();
-        		
-        		if (checkMove(player.getX(), player.getY() + 1, "down") && 
-        			player.getState() instanceof SpeedState && 
-        			oldState instanceof SpeedState) {
-        			player.tryToMove("down", dungeon, player);
-        			selfManageDungeon();
-        		}
-        	}
-        	dungeon.moveEnemies();
+        	signalMovement(player.getX(), player.getY() + 1, "down", oldState); 
             break;
         case LEFT:
-        	if (checkMove(player.getX() - 1, player.getY(), "left")) {
-        		player.tryToMove("left", dungeon, player); 
-        		selfManageDungeon();
-        		
-        		if (checkMove(player.getX() - 1, player.getY(), "left")  && 
-        			player.getState() instanceof SpeedState && 
-        			oldState instanceof SpeedState) {
-        			player.tryToMove("left", dungeon, player);
-        			selfManageDungeon();
-        		}
-        	}
-        	dungeon.moveEnemies();
+        	signalMovement(player.getX() - 1, player.getY(), "left", oldState); 
             break;
         case RIGHT:
-        	if (checkMove(player.getX() + 1, player.getY(), "right")) {
-        		player.tryToMove("right", dungeon, player); 
-        		selfManageDungeon();
-        		
-        		if (checkMove(player.getX() + 1, player.getY(), "right") &&
-        			player.getState() instanceof SpeedState && 
-        			oldState instanceof SpeedState) {
-        			player.tryToMove("right", dungeon, player);
-        			selfManageDungeon();
-        		}
-        	}
-        	dungeon.moveEnemies();
+        	signalMovement(player.getX() + 1, player.getY(), "right", oldState); 
             break;
         default:
             break; 
         }
+    
+    	// signal when the player should be using its sword
         player.useSword();
        
         // detects when to kill creatures after all creatures have moved
         dungeon.killCreature(null);
     }
- 
+   
     /**
-     * runs functions that allow the dungeon to manipulate the obstacles and items within it
+     * Checks if the player's movement should be blocked by an entity
+     * @param x
+     * @param y
+     * @param direction
+     * @return
      */
-    public void selfManageDungeon() {
-    	dungeon.updateObstacle();
-        dungeon.removeFromGround(); 
-    }
-    
     public boolean checkMove(int x, int y, String direction) {
     	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
     }
     
-    public void signalMovement() {
-    	
+    /**
+     * Signals the movement of living creatures and updates the dungeon as
+     * consequence of the player's movement
+     * @param x
+     * @param y
+     * @param direction
+     * @param oldState
+     */
+    public void signalMovement(int x, int y, String direction, PlayerState oldState) {
+		if (checkMove(x, y, direction)) {
+			player.tryToMove(direction, dungeon, player); 
+			dungeon.updateObstacle();
+	        dungeon.removeFromGround(); 
+	        
+			if (checkMove(x, y, direction) && player.getState() instanceof SpeedState && 
+				oldState instanceof SpeedState) {
+				player.tryToMove("right", dungeon, player);
+				dungeon.updateObstacle();
+		        dungeon.removeFromGround(); 
+			}
+		}
+		dungeon.moveEnemies();
     }
-    
+
+    /**
+     * Manages which images are shown in the front end section of the game.
+     * 
+     * Reason for use of a nested class:
+     * Since imageManager only uses the dungeonController functions, nesting places
+     * the code closer to where it is used and helps encapsulates the squares
+     * gridPane when the imageManager is used by other classes. 
+     * 
+     * @author z5209503
+     */
+    public static class ImageManager {
+    	private GridPane squares;
+    	
+    	/**
+    	 * removes an image from the game
+    	 * @param view
+    	 */
+    	public void removeImage(ImageView view) {
+    		getSquaresChildren().remove(view);
+	    }
+    	
+    	/**
+    	 * Gets the square's nodes
+    	 * @return
+    	 */
+    	public ObservableList<Node> getSquaresChildren() {
+        	return squares.getChildren();
+        }
+
+		/**
+    	 * adds an image from the game
+    	 * @param entity
+    	 */
+    	public void addImage(Entity entity) {
+    		squares.add(entity.getImage(), entity.getX(), entity.getY());
+    	}
+    	
+    	/**
+    	 * Brings the image of an entity to the front (in front of all other imageViews)
+    	 * @param image
+    	 */
+    	public void toFront(ImageView image) {
+    		image.toFront();
+    	}
+    }
 }
 

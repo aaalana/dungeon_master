@@ -2,43 +2,40 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import unsw.dungeon.DungeonController.ImageManager;
+
 public class Inventory {
 	private ArrayList<Item> items;
 	private Dungeon dungeon;
+	private ImageManager imageManager;
 	
 	public Inventory(Dungeon dungeon) {
 		this.items = new ArrayList<Item>();
 		this.dungeon = dungeon;
+		this.imageManager = new DungeonController.ImageManager();
 	}
 	
 	/**
-	 * Selectively allows some items to be added to the inventory
+	 * Selectively allows items to be added to the inventory
 	 * @param player
 	 * @param item
 	 * @param dungeon
 	 */
 	public void addItem(Player player, Item item) {
-		
 		if (item instanceof Sword && !hasCertainItem(item)) {
 			items.add(item);
-    		printInventory();
     		occupySlot(item);
     	} else if (item instanceof Key && !hasCertainItem(item))  {
     		items.add(item);
-    		printInventory();
     		occupySlot(item);
     	} else if (item instanceof InvincibilityPotion && getItemByName("speed") == null) {
     		activatePotion(player, "invincibility", item);
-    		printInventory();
     		occupySlot(item);
     	} else if (item instanceof SpeedPotion && getItemByName("invincibility") == null) { 
-    		System.out.println("here");
     		activatePotion(player, "speed", item);
-    		printInventory();
     		occupySlot(item);
     	} else if (item instanceof Treasure) {
     		items.add(item);
-    		printInventory();
     		occupySlot(item);
     	}
 	}
@@ -62,43 +59,33 @@ public class Inventory {
      * @param item
      */
 	public void removeItem(Item item) {
-		getImageManager().removeImage(item.getImage());
+		imageManager.removeImage(item.getImage());
 		items.remove(item);
 	}
 
 	/**
-	 * Gets the image manager from the dungeon
-	 * @return
-	 */
-	public DungeonControllerLoader.ImageManager getImageManager() {
-		return dungeon.getImageManager();
-	}
-	
-	/**
-	 * Moves the item from the dungeon into the inventory
+	 * Moves the item from the dungeon into the inventory (front end wise)
 	 * @param item
 	 * @param dungeon
 	 */
 	public void occupySlot(Item item) {
-		int i = 0;
+		// If the item type is already in the inventory, then move the item to 
+		// the same location
 		if (hasCertainItem(item)) {
 			for (int x = 9; x < 16; x = x + 2) {
 				if (getStoredItemType(x).equals(item.getClassName())) {
-					item.x().set(x);
-					item.y().set(dungeon.getHeight() + 2);
+					item.setPosition(x, dungeon.getHeight() + 2);
 					return;
 				} 
-				i++;
 			}		
 		}
 		
+		// Otherwise, move the item to an empty slot in the inventory
 		for (int x = 9; x < 16; x = x + 2) {
 			if (getStoredItemType(x).equals("None")) {
-				item.x().set(x);
-				item.y().set(dungeon.getHeight() + 2);
+				item.setPosition(x, dungeon.getHeight() + 2);
 				break;
 			} 
-			i++;
 		}	
 	}
 	
@@ -118,16 +105,6 @@ public class Inventory {
     	return "None";
 	}
 	
-	// temp testing: print out the inventory
-	// REMOVE THIS FUNCTION LATER
-	public void printInventory() {
-		System.out.println("Inventory: [");
-		for (Item i : items) {
-			System.out.println(i + ",");
-		}
-		System.out.println("]");
-	}
-	
 	/**
 	 * check if the inventory contains a certain item
 	 * @return
@@ -141,7 +118,7 @@ public class Inventory {
 	}
 	
 	/**
-	 * gets the items from the inventory
+	 * Gets the items from the inventory
 	 * @return
 	 */
 	public ArrayList<Item> getItems() {
@@ -163,20 +140,4 @@ public class Inventory {
 		}
 		return null;
 	}
-	
-	// not in use - use to show the number of items the player has later?s
-//	/**
-//	 * Counts the number of items that's in the inventory by its name
-//	 * @param name
-//	 * @return
-//	 */
-//	public int countItemByType(String name) {
-//		int count = 0;
-//		for (Item item : items) {
-//			if (item.sameName(name)) {
-//				count++;
-//			}
-//		}
-//		return count;
-//	}
 }

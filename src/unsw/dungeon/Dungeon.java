@@ -36,7 +36,7 @@ public class Dungeon implements Observer {
     private Player player;
     
     private Goal goal;
-    private DungeonControllerLoader.ImageManager imageManager;
+    private DungeonController.ImageManager imageManager;
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -58,7 +58,7 @@ public class Dungeon implements Observer {
 
         this.goal = null;
         
-        this.imageManager = new DungeonControllerLoader.ImageManager();
+        this.imageManager = new DungeonController.ImageManager();
     }
 
     /**
@@ -97,7 +97,7 @@ public class Dungeon implements Observer {
      * Gets the imageManager of the dungeon
      * @return
      */
-    public DungeonControllerLoader.ImageManager getImageManager() {
+    public DungeonController.ImageManager getImageManager() {
     	return imageManager;
     }
     

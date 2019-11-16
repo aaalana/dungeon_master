@@ -50,6 +50,11 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    /**
+     * Loads all the entities into the dungeon
+     * @param dungeon
+     * @param json
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -71,7 +76,6 @@ public abstract class DungeonLoader {
             entity = wall;
             dungeon.addBlocker(wall);
             break;
-        // TODO Handle other possible entities
         case "treasure":
             Treasure treasure = new Treasure(x, y);
             entity = treasure;
@@ -160,12 +164,18 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
     
+    /**
+     * Extracts all the goals from the JSON file and sets the goals in the system
+     * @param goals
+     * @param dungeon
+     * @return final overall goal of the dungeon
+     */
     private Goal loadGoals(JSONObject goals, Dungeon dungeon){
         String type = goals.getString("goal");
         System.out.println(goals);
+        
         Goal goal = null;
         switch(type) {
-        	// if the goals is AND, add all goals
             case "AND":
             	JSONArray subgoals = goals.getJSONArray("subgoals");
                 
@@ -213,6 +223,4 @@ public abstract class DungeonLoader {
     }
       
 	public abstract ImageView onLoad(Entity entity, Image image);
-
-    // TODO Create additional abstract methods for the other entities
 }

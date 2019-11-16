@@ -3,7 +3,7 @@ package unsw.dungeon;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
-import unsw.dungeon.DungeonControllerLoader.ImageManager;
+import unsw.dungeon.DungeonController.ImageManager;
 
 /**
  * An entity in the dungeon.
@@ -59,6 +59,15 @@ public abstract class Entity {
      */
     public int getX() {
         return x().get();
+    }
+    
+    /**
+     * Sets the x and y coordinates of the entity's position
+     * @param x
+     */
+    public void setPosition(int x, int y) {
+    	x().set(x);
+    	y().set(y);
     }
     
     /**

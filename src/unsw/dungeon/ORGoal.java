@@ -13,10 +13,13 @@ public class ORGoal extends GoalCombination implements GoalComponent {
 
 	@Override
 	public void addGoal(Goal goal) {
-		// TODO Auto-generated method stub
 		goals.add(goal);
 	}
 	
+	/**
+	 * Checks the status of the goal when it is an OR goal
+	 * @return true when at least one goal has been completed and false otherwise
+	 */
 	public boolean getStatus() {
 		System.out.println("Checking if all the goals were completed");
 		for (Goal goal : goals) {

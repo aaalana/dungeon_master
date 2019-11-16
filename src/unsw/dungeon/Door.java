@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import unsw.dungeon.DungeonControllerLoader.ImageManager;
+import unsw.dungeon.DungeonController.ImageManager;
 
 public class Door extends Blocker {
 	private int id;
