@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class ANDGoal extends GoalCombination implements GoalComponent {
 	
 	private ArrayList<Goal> goals;
+	private ArrayList<GoalCombination> nestedGoals;
 	
 	public ANDGoal(Dungeon dungeon) {
 		super(dungeon);
 		this.goals = new ArrayList<>();
+		this.nestedGoals = new ArrayList<>();
 	}
 
 	@Override
@@ -17,9 +19,14 @@ public class ANDGoal extends GoalCombination implements GoalComponent {
 	}
 	
 	@Override
+	public void addGoal(GoalCombination goal) {
+		nestedGoals.add(goal);
+	}
+	
+	@Override
 	public boolean getStatus() {
 		// Checks the status of the goal when it is an AND goal
-		// returns true when all goals are completed and false otherwise
+		// returns true only if all goals are completed and false otherwise
 		
 		System.out.println("Checking if all the goals were completed");
 		for (Goal goal : goals) {
@@ -29,7 +36,13 @@ public class ANDGoal extends GoalCombination implements GoalComponent {
 			}
 		}
 		
-		//Implement for what happens if a GoalCombination has another GoalCombination
+		for (Goal goal: goals) {
+			if (!goal.getStatus()) {
+				System.out.println("The goal: " + goal.getClassName() + " was not completed");
+				return false;
+			}
+		}
+		
 		return true;
 	}
 	
