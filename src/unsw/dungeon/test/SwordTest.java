@@ -12,7 +12,7 @@ class SwordTest {
 	void testGetUses() {
 		Sword sword = new Sword(5, 1);
 		Dungeon dungeon = new Dungeon(18, 16);
-		Player player = new Player(2, 2, dungeon);
+		Player player = new Player(2, 2, dungeon, new ItMovesInFourDirec());
 		
 		// false on default
 		assertFalse(sword.getStatus());

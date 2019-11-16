@@ -10,12 +10,12 @@ class BoulderSystemTest {
 	@Test
 	void testPushBoulder() {
 		Dungeon dungeon = new Dungeon(20,18);	
-		Boulder boulder = new Boulder(0, 0, new ItMoves());
-		Boulder boulder2 = new Boulder(0, 1, new ItMoves());
-		Boulder boulder3 = new Boulder(2, 0, new ItMoves());
-		Boulder boulder4 = new Boulder(9, 9, new ItMoves());
-		Boulder boulder5 = new Boulder(10, 9, new ItMoves());
-		Boulder boulder6 = new Boulder(10, 10, new ItMoves());
+		Boulder boulder = new Boulder(0, 0,  new ItMovesInFourDirec());
+		Boulder boulder2 = new Boulder(0, 1, new ItMovesInFourDirec());
+		Boulder boulder3 = new Boulder(2, 0, new ItMovesInFourDirec());
+		Boulder boulder4 = new Boulder(9, 9, new ItMovesInFourDirec());
+		Boulder boulder5 = new Boulder(10, 9, new ItMovesInFourDirec());
+		Boulder boulder6 = new Boulder(10, 10, new ItMovesInFourDirec());
 		Wall wall = new Wall(1, 0, new CantMove());
 		BoulderSystem sys = new BoulderSystem(dungeon);
 		

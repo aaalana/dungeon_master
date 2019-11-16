@@ -4,8 +4,8 @@ public class Archer extends Enemy {
 	
 	private Dungeon dungeon;
 	
-    public Archer(Dungeon dungeon, int x, int y) {
-        super(x, y);
+    public Archer(Dungeon dungeon, int x, int y, MoveStrategy move) {
+        super(x, y, move);
         this.dungeon = dungeon;
     }
 

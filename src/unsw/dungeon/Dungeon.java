@@ -55,9 +55,7 @@ public class Dungeon implements Observer {
         this.portals = new PortalSystem();
      
         this.player = null;
-
         this.goal = null;
-        
         this.imageManager = new DungeonControllerLoader.ImageManager();
     }
 

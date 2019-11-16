@@ -6,8 +6,8 @@ public class Crab extends Enemy {
 	private int count;
 	private String direction;
 	
-    public Crab(Dungeon dungeon, int x, int y) {
-        super(x, y);
+    public Crab(Dungeon dungeon, int x, int y, MoveStrategy move) {
+        super(x, y, move);
         this.dungeon = dungeon;
         count = 0;
         direction = "left";

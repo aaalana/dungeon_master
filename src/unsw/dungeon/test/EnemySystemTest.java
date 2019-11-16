@@ -14,9 +14,9 @@ class ArcherSystemTest {
 	void testGetEnemies() {
 		EnemySystem sys = new EnemySystem();
 		Dungeon dungeon = new Dungeon(18,16);
-		Archer e1 = new Archer(dungeon, 2, 3);
-		Archer e2 = new Archer(dungeon, 8, 3);
-		Archer e3 = new Archer(dungeon, 8, 7);
+		Archer e1 = new Archer(dungeon, 2, 3, new ItMovesInFourDirec());
+		Archer e2 = new Archer(dungeon, 8, 3, new ItMovesInFourDirec());
+		Archer e3 = new Archer(dungeon, 8, 7, new ItMovesInFourDirec());
 		
 		ArrayList<Entity> enemies = new ArrayList<Entity>();
 		

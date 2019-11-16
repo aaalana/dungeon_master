@@ -66,7 +66,7 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(x, y, dungeon);
+            Player player = new Player(x, y, dungeon, new ItMovesInFourDirec());
             dungeon.setPlayer(player);
             ImageView pView = onLoad(player, new Image("/human_new.png"));
             player.setImage(pView);
@@ -110,7 +110,7 @@ public abstract class DungeonLoader {
             dungeon.addSwitch(_switch);
         	break;
         case "boulder":
-            Boulder boulder = new Boulder(x, y, new ItMoves());
+            Boulder boulder = new Boulder(x, y, new ItMovesInFourDirec());
             ImageView bView = onLoad(boulder, new Image("/boulder.png"));
             boulder.setImage(bView);
             entity = boulder;
@@ -125,7 +125,7 @@ public abstract class DungeonLoader {
             dungeon.addItem(sword);
         	break;
         case "enemy":
-            Archer archer = new Archer(dungeon, x, y);
+            Archer archer = new Archer(dungeon, x, y, new ItMovesInFourDirec());
             ImageView eView = onLoad(archer, new Image("/deep_elf_master_archer.png"));
             archer.setImage(eView);
             entity = archer;
@@ -164,7 +164,7 @@ public abstract class DungeonLoader {
         	dungeon.addPortals(portal);
         	break;
         case "enemy2":
-        	Crab crab = new Crab(dungeon, x, y);
+        	Crab crab = new Crab(dungeon, x, y, new ItMovesSideways());
             ImageView e2View = onLoad(crab, new Image("/crab.png"));
             crab.setImage(e2View);
             entity = crab;

@@ -20,8 +20,8 @@ public class Player extends LivingCreature {
      * @param x
      * @param y
      */
-    public Player(int x, int y, Dungeon dungeon) {
-        super(x, y);
+    public Player(int x, int y, Dungeon dungeon, MoveStrategy move) {
+        super(x, y, move);
         this.dungeon = dungeon;
         inventory = new Inventory(dungeon);
         invincibilityState = new InvincibilityState(this);

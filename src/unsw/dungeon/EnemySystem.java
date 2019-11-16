@@ -13,6 +13,10 @@ public class EnemySystem implements Subject {
 		this.crabs = new ArrayList<Crab>();
 	}
 
+	/**
+	 * Gets a list of all the enemies in the system
+	 * @return
+	 */
 	public List<Enemy> getEnemies() {
 		List<Enemy> enemies = new ArrayList<Enemy>();
 		enemies.addAll(crabs);
@@ -20,22 +24,43 @@ public class EnemySystem implements Subject {
 		return enemies;
 	}
 
+	/**
+	 * Gets the enemy goal
+	 * @return
+	 */
 	public Goal getEnemyGoal() {
 		return enemyGoal;
 	}
 
+	/**
+	 * Sets the enemy goal
+	 * @param enemyGoal
+	 */
 	public void setEnemyGoal(EnemyGoal enemyGoal) {
 		this.enemyGoal = enemyGoal;
 	}
 	
+	/**
+	 * Adds an archer to the archer list
+	 * @param enemy
+	 */
 	public void addArcher(Archer enemy) {
 		archers.add(enemy);
 	}
 	
+	/**
+	 * Adds a crab to the crabs list
+	 * @param enemy
+	 */
 	public void addCrab(Crab enemy) {
 		crabs.add(enemy);
 	}
 	
+	/**
+	 * Removes an enemy from the system
+	 * @param <T>
+	 * @param enemy
+	 */
 	public <T> void removeEnemy(T enemy) {
 		if (enemy instanceof unsw.dungeon.Archer) {
 			archers.remove(enemy);
@@ -47,8 +72,15 @@ public class EnemySystem implements Subject {
 			this.update();
 	}
 
+	/**
+	 * Moves the enemies of the system
+	 * @param playerX
+	 * @param playerY
+	 * @param isInvincible
+	 */
 	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
-    	for (Archer entity : this.archers) {
+    	// move the archer enemies
+		for (Archer entity : this.archers) {
     		if (entity == null) continue;
     		
     		if (entity instanceof unsw.dungeon.Archer) {
@@ -56,6 +88,7 @@ public class EnemySystem implements Subject {
     		}
     	}
     	
+		// move the crab enemies
     	for (Crab entity : this.crabs) {
     		if (entity == null) continue;
     		
@@ -65,6 +98,9 @@ public class EnemySystem implements Subject {
     	}
     }
 	
+	/**
+	 * Updates the enemies goal when completed
+	 */
 	public void update() {
 		System.out.println("All archers are dead, updating goals");
 		enemyGoal.updateGoal();

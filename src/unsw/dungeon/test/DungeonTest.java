@@ -43,7 +43,7 @@ class DungeonTest {
 	@Test
 	void testCheckBlocker() {
 		Dungeon dungeon = new Dungeon(18,16);
-		Player player = new Player(0, 0, dungeon);
+		Player player = new Player(0, 0, dungeon, new ItMovesInFourDirec());
 		Wall wall = new Wall(0, 0, new CantMove());
 		Wall wall2 = new Wall(1, 0, new CantMove());
 		Door door = new Door(2, 1, 0, new CantMove());
@@ -70,13 +70,13 @@ class DungeonTest {
 	@Test
 	void testShareSquare() {
 		Dungeon dungeon = new Dungeon(18,16);
-		Player player = new Player(0, 0, dungeon);
+		Player player = new Player(0, 0, dungeon, new ItMovesInFourDirec());
 		Portal portal = new Portal(1,0,0,dungeon);
 		Portal portal2 = new Portal(8,0,0,dungeon);
 		Switch _switch = new Switch(3,2);
 		Switch _switch2 = new Switch(1,1);
-		Boulder boulder = new Boulder(3, 2, new ItMoves());
-		Boulder boulder2 = new Boulder(2, 2, new ItMoves());
+		Boulder boulder = new Boulder(3, 2, new ItMovesInFourDirec());
+		Boulder boulder2 = new Boulder(2, 2, new ItMovesInFourDirec());
 		Exit exit = new Exit(15,6);
 		
 		// check empty list

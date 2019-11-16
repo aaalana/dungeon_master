@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import unsw.dungeon.CantMove;
 import unsw.dungeon.Door;
 import unsw.dungeon.Dungeon;
+import unsw.dungeon.ItMovesInFourDirec;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 
@@ -17,8 +18,8 @@ class DoorTest {
 		Door door = new Door(0, 0, 0, new CantMove());
 		Door door2 = new Door(0, 0, 1, new CantMove());
 		Dungeon dungeon = new Dungeon(18, 16);
-		Player player = new Player(1, 0, dungeon);
-		Player player2 = new Player(0, 1, dungeon);
+		Player player = new Player(1, 0, dungeon, new ItMovesInFourDirec());
+		Player player2 = new Player(0, 1, dungeon, new ItMovesInFourDirec());
 		Key matchingKey = new Key(1, 0, 0);
 		Key wrongKey = new Key(1, 0, 1);
 		
