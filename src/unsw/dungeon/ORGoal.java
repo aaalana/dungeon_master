@@ -29,7 +29,6 @@ public class ORGoal extends GoalCombination implements GoalComponent {
 		return goals;
 	}
 	
-	@Override
 	public void addGoal(GoalCombination goal) {
 		nestedGoals.add(goal);
 	}

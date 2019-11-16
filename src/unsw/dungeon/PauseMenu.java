@@ -91,6 +91,7 @@ public class PauseMenu {
 	 */
 	public Label createGoalLabel(Goal dGoal) {
 		String goalText="Goal: ";
+	
 		goalText = extractGoal(dGoal, goalText);
 		goal = new Label(goalText);
        	goal.setFont(new Font("Arial", 14));
@@ -115,12 +116,22 @@ public class PauseMenu {
 	    } else if (dGoal.isSameType("unsw.dungeon.ANDGoal")) {
 	    	ArrayList<Goal> goalList = ((ANDGoal) dGoal).getGoal();
 	    	for (Goal g : goalList) {
-	    		goalText = goalText + "(AND): [" + extractGoal(g, "") + "  ";
+	    		if (goalList.get(goalList.size() - 1).equals(g))
+	    			goalText = goalText +  extractGoal(g, "") + "]";
+	    		else if (goalList.get(0).equals(g))
+    			goalText = goalText +  "[" + extractGoal(g, "") + " (AND) ";
+	    		else 
+	    			goalText = goalText +  extractGoal(g, "") + " (AND) ";
 	    	}
 	    } else if (dGoal.isSameType("unsw.dungeon.ORGoal")) {
 	    	ArrayList<Goal> goalList = ((ORGoal) dGoal).getGoal();
 	    	for (Goal g : goalList) {
-	    		goalText = goalText + "(OR): [" + extractGoal(g, "") + "  ";
+	    		if (goalList.get(goalList.size() - 1).equals(g))
+	    			goalText = goalText +  extractGoal(g, "") + ']';
+	    		else if (goalList.get(0).equals(g))
+	    			goalText = goalText +  "[" + extractGoal(g, "") + " (OR) ";
+	    		else 
+	    			goalText = goalText +  extractGoal(g, "") + " (OR) ";
 	    	}
 		}
 		return goalText;
