@@ -664,16 +664,16 @@
 	],
 	
 	"goal-condition": {
-	  "goal": "OR",
+	  "goal": "AND",
 	  "subgoals": [
 	    {
-	      "goal": "exit"
+	      "goal": "enemies"
 	    },
 	    {
-	    	"goal": "AND",
+	    	"goal": "OR",
 	    	"subgoals": [
 			    {
-			      "goal": "enemies"
+			      "goal": "exit"
 			    },
 			    {
 			      "goal": "treasure"
