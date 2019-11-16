@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class PauseMenu {
 	private Stage stage;
 	private VBox vbox;
-	private Label label;
+	private Label title;
 	private Label goal;
 	private Button resume;
 	private Button restart;
@@ -36,7 +36,7 @@ public class PauseMenu {
 	
 	public PauseMenu(Stage stage, Goal dGoal) {
 		this.stage = stage;
-		this.label = createTitleLabel();
+		this.title = createTitleLabel();
 		this.goal = createGoalLabel(dGoal);
 	    this.resume = resumeHandler();
 	    this.restart = restartHandler();
@@ -65,9 +65,9 @@ public class PauseMenu {
 	public void generatePauseMenu() {
         // add buttons and labels into a vBox structure
         ObservableList<Node> list = vbox.getChildren(); 
-		list.addAll(label, goal, resume, restart, exit);
+		list.addAll(title, goal, resume, restart, exit);
 		
-		VBox.setMargin(label, new Insets(30, 30, 10, 30));  
+		VBox.setMargin(title, new Insets(30, 30, 10, 30));  
 		VBox.setMargin(goal, new Insets(10, 30, 10, 30));
 		VBox.setMargin(resume, new Insets(10, 30, 20, 30));  
 		VBox.setMargin(restart, new Insets(10, 30, 20, 30)); 
@@ -76,18 +76,18 @@ public class PauseMenu {
 	
 	/**
 	 * Creates the Pause Menu title
-	 * @return
+	 * @return title label
 	 */
 	public Label createTitleLabel() {
-        label = new Label("P A U S E   S C R E E N");
-       	label.setStyle("-fx-font-weight: bold;");
-       	label.setFont(new Font("Arial", 15));
-       	return label;
+        title = new Label("P A U S E   S C R E E N");
+       	title.setStyle("-fx-font-weight: bold;");
+       	title.setFont(new Font("Arial", 15));
+       	return title;
 	}
 	
 	/**
 	 * Creates a label that shows the goals of the dungeon
-	 * @return
+	 * @return Goal label 
 	 */
 	public Label createGoalLabel(Goal dGoal) {
 		String goalText="Goal: ";
@@ -106,7 +106,7 @@ public class PauseMenu {
 	 * Transforms the dungeon goals as text 
 	 * @param dGoal
 	 * @param goalText
-	 * @return
+	 * @return goal text of the dungeon
 	 */
 	public String extractGoal(Goal dGoal, String goalText) {
 		if (dGoal.isSameType("unsw.dungeon.TreasureGoal")) {
