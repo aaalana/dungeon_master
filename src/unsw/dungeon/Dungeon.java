@@ -202,7 +202,7 @@ public class Dungeon implements Observer {
     		items.remove(entity);
     		if (entity instanceof Treasure) 
 				treasures.removeTreasure(entity);   	
-    	} else if (entity instanceof Enemy) {
+    	} else if (entity instanceof Enemy || entity instanceof Enemy2) {
     		imageManager.removeImage(entity.getImage());
     		enemies.removeEnemy(entity);
     	} else if (entity.equals(player)) {

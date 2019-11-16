@@ -52,6 +52,13 @@ public class EnemySystem implements Subject {
 		}
 	}
 
+	public void removeEnemy(Enemy2 enemy) {
+		enemies2.remove(enemy);
+		if (this.enemies.size() == 0) {
+			this.update();
+		}
+
+	}
 
 	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
     	for (Entity entity : this.enemies) {
