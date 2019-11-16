@@ -20,10 +20,6 @@ public class EnemySystem implements Subject {
 		return enemies;
 	}
 
-	public void setArchers(List<Archer> archers) {
-		this.archers = archers;
-	}
-	
 	public Goal getEnemyGoal() {
 		return enemyGoal;
 	}
@@ -36,8 +32,8 @@ public class EnemySystem implements Subject {
 		archers.add(enemy);
 	}
 	
-	public void addCrab(Entity enemy) {
-		crabs.add((Crab) enemy);
+	public void addCrab(Crab enemy) {
+		crabs.add(enemy);
 	}
 	
 	public <T> void removeEnemy(T enemy) {
