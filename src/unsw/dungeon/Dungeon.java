@@ -121,13 +121,16 @@ public class Dungeon implements Observer {
      * Adds an enemy to an enemy system
      * @param enemy
      */
-    public void addEnemy(Enemy enemy) {
-    	enemies.addEnemy(enemy);
+    public void addArcher(Archer enemy) {
+    	enemies.addArcher(enemy);
     }
     
-    public void addEnemy2(Enemy2 enemy) {
-    	System.out.println(enemy);
-    	enemies.addEnemy2(enemy);
+    /**
+     * Adds a crab to the enemy system
+     * @param enemy
+     */
+    public void addCrab(Crab enemy) {
+    	enemies.addCrab(enemy);
     }
     
     /**
@@ -138,6 +141,10 @@ public class Dungeon implements Observer {
     	boulders.addBoulder(boulder);
     }
     
+    /**
+     * Adds a switch to the switch system
+     * @param switchItem
+     */
     public void addSwitch(Switch switchItem) {
         switches.addSwitch(switchItem);
     }
