@@ -1,5 +1,13 @@
 package unsw.dungeon;
 
+/**
+ * Portal entity which is connected to another.
+ * -it communicates with the portal system to transport a 
+ * player that enters it
+ * another
+ * @author Alana Hua
+ *
+ */
 public class Portal extends Obstacle {
 	
 	// id is used to pair match portals

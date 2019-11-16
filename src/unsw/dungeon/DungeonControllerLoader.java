@@ -18,6 +18,7 @@ import javafx.stage.Stage;
  * them via listeners to the model. 
  * 
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  */
 public class DungeonControllerLoader extends DungeonLoader {
 

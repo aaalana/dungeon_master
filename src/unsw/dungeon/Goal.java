@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Polymorphism for goal
+ * @author Arthur Wong
+ *
+ */
 public class Goal implements Subject {
 	private boolean completed;
 	private Dungeon dungeon;
@@ -9,22 +14,6 @@ public class Goal implements Subject {
 		this.dungeon = dungeon;
 	}
 	
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public Dungeon getDungeon() {
-		return dungeon;
-	}
-
-	public void setDungeon(Dungeon dungeon) {
-		this.dungeon = dungeon;
-	}
-
 	/**
 	 * returns a status which indicates whether the goal has been completed or not
 	 * @return
@@ -43,17 +32,23 @@ public class Goal implements Subject {
 	}
 	
 	/**
-	 * 
+	 * Sets the goal as complete
 	 */
 	public void setComplete() {
 		this.completed = true;
-		this.update();
+		dungeon.updateGoal();
 	}
 	
+	/**
+	 * Updates the overall goal of the dungeon
+	 */
 	public void update() {
 		dungeon.updateGoal();
 	}
 
+	/**
+	 * Updates the overall goal of the dungeon and sets the goal as complete
+	 */
 	public void updateGoal() {
 		this.setComplete();
 		dungeon.updateGoal();

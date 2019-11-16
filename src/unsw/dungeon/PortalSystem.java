@@ -5,6 +5,12 @@ import java.util.List;
 
 import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
+/**
+ * System for managing the transportation of the player when the player enters
+ * a portal
+ * @author Alana Hua
+ *
+ */
 public class PortalSystem {
 	private List<Portal> portals;
 	private ImageManager imageManager;

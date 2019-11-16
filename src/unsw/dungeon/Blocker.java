@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 /**
- * Polymorphism 
- * @author z5209503
+ * Polymorphism to group entities that can block the movement of living creatures
+ * @author Alana Hua
  *
  */
 public abstract class Blocker extends Entity {

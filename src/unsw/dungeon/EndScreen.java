@@ -19,6 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * End screen which shows when the user has won/lost the game
+ * @author Alana Hua
+ *
+ */
 public class EndScreen {
 	private Stage stage;
 	private VBox vbox;

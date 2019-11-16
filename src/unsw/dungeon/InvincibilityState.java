@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 /**
  * The player's invincibility state
- * @author z5209503
+ * @author Alana Hua
  */
 public class InvincibilityState implements PlayerState {
 	private Player player;

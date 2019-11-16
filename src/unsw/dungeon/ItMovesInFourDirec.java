@@ -5,7 +5,7 @@ package unsw.dungeon;
  * Entities that have this move strategy are able to move in four directions given a direction.
  * This strategy is part of the strategy pattern that differentiates entities
  * as those that can move and can't move.
- * @author z5209503
+ * @author Alana Hua
  *
  */
 public class ItMovesInFourDirec implements MoveStrategy {

@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 /**
  * The player's speed state
- * @author z5209503
+ * @author Alana Hua
  */
 public class SpeedState implements PlayerState {
 	private Player player;

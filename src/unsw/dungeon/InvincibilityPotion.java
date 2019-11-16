@@ -7,7 +7,7 @@ import javafx.application.Platform;
 
 /**
  * Potion entity responsible for temporarily giving the player invincibility
- * @author z5209503
+ * @author Alana Hua
  *
  */
 public class InvincibilityPotion extends Item {

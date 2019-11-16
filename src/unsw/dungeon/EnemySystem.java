@@ -2,6 +2,13 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * EnemySystem which controls the enemy movement, EnemyGoal and manages the
+ * lists of enemies (archers and crabs)
+ * @author Alana Hua
+ * @author Arthur Wong
+ *
+ */
 public class EnemySystem implements Subject {
 	private List<Archer> archers;
 	private List<Crab> crabs;

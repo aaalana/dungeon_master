@@ -20,6 +20,7 @@ import javafx.stage.Stage;
  * A JavaFX controller for the dungeon. It is responsible for the management of the game's UI
  * and providing automatic surveillance of the dungeon's entities. 
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  *
  */
 public class DungeonController {

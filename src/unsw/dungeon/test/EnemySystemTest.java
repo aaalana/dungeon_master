@@ -8,7 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
 
-class ArcherSystemTest {
+/**
+ * Archer Test in enemy system
+ * @author Alana Hua
+ *
+ */
+class EnemySystemTest {
 
 	@Test
 	void testGetEnemies() {

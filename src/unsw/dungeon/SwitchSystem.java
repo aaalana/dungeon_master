@@ -2,6 +2,12 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Switch system which monitors whether the boulderGoal has been
+ * completed
+ * @author Arthur Wong
+ *
+ */
 public class SwitchSystem implements Subject {
 	private List<Switch> switches;
 	private BoulderGoal boulderGoal;

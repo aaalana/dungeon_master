@@ -7,7 +7,9 @@ import javafx.application.Platform;
 
 /**
  * Potion responsible for temporarily giving the player speed 
- * @author z5209503
+ * i.e. the player is able to move at a max of 2 squares at a time
+ * for three seconds
+ * @author Alana Hua
  *
  */
 public class SpeedPotion extends Item {

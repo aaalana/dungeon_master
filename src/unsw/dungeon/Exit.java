@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Exit entity used as a puzzle to complete the exit goal
+ * @author Alana Hua
+ *
+ */
 public class Exit extends Obstacle {
 	private ExitGoal exitGoal;
 	

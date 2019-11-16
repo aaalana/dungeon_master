@@ -2,6 +2,12 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * ORGoal used for grouping goals where only one is required to be completed
+ * @author Alana Hua
+ * @author Arthur Wong
+ *
+ */
 public class ORGoal extends GoalCombination implements GoalComponent {
 	
 	private ArrayList<Goal> goals;

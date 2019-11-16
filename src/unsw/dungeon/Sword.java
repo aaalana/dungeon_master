@@ -1,5 +1,11 @@
 package unsw.dungeon;
 
+/**
+ * Sword which is used to kill enemies.
+ * It only has a max of 5 uses.
+ * @author Alana Hua
+ *
+ */
 public class Sword extends Item {
 	
 	private boolean inUse;

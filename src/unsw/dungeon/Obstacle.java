@@ -1,8 +1,9 @@
 package unsw.dungeon;
 
 /**
- * Polymorphism 
- * @author z5209503
+ * Polymorphism used for grouping together entities that the player
+ * interacts with (i.e. portals, switches, exits)
+ * @author Alana Hua
  *
  */
 public abstract class Obstacle extends Entity {

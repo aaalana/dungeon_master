@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 /**
- * Polymorphism 
+ * Polymorphism for grouping Enemy types and the player
  * @author z5209503
  *
  */

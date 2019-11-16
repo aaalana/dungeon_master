@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
 
+/**
+ * Player test
+ * @author Alana Hua
+ *
+ */
 class PlayerTest {
 
 	@Test

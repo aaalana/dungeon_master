@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Crab Entity
+ * @author Arthur Wong
+ *
+ */
 public class Crab extends Enemy {
 	
 	private Dungeon dungeon;

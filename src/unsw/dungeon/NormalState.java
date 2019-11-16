@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 /**
  * The player's normal state
- * @author z5209503
+ * @author Alana Hua
  */
 public class NormalState implements PlayerState {
 	private Player player;

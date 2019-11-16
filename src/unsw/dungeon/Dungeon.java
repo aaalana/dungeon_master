@@ -16,6 +16,8 @@ import java.util.List;
  * However the entity tasks themselves are performed within the entities. 
  * 
  * @author Robert Clifton-Everest
+ * @author Alana Hua
+ * @author Arthur Wong
  *
  */
 public class Dungeon implements Observer {
@@ -251,7 +253,7 @@ public class Dungeon implements Observer {
     		
     		if (entity.getX() == x && entity.getY() == y) {
     			if (entity instanceof Wall) {
-    				return true;
+    				return entity.block(player);
     			} else {
     				// change the locked door image to an unlocked door 
     				if (!entity.block(player)) 

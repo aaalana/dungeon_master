@@ -4,6 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import unsw.dungeon.DungeonControllerLoader.ImageManager;
 
+/**
+ * Door entity is locked at default and can be unlocked if given a key with the 
+ * same ID as that of the door
+ * @author Alana Hua
+ *
+ */
 public class Door extends Blocker {
 	private int id;
 	private boolean locked;

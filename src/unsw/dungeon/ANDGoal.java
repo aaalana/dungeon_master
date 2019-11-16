@@ -2,6 +2,12 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * AND Goal which collects all subgoals
+ * @author Alana Hua
+ * @author Arthur Wong
+ *
+ */
 public class ANDGoal extends GoalCombination implements GoalComponent {
 	
 	private ArrayList<Goal> goals;

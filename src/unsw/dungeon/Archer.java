@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Archer entity
+ * @author Arthur Wong
+ *
+ */
 public class Archer extends Enemy {
 	
 	private Dungeon dungeon;

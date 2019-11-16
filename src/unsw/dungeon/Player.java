@@ -3,6 +3,7 @@ package unsw.dungeon;
 /**
  * The player entity
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  *
  */
 public class Player extends LivingCreature {

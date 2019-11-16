@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 /**
- * Polymorphism 
- * @author z5209503
+ * Polymorphism for grouping entities that the player collects
+ * @author Alana Hua
  *
  */
 public abstract class Item extends Entity {

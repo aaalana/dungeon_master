@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import unsw.dungeon.*;
 
+/**
+ * Key Test 
+ * @author Alana Hua
+ *
+ */
 class KeyTest {
 
 	@Test

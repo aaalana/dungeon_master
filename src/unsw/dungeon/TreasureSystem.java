@@ -2,6 +2,11 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TreasureSystem for monitoring when the treasure goal has been completed 
+ * @author Arthur Wong
+ *
+ */
 public class TreasureSystem implements Subject {
 	private List<Treasure> treasures;
 	private TreasureGoal treasureGoal;

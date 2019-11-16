@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.*;
 
+/**
+ * Sword Test 
+ * @author Alana Hua
+ *
+ */
 class SwordTest {
 
 	@Test

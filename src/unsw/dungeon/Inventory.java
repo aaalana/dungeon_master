@@ -10,7 +10,7 @@ import unsw.dungeon.DungeonControllerLoader.ImageManager;
  * storing, removing and searching of items as well as signaling the automatic 
  * activation of potions.
  * 
- * @author z5209503
+ * @author Alana Hua
  *
  */
 public class Inventory {

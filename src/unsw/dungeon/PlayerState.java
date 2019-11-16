@@ -6,7 +6,7 @@ package unsw.dungeon;
  * deadState
  * (all of which are mutually exclusive i.e. the player can only be in one 
  *  of these states at a time)
- * @author z5209503
+ * @author Alana Hua
  *
  */
 public interface PlayerState {

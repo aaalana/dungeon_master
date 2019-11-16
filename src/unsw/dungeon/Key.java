@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Key entity which has a unique ID that matches a door in the dungeon
+ * @author Alana Hua
+ *
+ */
 public class Key extends Item {
 	private int id;
 	

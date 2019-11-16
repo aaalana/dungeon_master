@@ -1,8 +1,9 @@
 package unsw.dungeon;
 
 /**
- * Switch entity
- * @author z5209503
+ * Switch entity which can become triggered and untriggered by 
+ * boulders
+ * @author Alana Hua
  *
  */
 public class Switch extends Obstacle {
@@ -28,6 +29,10 @@ public class Switch extends Obstacle {
     	return;
     }
    
+    /**
+     * Gets the state of the switch
+     * @return
+     */
     public boolean getState() {
     	return triggered;
     }

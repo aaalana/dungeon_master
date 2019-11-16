@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Treasure entity
+ * @author Alana Hua
+ *
+ */
 public class Treasure extends Item {
 
     public Treasure(int x, int y) {

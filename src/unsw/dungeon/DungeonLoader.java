@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
  * useful for creating UI elements with corresponding entities.
  *
  * @author Robert Clifton-Everest
+ * @author Alana Hua
  *
  */
 public abstract class DungeonLoader {

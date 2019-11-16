@@ -11,6 +11,12 @@ import unsw.dungeon.ItMovesInFourDirec;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 
+
+/**
+ * Testing door behaviour
+ * @author Alana Hua
+ *
+ */
 class DoorTest {
 
 	@Test

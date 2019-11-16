@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import unsw.dungeon.*;
 
+/**
+ * BoulderSystem test
+ * @author Alana Hua
+ *
+ */
 class BoulderSystemTest {
 
 	@Test

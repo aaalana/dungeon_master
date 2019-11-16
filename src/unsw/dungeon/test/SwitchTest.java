@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.Switch;
 
+/**
+ * Switch test
+ * @author Alana Hua
+ *
+ */
 class SwitchTest {
 
 	@Test

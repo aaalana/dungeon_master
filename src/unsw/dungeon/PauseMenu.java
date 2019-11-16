@@ -19,6 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Pause menu used when the user wants to pause the game
+ * @author Alana Hua
+ *
+ */
 public class PauseMenu {
 	private Stage stage;
 	private VBox vbox;

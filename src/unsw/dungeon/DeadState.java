@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 /**
  * The player's dead state
- * @author z5209503
+ * @author Alana Hua
  */
 public class DeadState implements PlayerState {
 	Player player;
