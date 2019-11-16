@@ -91,7 +91,12 @@ public class PauseMenu {
 	 */
 	public Label createGoalLabel(Goal dGoal) {
 		String goalText="Goal: ";
-        goalText = extractGoal(dGoal, goalText);
+		if (dGoal.isSameType("unsw.dungeon.ANDGoal"))
+			goalText = goalText + "(OR) ";
+		else if (dGoal.isSameType("unsw.dungeon.ORGoal"))
+			goalText = goalText + "(AND) ";
+		
+		goalText = extractGoal(dGoal, goalText);
 		goal = new Label(goalText);
        	goal.setFont(new Font("Arial", 14));
        	return goal;
