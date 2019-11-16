@@ -79,6 +79,8 @@ public class DungeonController {
         for (ImageView entity : initialEntities)
             getSquaresChildren().add(entity);
         
+        // allow the player to move
+    	squares.setFocusTraversable(true);
     }
     
     /**
@@ -125,8 +127,8 @@ public class DungeonController {
     
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	System.out.print(endScreen.getShowing());
     	if (!endScreen.getShowing()) {
-	    	squares.setFocusTraversable(true);
 	    	
 	    	PlayerState oldState = player.getState();
 	    	switch (event.getCode()) {
