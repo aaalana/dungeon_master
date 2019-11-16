@@ -15,6 +15,7 @@ public class Archer extends Enemy {
      * @param x
      * @param y
      */
+    @Override
     public void searchPlayer(int playerX, int playerY, boolean isInvin) {
     	if (getX() != playerX) {
     		if (!isInvin) {

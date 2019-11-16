@@ -19,6 +19,7 @@ public class Crab extends Enemy {
      * @param x
      * @param y
      */
+    @Override
     public void searchPlayer(int playerX, int playerY, boolean isInvin) {
     	this.tryToMove(direction, dungeon, this);
     	if (direction == "left") {

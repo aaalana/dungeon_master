@@ -52,21 +52,19 @@ public class EnemySystem implements Subject {
 	}
 
 	public void moveEnemies(int playerX, int playerY, boolean isInvincible) {
-    	for (Entity entity : this.archers) {
+    	for (Archer entity : this.archers) {
     		if (entity == null) continue;
     		
     		if (entity instanceof unsw.dungeon.Archer) {
-    			Archer enemy = (Archer) entity;
-    			enemy.searchPlayer(playerX, playerY, isInvincible);
+    			entity.searchPlayer(playerX, playerY, isInvincible);
     		}
     	}
     	
-    	for (Entity entity : this.crabs) {
+    	for (Crab entity : this.crabs) {
     		if (entity == null) continue;
     		
     		if (entity instanceof unsw.dungeon.Crab) {
-    			Crab enemy = (Crab) entity;
-    			enemy.searchPlayer(playerX, playerY, isInvincible);
+    			entity.searchPlayer(playerX, playerY, isInvincible);
     		}
     	}
     }
