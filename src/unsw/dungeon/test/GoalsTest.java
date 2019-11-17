@@ -7,19 +7,16 @@ import unsw.dungeon.*;
 
 /**
  * Goals test
- * 
+ * @author Arthur Wong
  *
  */
 
 class GoalsTest {
 	@Test
-	void TestSImpleGoal() {
+	void TestSimpleGoal() {
 		Dungeon dungeon = new Dungeon(20, 18);
 		
 		ExitGoal exitGoal = new ExitGoal(dungeon);
-		EnemyGoal enemyGoal = new EnemyGoal(dungeon);
-		TreasureGoal treasureGoal = new TreasureGoal(dungeon);
-		BoulderGoal boulderGoal = new BoulderGoal(dungeon);
 			
 		//Testing with a simple, single goal
 		dungeon.setGoal(exitGoal);
@@ -36,7 +33,6 @@ class GoalsTest {
 		ExitGoal exitGoal = new ExitGoal(dungeon);
 		TreasureGoal treasureGoal = new TreasureGoal(dungeon);
 		ANDGoal andGoal = new ANDGoal(dungeon);
-		
 		
 		dungeon.setGoal(andGoal);
 		andGoal.addGoal(exitGoal);

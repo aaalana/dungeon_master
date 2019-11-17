@@ -38,6 +38,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         return view;
     }
    
+    /**
+     * Adds an entity sprite to a list
+     * @param entity
+     * @param view
+     */
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
@@ -85,12 +90,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Manages which images are shown in the front end section of the game.
      * 
-     * Reason for use of a nested class:
      * Since imageManager only uses the dungeonController functions, nesting places
-     * the code closer to where it is used and helps encapsulates the squares
-     * gridPane when the imageManager is used by other classes. 
+     * helps encapsulate the dungeonController
+     * when the imageManager is used by other classes. 
      * 
-     * @author z5209503
+     * @author Alana Hua
      */
     public static class ImageManager {
     	

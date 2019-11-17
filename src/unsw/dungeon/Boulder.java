@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
 /**
- * Boulder Entity 
+ * Boulder Entity which can be pushed by the player. 
+ * This is managed by the boulder system.
  * @author Alana Hua
  *
  */

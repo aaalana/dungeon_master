@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 /**
- * AND Goal which collects all subgoals
+ * AND Goal which collects all subgoals that all must be completed together
  * @author Alana Hua
  * @author Arthur Wong
  *
