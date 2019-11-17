@@ -16,11 +16,6 @@ public class Switch extends Obstacle {
  
     @Override
     public void trigger(boolean state){
-    	if (state)
-    		System.out.println("switch triggered!");
-    	else
-    		System.out.println("switch untriggered!");
-    	
     	// sets the triggered state of the switch
     	this.triggered = state;
     }
