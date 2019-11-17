@@ -103,6 +103,10 @@ public class Player extends LivingCreature {
 		return state;
 	}
 	
+	/**
+	 * Checks if the player's invincible
+	 * @return
+	 */
 	public boolean isInvincible() {
 		return state instanceof InvincibilityState;
 	}
