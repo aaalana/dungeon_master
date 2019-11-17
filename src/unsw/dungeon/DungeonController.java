@@ -209,7 +209,7 @@ public class DungeonController {
 	        else
 	        	y++;
 	        
-			if (checkMove(x, y, direction) && player.getState() instanceof SpeedState && 
+			if (player.getState() instanceof SpeedState && 
 				oldState instanceof SpeedState) {
 				player.tryToMove(direction, dungeon, player);
 				dungeon.updateObstacle();
