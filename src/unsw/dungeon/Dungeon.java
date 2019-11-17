@@ -257,7 +257,7 @@ public class Dungeon implements Observer {
     			} else {
     				// change the locked door image to an unlocked door 
     				if (!entity.block(player)) 
-    					((Door) entity).replaceDoorImage(player, imageManager);
+    					if (entity instanceof Door) ((Door) entity).replaceDoorImage(player, imageManager);
     				
     				return entity.block(player);
     			}
