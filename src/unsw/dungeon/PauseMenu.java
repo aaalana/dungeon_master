@@ -79,9 +79,9 @@ public class PauseMenu {
 	 * @return title label
 	 */
 	public Label createTitleLabel() {
-        title = new Label("P A U S E   S C R E E N");
+        title = new Label("P A U S E   G A M E");
        	title.setStyle("-fx-font-weight: bold;");
-       	title.setFont(new Font("Arial", 15));
+       	title.setFont(new Font("Arial", 18));
        	return title;
 	}
 	
