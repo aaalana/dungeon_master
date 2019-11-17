@@ -25,8 +25,11 @@ public class Switch extends Obstacle {
     	this.triggered = state;
     }
     
+    @Override
     public void setExitGoal(ExitGoal e) {
-    	return;
+    	// Unused:
+	    // Used in exit class (method in Obstacle to avoid 
+	    // typecasting obstacles to exits)
     }
    
     /**

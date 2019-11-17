@@ -67,7 +67,8 @@ public class Portal extends Obstacle {
 
 	@Override
 	public void setExitGoal(ExitGoal exitGoal) {
-		// TODO Auto-generated method stub
-		
+	     // Unused:
+	     // Used in exit class (method in Obstacle to avoid 
+	     // typecasting obstacles to exits)
 	}
 }
