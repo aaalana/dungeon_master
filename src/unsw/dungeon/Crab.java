@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 /**
- * Crab Entity
+ * Crab Entity which can only move sideways.
  * @author Arthur Wong
  *
  */
@@ -18,12 +18,6 @@ public class Crab extends Enemy {
         direction = "left";
     }
 
-    /**
-     * The enemy will take in the player's co-ordinates and finds the best way to reach
-     * those co-ordinates.
-     * @param x
-     * @param y
-     */
     @Override
     public void searchPlayer(int playerX, int playerY, boolean isInvin) {
     	this.tryToMove(direction, dungeon, this);
