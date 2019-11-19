@@ -247,7 +247,7 @@ public class Dungeon implements Observer {
      * @param y
      * @return true when the player should be blocked and false otherwise
      */
-    public boolean checkBlocker(int x, int y) {
+    public boolean checkBlocker(int x, int y, Entity creature) {
     	for (Blocker entity : this.blockers) {
     		if (entity == null) continue;
     		
@@ -256,10 +256,10 @@ public class Dungeon implements Observer {
     				return true;
     			} else if (entity instanceof Door) {
     				// change the locked door image to an unlocked door 
-    				if (!entity.block(player)) 
+    				if (!entity.block(player, creature)) 
     					if (entity instanceof Door) ((Door) entity).replaceDoorImage(player, imageManager);
     				
-    				return entity.block(player);
+    				return entity.block(player, creature);
     			}
     		}
     	}

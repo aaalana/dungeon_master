@@ -183,7 +183,7 @@ public class DungeonController {
      * @return
      */
     public boolean checkMove(int x, int y, String direction) {
-    	return (!dungeon.checkBlocker(x, y)) && dungeon.pushBoulder(x, y, direction);
+    	return (!dungeon.checkBlocker(x, y, player)) && dungeon.pushBoulder(x, y, direction);
     }
     
     /**

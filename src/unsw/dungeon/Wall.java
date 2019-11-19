@@ -12,7 +12,7 @@ public class Wall extends Blocker {
     }
 	
 	@Override
-	public boolean block(Player player) {
+	public boolean block(Player player, Entity creature) {
 		// all walls should block
 		return true;
 	}

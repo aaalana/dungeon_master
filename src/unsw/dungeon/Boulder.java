@@ -13,7 +13,7 @@ public class Boulder extends Blocker {
     }
   
 	@Override
-	public boolean block(Player player) {
+	public boolean block(Player player, Entity creature) {
 		return false;
 	}
 }

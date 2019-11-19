@@ -20,7 +20,10 @@ public class Crab extends Enemy {
 
     @Override
     public void searchPlayer(int playerX, int playerY, boolean isInvin) {
-    	this.tryToMove(direction, dungeon, this);
+    	if ((direction == "left" && !dungeon.checkBlocker(getX() - 1, getY(), this)) ||
+    		(direction == "right" && !dungeon.checkBlocker(getX() + 1, getY(), this))) 
+    		this.tryToMove(direction, dungeon, this);
+    	
     	if (direction == "left") {
     		count++;
     		if (count == 3) direction = "right";

@@ -22,18 +22,18 @@ public class Archer extends Enemy {
     	// moving the archer horizontally
     	if (getX() != playerX) {
     		if (!isInvin) {
-    			if (getX() > playerX && !dungeon.checkBlocker(getX() - 1, getY())) {
+    			if (getX() > playerX && !dungeon.checkBlocker(getX() - 1, getY(), this)) {
         			this.tryToMove("left", dungeon, this);
         			return;
-        		} else if (getX() < playerX && !dungeon.checkBlocker(getX() + 1, getY())) {
+        		} else if (getX() < playerX && !dungeon.checkBlocker(getX() + 1, getY(), this)) {
         			this.tryToMove("right", dungeon, this);
         			return;
         		}	
     		} else {
-    			if (getX() > playerX && !dungeon.checkBlocker(getX() + 1, getY())) {
+    			if (getX() > playerX && !dungeon.checkBlocker(getX() + 1, getY(), this)) {
         			this.tryToMove("right", dungeon, this);
         			return;
-        		} else if (getX() < playerX && !dungeon.checkBlocker(getX() - 1, getY())) {
+        		} else if (getX() < playerX && !dungeon.checkBlocker(getX() - 1, getY(), this)) {
         			this.tryToMove("left", dungeon, this);
         			return;
         		}	
@@ -44,18 +44,18 @@ public class Archer extends Enemy {
     	// moving the archer vertically
     	if (getY() != playerY) {
     		if (!isInvin) {
-    			if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() - 1)) {
+    			if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() - 1, this)) {
         			this.tryToMove("up", dungeon, this);
         			return;
-        		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() + 1)) {
+        		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() + 1, this)) {
         			this.tryToMove("down", dungeon, this);
         			return;
         		}
     		} else {
-    			if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() + 1)) {
+    			if (getY() > playerY && !dungeon.checkBlocker(getX(), getY() + 1, this)) {
         			this.tryToMove("down", dungeon, this);
         			return;
-        		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() - 1)) {
+        		} else if (getY() < playerY && !dungeon.checkBlocker(getX(), getY() - 1, this)) {
         			this.tryToMove("up", dungeon, this);
         			return;
         		}

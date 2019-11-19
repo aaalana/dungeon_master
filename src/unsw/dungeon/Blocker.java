@@ -11,5 +11,5 @@ public abstract class Blocker extends Entity {
 		super(x, y, movementType);
 	}
 	
-	public abstract boolean block(Player player);
+	public abstract boolean block(Player player, Entity creature);
 }

@@ -54,8 +54,8 @@ class DungeonTest {
 		Door door = new Door(2, 1, 0, new CantMove());
 	
 		// check empty list
-		assertFalse(dungeon.checkBlocker(0,0));
-		assertFalse(dungeon.checkBlocker(9,0));
+		assertFalse(dungeon.checkBlocker(0, 0, player));
+		assertFalse(dungeon.checkBlocker(9, 0, player));
 		
 		dungeon.addBlocker(null);
 		dungeon.addBlocker(null);
@@ -65,9 +65,9 @@ class DungeonTest {
 		dungeon.setPlayer(player);
 		
 		// random testing of coordinates for walls and locked door
-		assertTrue(dungeon.checkBlocker(0,0));
-		assertTrue(dungeon.checkBlocker(1,0));
-		assertTrue(dungeon.checkBlocker(2,1));
+		assertTrue(dungeon.checkBlocker(0, 0, player));
+		assertTrue(dungeon.checkBlocker(1, 0, player));
+		assertTrue(dungeon.checkBlocker(2, 1, player));
 		
 		// note: unlocked door is tested in front-end
 	}

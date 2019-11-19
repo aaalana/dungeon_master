@@ -21,10 +21,10 @@ public class Door extends Blocker {
 	}
 	
 	@Override
-	public boolean block(Player player) {
+	public boolean block(Player player, Entity creature) {
 		Key key = (Key)player.getItem("key");
 		
-		if (key != null && (matchingKey(key))) {
+		if (creature instanceof Player && key != null && (matchingKey(key))) {
 			unlock(player, key);
 			System.out.println("Player unlocked door.");
 			return false;

@@ -30,14 +30,14 @@ class DoorTest {
 		Key wrongKey = new Key(1, 0, 1);
 		
 		// no key at door
-		assertTrue(door.block(player));
+		assertTrue(door.block(player, player));
 		
 		player.collectItem(wrongKey);
 		player2.collectItem(matchingKey);
 		
 		// wrong key at door
-		assertTrue(door.block(player));
-		assertTrue(door2.block(player2));
+		assertTrue(door.block(player, player));
+		assertTrue(door2.block(player2, player2));
 		
 		// unlocking the door is tested in the 
 		// front end
